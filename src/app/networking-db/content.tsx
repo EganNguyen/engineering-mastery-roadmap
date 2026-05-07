@@ -8,8 +8,9 @@ export default function NetworkingDBContent() {
   return (
     <main className="pb-20">
       <div className="mb-6">
-        <Link href="/" className="text-accent font-medium inline-flex items-center gap-1 hover:underline">
-          <span>←</span> Back to Roadmap & Portfolio
+        <Link href="/" className="text-accent font-medium inline-flex items-center gap-2 hover:underline group">
+          <svg className="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
+          Back to Roadmap & Portfolio
         </Link>
       </div>
 
@@ -21,15 +22,17 @@ export default function NetworkingDBContent() {
       </ScrollAnimation>
 
       <div className="legend">
-        <span><span className="ldot" style={{ background: "#1D9E75" }}></span>High frequency</span>
-        <span><span className="ldot" style={{ background: "#185FA5" }}></span>Medium frequency</span>
-        <span><span className="ldot" style={{ background: "#888780" }}></span>Occasional / senior roles</span>
+        <span><span className="ldot" style={{ background: "#4ADE80" }}></span>High frequency</span>
+        <span><span className="ldot" style={{ background: "#60A5FA" }}></span>Medium frequency</span>
+        <span><span className="ldot" style={{ background: "#94A3B8" }}></span>Occasional / senior roles</span>
       </div>
 
       <ScrollAnimation variant="stagger">
         <section className="section">
           <div className="sec-head">
-            <span className="sec-icon">🌐</span>
+            <span className="sec-icon">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+            </span>
             <span className="sec-title">Networking</span>
           </div>
           <div className="grid">
@@ -88,7 +91,9 @@ export default function NetworkingDBContent() {
       <ScrollAnimation variant="stagger">
         <section className="section">
           <div className="sec-head">
-            <span className="sec-icon">💾</span>
+            <span className="sec-icon">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+            </span>
             <span className="sec-title">Database internals</span>
           </div>
           <div className="grid">

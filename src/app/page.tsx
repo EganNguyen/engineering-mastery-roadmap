@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 export default function Home() {
   return (
     <main className="pb-20">
-      <div className="bg-glow"></div>
       <div className="bg-grid"></div>
 
       <PortfolioHero />
@@ -71,13 +70,13 @@ export default function Home() {
                 className="card group"
               >
                 <div className="flex flex-col md:flex-row gap-8">
-                  <div className="w-20 h-20 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-20 h-20 rounded-2xl bg-background-secondary border border-border-tertiary flex items-center justify-center text-primary shrink-0 group-hover:scale-105 transition-transform">
                     <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-3">
-                        <h3 className="text-2xl font-bold text-white group-hover:text-accent transition-colors">Open Guard</h3>
+                        <h3 className="text-2xl font-bold text-text-primary group-hover:text-accent transition-colors">Open Guard</h3>
                         <span className="freq freq-h text-[10px]">Production Grade</span>
                       </div>
                       <svg className="w-5 h-5 text-text-secondary group-hover:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
@@ -86,11 +85,11 @@ export default function Home() {
                       A scalable multi-tenant security platform (IAM, policy engine, audit) handling high-throughput workloads with p99 latency &lt; 30ms.
                     </p>
                     <div className="flex flex-wrap gap-3">
-                      <span className="tag text-purple-400">.NET Core</span>
-                      <span className="tag text-blue-400">PostgreSQL</span>
-                      <span className="tag text-yellow-400">Kafka</span>
-                      <span className="tag text-blue-300">Kubernetes</span>
-                      <span className="tag text-orange-400">Prometheus</span>
+                      <span className="tag">.NET Core</span>
+                      <span className="tag">PostgreSQL</span>
+                      <span className="tag">Kafka</span>
+                      <span className="tag">Kubernetes</span>
+                      <span className="tag">Prometheus</span>
                     </div>
                   </div>
                 </div>
@@ -108,13 +107,13 @@ export default function Home() {
             <div className="dot-btn dot-green"></div>
           </div>
           <div className="space-y-1">
-            <p className="m-0"><span className="text-blue-400">$</span> kubectl get pods -n open-guard</p>
-            <p className="m-0 text-white">NAME                             READY   STATUS    RESTARTS   AGE</p>
-            <p className="m-0 text-gray-400">iam-service-7f4b9d8c           1/1     Running   0          12d</p>
-            <p className="m-0 text-gray-400">policy-engine-5d2a3f1b         1/1     Running   0          12d</p>
-            <p className="m-0 text-gray-400">audit-log-9b8c7d6e             1/1     Running   0          12d</p>
-            <p className="m-0 text-green-400">$ system_status --check all</p>
-            <p className="m-0 text-green-500 font-bold">{"> All systems healthy. Latency within SLA."}</p>
+            <p className="m-0"><span className="text-secondary">$</span> kubectl get pods -n open-guard</p>
+            <p className="m-0 text-text-primary">NAME                             READY   STATUS    RESTARTS   AGE</p>
+            <p className="m-0 text-text-secondary opacity-70">iam-service-7f4b9d8c           1/1     Running   0          12d</p>
+            <p className="m-0 text-text-secondary opacity-70">policy-engine-5d2a3f1b         1/1     Running   0          12d</p>
+            <p className="m-0 text-text-secondary opacity-70">audit-log-9b8c7d6e             1/1     Running   0          12d</p>
+            <p className="m-0 text-primary">$ system_status --check all</p>
+            <p className="m-0 text-primary font-bold">{"> All systems healthy. Latency within SLA."}</p>
           </div>
         </div>
       </ScrollAnimation>
@@ -126,17 +125,30 @@ export default function Home() {
         </div>
       </ScrollAnimation>
 
-      <div className="legend">
-        <span><span className="dot" style={{ color: "#10b981" }}></span>Core — always tested</span>
-        <span><span className="dot" style={{ color: "#3b82f6" }}></span>Emerging — rising weight</span>
-        <span><span className="dot" style={{ color: "#818cf8" }}></span>Supplementary</span>
+      <div className="legend border-t border-border-tertiary pt-8">
+        <span><span className="dot" style={{ color: "#4ADE80" }}></span>Core — always tested</span>
+        <span><span className="dot" style={{ color: "#60A5FA" }}></span>Emerging — rising weight</span>
+        <span><span className="dot" style={{ color: "#94A3B8" }}></span>Supplementary</span>
       </div>
 
       {/* Color Definitions */}
       {(() => {
-        const coreColor = { bg: "rgba(16, 185, 129, 0.1)", text: "#10b981", border: "rgba(16, 185, 129, 0.2)" };
-        const emergingColor = { bg: "rgba(59, 130, 246, 0.1)", text: "#3b82f6", border: "rgba(59, 130, 246, 0.2)" };
-        const supplementaryColor = { bg: "rgba(129, 140, 248, 0.1)", text: "#818cf8", border: "rgba(129, 140, 248, 0.2)" };
+        // High contrast colors for clear hierarchy
+        const coreColor = { 
+          bg: "rgba(34, 197, 94, 0.15)", // Vibrant green tint
+          text: "#4ADE80", // Bright green
+          border: "rgba(34, 197, 94, 0.4)" // Strong green border
+        };
+        const emergingColor = { 
+          bg: "rgba(59, 130, 246, 0.1)", // Clear blue tint
+          text: "#60A5FA", // Bright blue
+          border: "rgba(59, 130, 246, 0.3)" 
+        };
+        const supplementaryColor = { 
+          bg: "rgba(155, 155, 155, 0.05)", // Muted gray
+          text: "#94A3B8", // Slate gray
+          border: "rgba(155, 155, 155, 0.1)" 
+        };
 
         return (
           <div className="space-y-16">

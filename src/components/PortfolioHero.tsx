@@ -43,7 +43,7 @@ export default function PortfolioHero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-text-primary">
             Tuan Nguyen
           </h1>
           <div className="h-12 flex items-center">
@@ -79,53 +79,51 @@ export default function PortfolioHero() {
 
       <motion.div 
         className="flex-1 hidden md:block"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.4, duration: 0.8 }}
       >
         <div className="relative">
-          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-xl blur opacity-25"></div>
-          <div className="relative bg-black rounded-xl border border-white/10 p-6 shadow-2xl">
-            <div className="flex gap-1.5 mb-4">
-              <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+          <div className="relative bg-surface rounded-xl border border-border-tertiary p-8 shadow-sm">
+            <div className="flex gap-1.5 mb-6">
+              <div className="w-2.5 h-2.5 rounded-full bg-border-tertiary"></div>
+              <div className="w-2.5 h-2.5 rounded-full bg-border-tertiary"></div>
+              <div className="w-2.5 h-2.5 rounded-full bg-border-tertiary"></div>
             </div>
-            <div className="space-y-3 font-mono text-sm">
+            <div className="space-y-4 font-mono text-xs md:text-sm">
               <div className="flex gap-4">
-                <span className="text-gray-500">1</span>
-                <span className="text-purple-400">const</span>
-                <span className="text-blue-400">developer</span>
-                <span className="text-white">=</span>
-                <span className="text-yellow-200">{"{"}</span>
+                <span className="text-text-secondary opacity-40">1</span>
+                <span className="text-secondary">const</span>
+                <span className="text-text-primary">developer</span>
+                <span className="text-text-secondary">=</span>
+                <span className="text-text-secondary">{"{"}</span>
               </div>
               <div className="flex gap-4">
-                <span className="text-gray-500">2</span>
-                <span className="pl-4 text-white">name:</span>
-                <span className="text-green-300">"Tuan Nguyen"</span>,
+                <span className="text-text-secondary opacity-40">2</span>
+                <span className="pl-4 text-text-secondary">name:</span>
+                <span className="text-primary">"Tuan Nguyen"</span>,
               </div>
               <div className="flex gap-4">
-                <span className="text-gray-500">3</span>
-                <span className="pl-4 text-white">role:</span>
-                <span className="text-green-300">"Backend Software Engineer"</span>,
+                <span className="text-text-secondary opacity-40">3</span>
+                <span className="pl-4 text-text-secondary">role:</span>
+                <span className="text-primary">"Backend Engineer"</span>,
               </div>
               <div className="flex gap-4">
-                <span className="text-gray-500">4</span>
-                <span className="pl-4 text-white">specialty:</span>
-                <span className="text-green-300">"Distributed Systems"</span>
+                <span className="text-text-secondary opacity-40">4</span>
+                <span className="pl-4 text-text-secondary">specialty:</span>
+                <span className="text-primary">"Distributed Systems"</span>
               </div>
               <div className="flex gap-4">
-                <span className="text-gray-500">5</span>
-                <span className="text-yellow-200">{"}"}</span>;
+                <span className="text-text-secondary opacity-40">5</span>
+                <span className="text-text-secondary">{"}"}</span>;
               </div>
-              <div className="flex gap-4">
-                <span className="text-gray-500">6</span>
+              <div className="pt-4 flex gap-4">
+                <span className="text-text-secondary opacity-40">6</span>
+                <span className="text-secondary">deploy</span>(developer);
               </div>
-              <div className="flex gap-4">
-                <span className="text-gray-500">7</span>
-                <span className="text-blue-400">deploy</span>(developer);
+              <div className="text-text-secondary italic opacity-60 mt-4 font-sans text-xs">
+                // System healthy. Ready to scale.
               </div>
-              <div className="text-green-500 mt-4 opacity-50">{"> system healthy"}</div>
             </div>
           </div>
         </div>

@@ -1,8 +1,6 @@
 "use client";
-
 import Link from "next/link";
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { MouseEvent } from "react";
+import { motion } from "framer-motion";
 
 interface TopicCardProps {
   id: string;
@@ -26,36 +24,25 @@ export default function TopicCard({
   href,
   icon,
   color = {
-    bg: "rgba(56, 189, 248, 0.1)",
-    text: "#38bdf8",
-    border: "rgba(56, 189, 248, 0.2)",
+    bg: "rgba(217, 119, 87, 0.1)",
+    text: "#D97757",
+    border: "rgba(217, 119, 87, 0.2)",
   },
 }: TopicCardProps) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
   const CardContent = (
     <motion.div
       id={id}
-      onMouseMove={handleMouseMove}
-      whileHover={{ y: -8 }}
-      className="card group relative"
-      style={{
-        // @ts-ignore
-        "--mouse-x": useMotionTemplate`${mouseX}px`,
-        "--mouse-y": useMotionTemplate`${mouseY}px`,
+      whileHover={{ y: -4 }}
+      className="card group relative h-full transition-all duration-300"
+      style={{ 
+        borderColor: color.border,
+        background: `linear-gradient(135deg, var(--color-surface) 0%, ${color.bg} 100%)`
       }}
     >
       <div className="card-head">
         <div className="flex items-center gap-4">
           {icon ? (
-            <div className="p-2 rounded-lg bg-white/5 border border-white/10 text-accent group-hover:scale-110 transition-transform">
+            <div className="p-2 rounded-lg bg-background-secondary border border-border-tertiary text-primary group-hover:text-accent transition-colors">
               {icon}
             </div>
           ) : (
@@ -70,13 +57,13 @@ export default function TopicCard({
               {index}
             </span>
           )}
-          <span className="card-title">
+          <span className="card-title text-text-primary">
             {title}
           </span>
         </div>
         {href && (
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity text-accent">
-            ↗
+          <span className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1 -translate-y-0 group-hover:-translate-y-1 text-accent">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" /></svg>
           </span>
         )}
       </div>
@@ -93,7 +80,7 @@ export default function TopicCard({
 
   if (href) {
     return (
-      <Link href={href} className="no-underline">
+      <Link href={href} className="no-underline block h-full">
         {CardContent}
       </Link>
     );

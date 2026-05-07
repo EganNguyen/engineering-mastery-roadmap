@@ -1,7 +1,5 @@
 "use client";
-
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { MouseEvent } from "react";
+import { motion } from "framer-motion";
 
 interface DeepDiveCardProps {
   id: string;
@@ -18,35 +16,20 @@ const freqStyles = {
 };
 
 export default function DeepDiveCard({ id, title, frequency, tags, role }: DeepDiveCardProps) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
   return (
     <motion.div
       id={id}
-      onMouseMove={handleMouseMove}
-      whileHover={{ y: -8 }}
-      className="card group relative"
-      style={{
-        // @ts-ignore
-        "--mouse-x": useMotionTemplate`${mouseX}px`,
-        "--mouse-y": useMotionTemplate`${mouseY}px`,
-      }}
+      whileHover={{ y: -4 }}
+      className="card group relative h-full"
     >
       <div className="flex justify-between items-start gap-4 mb-6">
-        <h3 className="card-title text-white group-hover:text-accent transition-colors">
+        <h3 className="card-title text-text-primary group-hover:text-accent transition-colors">
           {title}
         </h3>
         <div className="flex flex-col items-end gap-2 shrink-0">
           <span className={`freq ${freqStyles[frequency]}`}>{frequency}</span>
           {role && (
-            <span className="text-[10px] font-bold uppercase tracking-wider text-primary/70 bg-primary/5 px-2 py-1 rounded">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-text-secondary bg-background-secondary px-2 py-1 rounded border border-border-tertiary">
               {role}
             </span>
           )}
