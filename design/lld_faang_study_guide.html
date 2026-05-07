@@ -1,0 +1,380 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+h2.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.wrap{padding:14px 16px}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab{font-size:13px;padding:6px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.tab.active{background:var(--color-background-primary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.panel{display:none}.panel.active{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:13px 15px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+.card-body{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin-bottom:8px}
+.bh{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.bm{background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB}
+.bl{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.bp{background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC}
+.topic-list{display:flex;flex-direction:column;gap:8px}
+.topic-row{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.topic-header{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer}
+.topic-header:hover{background:var(--color-background-secondary)}
+.topic-title{font-size:14px;font-weight:500;color:var(--color-text-primary);flex:1}
+.topic-body{padding:0 14px 13px;border-top:0.5px solid var(--color-border-tertiary);display:none}
+.topic-body.open{display:block}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tag{font-size:11px;padding:2px 8px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.ask-btn{margin-top:10px;font-size:12px;padding:5px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-primary);cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.chev{font-size:14px;color:var(--color-text-secondary);transition:transform .2s}
+.chev.open{transform:rotate(180deg)}
+.tip{font-size:13px;padding:10px 14px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);color:var(--color-text-secondary);line-height:1.6;margin-bottom:14px}
+.tip strong{color:var(--color-text-primary)}
+.step-row{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
+.step-num{min-width:22px;height:22px;border-radius:50%;background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--color-text-primary);flex-shrink:0;margin-top:1px}
+.step-text{font-size:13px;color:var(--color-text-secondary);line-height:1.55}
+code{font-family:var(--font-mono);font-size:12px;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px;color:var(--color-text-primary)}
+pre{font-family:var(--font-mono);font-size:12px;background:var(--color-background-secondary);padding:10px 12px;border-radius:var(--border-radius-md);color:var(--color-text-secondary);line-height:1.55;margin-top:8px;white-space:pre-wrap;border:0.5px solid var(--color-border-tertiary)}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">LLD topics tested at FAANG — SOLID, design patterns, class design, and system-level coding problems with study guide and interview tips</h2>
+
+<div class="tabs">
+  <div class="tab active" onclick="show('solid')">SOLID + OOP</div>
+  <div class="tab" onclick="show('patterns')">Design patterns</div>
+  <div class="tab" onclick="show('problems')">Classic LLD problems</div>
+  <div class="tab" onclick="show('approach')">Interview approach</div>
+  <div class="tab" onclick="show('plan')">Study plan</div>
+</div>
+
+<!-- SOLID + OOP -->
+<div class="panel active" id="p-solid">
+  <div class="tip"><strong>What FAANG tests:</strong> They don't ask "name the SOLID principles." They give you a bad class design and ask you to fix it — or ask you to extend a feature and penalise you for touching code that should be closed. Know each principle as a rule you apply, not a fact you recite.</div>
+  <div class="grid2">
+    <div class="card">
+      <span class="badge bh">S — Single responsibility</span>
+      <div class="card-title">One reason to change</div>
+      <div class="card-body">Each class owns one concept. A <code>UserService</code> that handles auth, sends emails, and formats UI strings has three reasons to change — split it.<br><br><strong style="color:var(--color-text-primary)">Interview signal:</strong> "I'd extract email sending into a <code>NotificationService</code> so a change in email provider doesn't touch auth logic."</div>
+    </div>
+    <div class="card">
+      <span class="badge bh">O — Open/closed</span>
+      <div class="card-title">Open to extension, closed to modification</div>
+      <div class="card-body">Add new behaviour via new classes, not by editing existing ones. A payment processor with a switch on payment type violates OCP — add <code>StripePayment</code> without touching <code>PaymentProcessor</code>.<br><br><strong style="color:var(--color-text-primary)">Pattern link:</strong> Strategy, Decorator, Template Method all enforce OCP.</div>
+    </div>
+    <div class="card">
+      <span class="badge bh">L — Liskov substitution</span>
+      <div class="card-title">Subtypes must be substitutable</div>
+      <div class="card-body">If <code>Square extends Rectangle</code> and <code>setWidth</code> also changes height, the caller's invariant breaks — LSP violation. Classic interview trap: inheritance when composition is needed.<br><br><strong style="color:var(--color-text-primary)">Test:</strong> Can you replace a parent with any child without breaking the caller?</div>
+    </div>
+    <div class="card">
+      <span class="badge bh">I — Interface segregation</span>
+      <div class="card-title">Don't force unused dependencies</div>
+      <div class="card-body">A fat <code>IWorker</code> with <code>work()</code>, <code>eat()</code>, <code>sleep()</code> forces robots to implement <code>eat()</code>. Split into <code>IWorkable</code>, <code>IFeedable</code>.<br><br><strong style="color:var(--color-text-primary)">Interview signal:</strong> spotting when an interface forces a class to implement methods it throws <code>UnsupportedOperationException</code> on.</div>
+    </div>
+    <div class="card">
+      <span class="badge bh">D — Dependency inversion</span>
+      <div class="card-title">Depend on abstractions</div>
+      <div class="card-body">High-level modules shouldn't depend on low-level ones — both depend on interfaces. <code>OrderService</code> depends on <code>IPaymentGateway</code>, not on <code>StripeClient</code> directly. Enables mocking in tests.<br><br><strong style="color:var(--color-text-primary)">Pattern link:</strong> Factory, DI containers, Strategy all implement DI.</div>
+    </div>
+    <div class="card">
+      <span class="badge bm">OOP pillars</span>
+      <div class="card-title">Encapsulation, abstraction, inheritance, polymorphism</div>
+      <div class="card-body">Know the subtle distinctions: encapsulation = hide state + expose behaviour; abstraction = hide implementation details. Favour composition over inheritance — interviewers probe this constantly when you reach for <code>extends</code>.<br><br><strong style="color:var(--color-text-primary)">Signal:</strong> "I'd use composition here — the relationship is has-a, not is-a."</div>
+    </div>
+  </div>
+</div>
+
+<!-- DESIGN PATTERNS -->
+<div class="panel" id="p-patterns">
+  <div class="tip"><strong>What FAANG tests:</strong> You'll never be asked "name a creational pattern." You'll be asked "design a logger" and penalised if you create multiple instances. Know each pattern as a solution to a named problem.</div>
+  <div class="topic-list">
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pat1')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">Creational</span>
+        <div class="topic-title">Singleton, Factory, Abstract Factory, Builder, Prototype</div>
+        <i class="ti ti-chevron-down chev" id="c-pat1" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pat1">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Singleton</strong> — one instance globally. Thread-safe implementation uses double-checked locking or an enum (Java). Tested in: Logger, Config, Connection Pool. Know its testability problem: global state is hard to mock.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Factory / Abstract Factory</strong> — decouple object creation from usage. <code>ShapeFactory.create("circle")</code> returns a <code>Shape</code>. Abstract Factory creates families: <code>GUIFactory</code> returns matching <code>Button</code> + <code>Scrollbar</code>. Tested in: parsers, DB adapters, notification systems.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Builder</strong> — construct complex objects step by step. Avoids telescoping constructors. <code>QueryBuilder</code>, <code>HttpRequest.Builder</code>. Required when objects have many optional fields.</div></div>
+        <div class="tag-row"><span class="tag">thread-safe singleton</span><span class="tag">factory method</span><span class="tag">telescoping constructor</span><span class="tag">immutable builder</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Show me how to implement a thread-safe Singleton and Builder pattern in Java or Python with FAANG-level detail')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pat2')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">Structural</span>
+        <div class="topic-title">Adapter, Decorator, Facade, Proxy, Composite</div>
+        <i class="ti ti-chevron-down chev" id="c-pat2" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pat2">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Decorator</strong> — add behaviour without subclassing. <code>BufferedReader</code> wraps <code>FileReader</code>. Classic interview: design a coffee shop with condiments. Implements OCP perfectly.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Adapter</strong> — translate one interface to another. Legacy XML API wrapped to look like JSON API. Tested in: third-party integrations, SDK wrappers.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Proxy</strong> — control access. Virtual proxy (lazy load), protection proxy (auth check), remote proxy (RPC stub). Tested in: caching layer, lazy-load heavy objects.</div></div>
+        <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong style="color:var(--color-text-primary)">Facade</strong> — simple interface over a complex subsystem. <code>HomeTheatreFacade.watchMovie()</code> hides 10 steps. Reduces coupling to subsystems.</div></div>
+        <div class="tag-row"><span class="tag">wrapping</span><span class="tag">open/closed</span><span class="tag">lazy loading</span><span class="tag">interface translation</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Show me Decorator vs Proxy vs Adapter — when to use each with code examples for FAANG LLD interviews')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pat3')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">Behavioural</span>
+        <div class="topic-title">Observer, Strategy, Command, Iterator, Template Method, State</div>
+        <i class="ti ti-chevron-down chev" id="c-pat3" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pat3">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Observer</strong> — one-to-many event propagation. <code>EventEmitter</code>, pub/sub, UI event listeners. Tested in: notification systems, stock tickers, MVC model updates.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Strategy</strong> — encapsulate interchangeable algorithms. <code>Sorter</code> with swappable <code>ISortStrategy</code>. Tested in: payment processors, compression algorithms, routing.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Command</strong> — encapsulate a request as an object. Enables undo/redo, queueing, logging. Tested in: text editors, transaction systems, macro recording.</div></div>
+        <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong style="color:var(--color-text-primary)">State</strong> — object changes behaviour when internal state changes. Vending machine, traffic light, order lifecycle. Replaces complex switch/if-else chains.</div></div>
+        <div class="tag-row"><span class="tag">event-driven</span><span class="tag">interchangeable algorithms</span><span class="tag">undo/redo</span><span class="tag">state machine</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Show me Observer and Strategy patterns implemented from scratch — FAANG LLD coding examples')">Deep dive ↗</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CLASSIC LLD PROBLEMS -->
+<div class="panel" id="p-problems">
+  <div class="tip"><strong>What FAANG tests:</strong> These 10 problems cover ~90% of what appears in actual LLD rounds at Google, Meta, Amazon, and Uber. Each one targets specific patterns. Practise designing the class diagram first, then coding the core methods.</div>
+  <div class="topic-list">
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr1')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">LRU Cache</div>
+        <i class="ti ti-chevron-down chev" id="c-pr1" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr1">
+        <div class="card-body">Core data structures: <code>HashMap&lt;Key, Node&gt;</code> + doubly-linked list. O(1) get and put. The interviewer watches how you handle the pointer manipulation on eviction and insertion — most candidates mess up the <code>remove</code> + <code>addToFront</code> sequencing.<br><br>Follow-ups: make it thread-safe (read-write lock + lock striping), distributed LRU (consistent hashing across nodes), LFU variant (min-heap or frequency buckets).</div>
+        <div class="tag-row"><span class="tag">doubly-linked list</span><span class="tag">hashmap</span><span class="tag">O(1) ops</span><span class="tag">thread safety</span><span class="tag">eviction policy</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Walk me through designing and coding LRU Cache from scratch for a FAANG LLD interview — including thread safety follow-ups')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr2')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Parking lot</div>
+        <i class="ti ti-chevron-down chev" id="c-pr2" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr2">
+        <div class="card-body">Entities: <code>ParkingLot</code>, <code>Floor</code>, <code>Spot</code> (Compact/Large/Handicapped), <code>Vehicle</code> (Car/Truck/Bike), <code>Ticket</code>, <code>PaymentStrategy</code>. Tests: inheritance hierarchy, Strategy for pricing, Singleton for the lot, Observer for spot availability.<br><br>Common mistakes: hardcoding spot types, putting pricing logic in <code>Spot</code> instead of a <code>PricingStrategy</code>, not modelling <code>Ticket</code> as a first-class object.</div>
+        <div class="tag-row"><span class="tag">inheritance hierarchy</span><span class="tag">Strategy pattern</span><span class="tag">Singleton</span><span class="tag">enum types</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design a parking lot system for a FAANG LLD interview — class diagram, patterns used, and core method implementations')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr3')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Elevator system</div>
+        <i class="ti ti-chevron-down chev" id="c-pr3" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr3">
+        <div class="card-body">Entities: <code>ElevatorController</code>, <code>Elevator</code>, <code>Request</code> (internal/external), <code>Direction</code>. State machine: IDLE → MOVING_UP → MOVING_DOWN → STOPPED. Dispatch algorithm: SCAN (look algorithm) or FCFS.<br><br>Tests your state machine design and algorithm thinking. Key question: how do you handle conflicting requests efficiently? This is one of the hardest LLD problems — the scheduling logic is non-trivial.</div>
+        <div class="tag-row"><span class="tag">state machine</span><span class="tag">SCAN algorithm</span><span class="tag">Observer</span><span class="tag">priority queue</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design an elevator system for a FAANG LLD interview — state machine, dispatch algorithm, and class structure')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr4')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Snake and ladder / Board game</div>
+        <i class="ti ti-chevron-down chev" id="c-pr4" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr4">
+        <div class="card-body">Entities: <code>Game</code>, <code>Board</code>, <code>Cell</code>, <code>Player</code>, <code>Dice</code>, <code>Snake</code>, <code>Ladder</code>. Tests: extensibility (what if we add new cell types?), separation of game logic from I/O, Strategy for dice behaviour.<br><br>Key design question: should <code>Snake</code> and <code>Ladder</code> share a parent? Yes — both are <code>Jump</code> objects with a <code>start</code> and <code>end</code>. This is the insight interviewers look for.</div>
+        <div class="tag-row"><span class="tag">extensibility</span><span class="tag">polymorphism</span><span class="tag">game loop</span><span class="tag">composition</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design a Snake and Ladder game for a FAANG LLD interview — class structure, extensibility, and patterns')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr5')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Logger / rate limiter</div>
+        <i class="ti ti-chevron-down chev" id="c-pr5" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr5">
+        <div class="card-body"><strong style="color:var(--color-text-primary)">Logger:</strong> Singleton + Chain of Responsibility. Log levels (DEBUG/INFO/WARN/ERROR), multiple appenders (file, console, remote), configurable formatters. Decorator for adding timestamp/correlation ID.<br><br><strong style="color:var(--color-text-primary)">Rate limiter:</strong> Strategy for algorithms (token bucket, leaky bucket, fixed window, sliding window). Thread-safe counter with atomic operations. Follow-up: distributed rate limiter with Redis.</div>
+        <div class="tag-row"><span class="tag">Singleton</span><span class="tag">Chain of Responsibility</span><span class="tag">Strategy</span><span class="tag">token bucket</span><span class="tag">thread safety</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design a flexible Logger system and a thread-safe rate limiter for a FAANG LLD interview')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr6')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Vending machine</div>
+        <i class="ti ti-chevron-down chev" id="c-pr6" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr6">
+        <div class="card-body">Classic State pattern problem. States: IDLE → HAS_MONEY → ITEM_SELECTED → DISPENSING → CHANGE_RETURN. Each state handles events (insertCoin, selectItem, cancel) differently.<br><br>Also tests: inventory management, payment handling, error states (out of stock, insufficient funds). Key: transitions should be encoded in the State objects, not in a monolithic switch statement.</div>
+        <div class="tag-row"><span class="tag">State pattern</span><span class="tag">state transitions</span><span class="tag">inventory</span><span class="tag">error handling</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design a vending machine using the State pattern for a FAANG LLD interview — all states, transitions, and code')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr7')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Medium</span>
+        <div class="topic-title">Library management / Hotel booking</div>
+        <i class="ti ti-chevron-down chev" id="c-pr7" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr7">
+        <div class="card-body">Tests entity modelling depth. <strong style="color:var(--color-text-primary)">Library:</strong> <code>Book</code> vs <code>BookItem</code> (multiple copies), <code>Member</code>, <code>Reservation</code>, <code>Fine</code> calculation, search (Strategy for different search algorithms).<br><br><strong style="color:var(--color-text-primary)">Hotel:</strong> <code>Room</code> types, <code>Booking</code>, <code>Guest</code>, <code>Invoice</code>, availability calendar. Key: model time-based availability correctly — overlapping booking detection is the core algorithm.</div>
+        <div class="tag-row"><span class="tag">entity modelling</span><span class="tag">search Strategy</span><span class="tag">time intervals</span><span class="tag">reservation system</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design a library management system for a FAANG LLD interview — entity model, class diagram, and key methods')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr8')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Medium</span>
+        <div class="topic-title">Chess / Tic-Tac-Toe</div>
+        <i class="ti th-chevron-down chev" id="c-pr8" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr8">
+        <div class="card-body"><code>Game</code>, <code>Board</code>, <code>Player</code>, <code>Piece</code> hierarchy (King/Queen/Rook…), <code>Move</code>, <code>MoveValidator</code>. Command pattern for move history + undo. Strategy for AI player.<br><br><strong style="color:var(--color-text-primary)">Tic-Tac-Toe</strong> is the warm-up version: <code>Board</code>, <code>Player</code>, <code>WinChecker</code>. Tests extensibility: can you generalise to N×N? Can you plug in an AI player without changing <code>Game</code>?</div>
+        <div class="tag-row"><span class="tag">Command pattern</span><span class="tag">undo/redo</span><span class="tag">piece hierarchy</span><span class="tag">move validation</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design a Chess game for a FAANG LLD interview — class hierarchy, move validation, Command pattern for undo')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr9')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Medium</span>
+        <div class="topic-title">File system / in-memory filesystem</div>
+        <i class="ti ti-chevron-down chev" id="c-pr9" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr9">
+        <div class="card-body">Composite pattern: <code>FileSystemEntry</code> is either a <code>File</code> or <code>Directory</code>. <code>Directory</code> holds a list of <code>FileSystemEntry</code>. Operations (size, search, delete) recurse uniformly. Iterator for traversal.<br><br>Follow-ups: permissions system (Decorator or separate ACL), versioning (Memento pattern), search by content (Visitor pattern). Tests whether you can model recursive structures cleanly.</div>
+        <div class="tag-row"><span class="tag">Composite pattern</span><span class="tag">recursive structure</span><span class="tag">Visitor</span><span class="tag">Memento</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design an in-memory file system using the Composite pattern for a FAANG LLD interview')">Deep dive ↗</button>
+      </div>
+    </div>
+
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('pr10')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Medium</span>
+        <div class="topic-title">Pub/sub message broker (simplified)</div>
+        <i class="ti ti-chevron-down chev" id="c-pr10" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-pr10">
+        <div class="card-body"><code>Topic</code>, <code>Publisher</code>, <code>Subscriber</code>, <code>Message</code>, <code>Queue</code>, <code>SubscriptionManager</code>. Observer pattern at its core. Thread-safe subscriber notification. Filter support (Decorator on subscriber).<br><br>Follow-ups: at-least-once vs at-most-once delivery, offset tracking (Kafka model), fan-out vs direct routing. This bridges LLD and system design — the interviewer can pivot either direction.</div>
+        <div class="tag-row"><span class="tag">Observer</span><span class="tag">thread safety</span><span class="tag">fan-out</span><span class="tag">message queue</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design a simplified pub/sub message broker for a FAANG LLD interview — Observer pattern, thread safety, and delivery guarantees')">Deep dive ↗</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- INTERVIEW APPROACH -->
+<div class="panel" id="p-approach">
+  <div class="tip"><strong>The 5-step LLD interview framework used at Google, Meta, and Amazon:</strong> most candidates jump to coding within 2 minutes. This is wrong. The interviewer is watching how you think, not just what you produce.</div>
+  <div class="grid2">
+    <div class="card">
+      <span class="badge bp">Step 1 — Clarify (3 min)</span>
+      <div class="card-title">Scope before designing</div>
+      <div class="card-body">Ask: what actors use this? What are the core use cases? What do we NOT need to handle? What scale — in-memory or persistent? Single-process or distributed?<br><br>Never assume. "Design a parking lot" could mean a kiosk, a backend service, or a full system. Nail the scope or you'll design the wrong thing.</div>
+    </div>
+    <div class="card">
+      <span class="badge bp">Step 2 — Use cases (3 min)</span>
+      <div class="card-title">List the behaviours, not the classes</div>
+      <div class="card-body">Write 5–7 use cases as sentences: "A driver parks a vehicle and gets a ticket." "A cashier processes payment." "A manager views occupancy."<br><br>Classes emerge from use cases, not the other way around. Interviewers penalise candidates who jump to <code>ParkingLot.java</code> before understanding what it needs to do.</div>
+    </div>
+    <div class="card">
+      <span class="badge bp">Step 3 — Core entities (5 min)</span>
+      <div class="card-title">Noun extraction + relationships</div>
+      <div class="card-body">Extract nouns from your use cases — those are your candidate classes. Draw rough associations: one-to-many, has-a, is-a. Explicitly state composition vs inheritance decisions.<br><br>"Vehicle is abstract — Car, Truck, Bike extend it. Spot has-a SpotType enum rather than a subclass per type — I'd only subclass if behaviour differs."</div>
+    </div>
+    <div class="card">
+      <span class="badge bp">Step 4 — Identify patterns (3 min)</span>
+      <div class="card-title">Name the patterns before coding</div>
+      <div class="card-body">Before writing code, say: "I'll use Strategy for pricing so adding a new tier doesn't touch Spot. I'll use Singleton for ParkingLot since there's one instance. I'll use Observer to notify a display when a spot changes state."<br><br>This is the highest signal moment of the interview — it shows you design with intent.</div>
+    </div>
+    <div class="card">
+      <span class="badge bp">Step 5 — Code the core (20 min)</span>
+      <div class="card-title">Interfaces first, then key methods</div>
+      <div class="card-body">Define interfaces before concrete classes. Code the 2–3 methods the interviewer cares most about (usually: the main operation + one complex edge case). Leave helpers as stubs with comments.<br><br>"I'll implement <code>park()</code> and <code>unpark()</code> fully, and stub out <code>calculateFee()</code> — want me to implement that next?"</div>
+    </div>
+    <div class="card">
+      <span class="badge bm">Anti-patterns to avoid</span>
+      <div class="card-title">What tanks candidates</div>
+      <div class="card-body">Anemic models (classes with no behaviour — just getters/setters). God classes (one class doing everything). Inheritance where composition fits. Hardcoded enums that block extension. Missing interfaces — depending on concretions. Not narrating your decisions — silent coding tells the interviewer nothing.</div>
+    </div>
+  </div>
+</div>
+
+<!-- STUDY PLAN -->
+<div class="panel" id="p-plan">
+  <div class="tip"><strong>6-week LLD study plan</strong> — parallel with your DSA prep. 3–4 sessions per week, 90 minutes each.</div>
+  <div class="topic-list">
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('wk1')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">Week 1–2</span>
+        <div class="topic-title">SOLID + design patterns foundation</div>
+        <i class="ti ti-chevron-down chev" id="c-wk1" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-wk1">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text">Read each SOLID principle with a bad code example and a fixed version. Don't memorise definitions — memorise the violation and the fix.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text">Implement from scratch: Singleton (thread-safe), Factory, Builder, Observer, Strategy, Decorator, Command. In your primary language, without looking at references.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text">For each pattern: write one sentence describing the problem it solves, one real-world example, and one FAANG problem it appears in.</div></div>
+        <button class="ask-btn" onclick="sendPrompt('Give me a SOLID violation example and its fix for each of the 5 principles — Python or Java code')">Practice SOLID violations ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('wk2')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">Week 3–4</span>
+        <div class="topic-title">Core LLD problems — design then code</div>
+        <i class="ti ti-chevron-down chev" id="c-wk2" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-wk2">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text">Solve in order: LRU Cache → Parking Lot → Vending Machine → Snake & Ladder → Logger. Each session: 15 min design (no code), 45 min coding, 15 min review against a reference.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text">After each: write down which patterns you used and why. If your design differs from a reference, understand why — both can be valid.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text">Add thread safety to LRU Cache and Logger — these are the two most common follow-ups at FAANG.</div></div>
+        <button class="ask-btn" onclick="sendPrompt('Give me a 45-minute LLD mock interview — design a parking lot, ask me clarifying questions, then evaluate my design')">Mock LLD session ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('wk3')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Week 5–6</span>
+        <div class="topic-title">Advanced problems + mock interviews</div>
+        <i class="ti ti-chevron-down chev" id="c-wk3" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-wk3">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text">Elevator system, Chess, File system, Pub/Sub. These require multi-pattern thinking — expect to combine State + Observer + Command in a single design.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text">Run 3 timed mock sessions (45 min each) narrating aloud. Record yourself if possible — review the narration, not just the code.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text">Review your weakest problem twice more. The goal: any of the 10 classic problems should take under 30 min from blank page to working core code.</div></div>
+        <button class="ask-btn" onclick="sendPrompt('Give me a hard LLD mock — design an elevator system with multiple lifts, narrate your requirements questions, then evaluate my solution')">Hard mock ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){
+  const ids=['solid','patterns','problems','approach','plan'];
+  ids.forEach((t,i)=>{
+    document.querySelectorAll('.tab')[i].classList.toggle('active',t===id);
+    document.getElementById('p-'+t).classList.toggle('active',t===id);
+  });
+}
+function tb(id){
+  const b=document.getElementById('body-'+id);
+  const c=document.getElementById('c-'+id);
+  const open=b.classList.toggle('open');
+  if(c)c.classList.toggle('open',open);
+}
+</script>

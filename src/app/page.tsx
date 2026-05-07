@@ -202,6 +202,7 @@ export default function Home() {
                   index="01"
                   title="DSA + Patterns"
                   badges={["Arrays / trees", "Sliding window", "DP", "Backtracking", "Bit manipulation"]}
+                  href="/dsa-patterns"
                   color={coreColor}
                 />
                 <TopicCard
@@ -209,6 +210,7 @@ export default function Home() {
                   index="02"
                   title="Low-Level Design (LLD)"
                   badges={["OOP + SOLID", "Design patterns", "Class diagrams", "State machines"]}
+                  href="/low-level-design"
                   color={coreColor}
                 />
                 <TopicCard
