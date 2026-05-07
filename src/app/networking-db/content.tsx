@@ -16,15 +16,26 @@ export default function NetworkingDBContent() {
 
       <ScrollAnimation>
         <header className="portfolio-header">
-          <h1>Networking & DB Internals</h1>
-          <p>Deep dive into network protocols, load balancing, database engines, indexing, and distributed transactions.</p>
+          <div className="eyebrow mb-2">Systems Mastery</div>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Networking & DB Internals</h1>
+          <p className="text-lg text-text-secondary max-w-3xl">
+            Deep dive into network protocols, load balancing, database engines, indexing, and distributed transactions.
+          </p>
         </header>
       </ScrollAnimation>
 
-      <div className="legend">
-        <span><span className="ldot" style={{ background: "#4ADE80" }}></span>High frequency</span>
-        <span><span className="ldot" style={{ background: "#60A5FA" }}></span>Medium frequency</span>
-        <span><span className="ldot" style={{ background: "#94A3B8" }}></span>Occasional / senior roles</span>
+      <div className="legend mb-12">
+        <div className="flex flex-wrap gap-6 items-center">
+          <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-text-secondary">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#4ADE80]"></span> High Frequency
+          </span>
+          <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-text-secondary">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#60A5FA]"></span> Medium Frequency
+          </span>
+          <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-text-secondary">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#94A3B8]"></span> Occasional / Senior+
+          </span>
+        </div>
       </div>
 
       <ScrollAnimation variant="stagger">

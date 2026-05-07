@@ -41,15 +41,9 @@ export default function TopicCard({
       variants={{
         hover: { y: isPortfolio ? -8 : -4 }
       }}
-      className={`card group relative h-full transition-all duration-300 ${
-        isPortfolio ? "portfolio-variant p-10" : "roadmap-variant p-6"
+      className={`card group relative h-full transition-all duration-300 border border-border-tertiary rounded-xl bg-surface/50 backdrop-blur-sm hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 ${
+        isPortfolio ? "p-10" : "p-6"
       }`}
-      style={{ 
-        borderColor: color.border,
-        background: isPortfolio 
-          ? `linear-gradient(135deg, var(--color-surface) 0%, ${color.bg} 100%)`
-          : "var(--color-surface)"
-      }}
     >
       <div className="card-head">
         <div className="flex items-center gap-4">
@@ -58,22 +52,22 @@ export default function TopicCard({
               variants={{
                 initial: { scale: 1, rotate: 0, y: 0 },
                 hover: { 
-                  scale: 1.1, 
-                  rotate: [0, -5, 5, 0],
-                  y: [0, -2, 0],
-                  transition: { 
-                    rotate: { duration: 0.4 },
-                    y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
-                  }
+                   scale: 1.1, 
+                   rotate: [0, -5, 5, 0],
+                   y: [0, -2, 0],
+                   transition: { 
+                     rotate: { duration: 0.4 },
+                     y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+                   }
                 }
               }}
-              className={`p-2 rounded-lg bg-background-secondary border border-border-tertiary text-primary group-hover:text-accent transition-colors ${isPortfolio ? "w-12 h-12 flex items-center justify-center" : ""}`}
+              className={`p-2.5 rounded-xl bg-background-secondary border border-border-tertiary text-primary group-hover:text-accent group-hover:border-accent/30 transition-all duration-300 ${isPortfolio ? "w-14 h-14 flex items-center justify-center" : "w-10 h-10 flex items-center justify-center"}`}
             >
               {icon}
             </motion.div>
           ) : (
             <span
-              className="num"
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold border"
               style={{
                 background: color.bg,
                 color: color.text,
@@ -83,7 +77,7 @@ export default function TopicCard({
               {index}
             </span>
           )}
-          <span className={`card-title text-text-primary ${isPortfolio ? "text-xl font-bold" : "text-base font-semibold"}`}>
+          <span className={`text-text-primary group-hover:text-primary transition-colors ${isPortfolio ? "text-2xl font-bold tracking-tight" : "text-lg font-bold"}`}>
             {title}
           </span>
         </div>
@@ -94,17 +88,22 @@ export default function TopicCard({
         )}
       </div>
       
-      <div className="badge-row mt-6">
+      <div className="flex flex-wrap gap-2 mt-6">
         {badges.map((badge, i) => (
-          <span key={i} className={`badge ${isPortfolio ? "px-4 py-2 text-sm" : "px-2 py-1 text-[10px]"}`}>
+          <span key={i} className={`px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-text-secondary font-medium tracking-wide ${isPortfolio ? "text-xs" : "text-[10px]"}`}>
             {badge}
           </span>
         ))}
       </div>
 
+      {/* Premium Hover Glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+        <div className="absolute -inset-[1px] bg-gradient-to-br from-primary/20 via-transparent to-transparent rounded-[13px] z-[-1]"></div>
+      </div>
+
       {isPortfolio && (
-        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-          <div className="w-24 h-24 blur-3xl bg-primary rounded-full"></div>
+        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+          <div className="w-32 h-32 blur-3xl bg-primary rounded-full"></div>
         </div>
       )}
     </motion.div>

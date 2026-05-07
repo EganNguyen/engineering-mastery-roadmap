@@ -1,0 +1,365 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+h2.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.wrap{padding:14px 16px}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab{font-size:13px;padding:6px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.tab.active{background:var(--color-background-primary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.panel{display:none}.panel.active{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:13px 15px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+.card-body{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin-bottom:8px}
+.bh{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.bm{background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB}
+.bl{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.bp{background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC}
+.ba{background:#FAEEDA;color:#633806;border:0.5px solid #EF9F27}
+.topic-list{display:flex;flex-direction:column;gap:8px}
+.topic-row{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.topic-header{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer}
+.topic-header:hover{background:var(--color-background-secondary)}
+.topic-title{font-size:14px;font-weight:500;color:var(--color-text-primary);flex:1}
+.topic-body{padding:0 14px 13px;border-top:0.5px solid var(--color-border-tertiary);display:none}
+.topic-body.open{display:block}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tag{font-size:11px;padding:2px 8px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.ask-btn{margin-top:10px;font-size:12px;padding:5px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-primary);cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.chev{font-size:14px;color:var(--color-text-secondary);transition:transform .2s}
+.chev.open{transform:rotate(180deg)}
+.tip{font-size:13px;padding:10px 14px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);color:var(--color-text-secondary);line-height:1.6;margin-bottom:14px}
+.tip strong{color:var(--color-text-primary)}
+.step-row{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
+.step-num{min-width:22px;height:22px;border-radius:50%;background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--color-text-primary);flex-shrink:0;margin-top:1px}
+.step-text{font-size:13px;color:var(--color-text-secondary);line-height:1.55}
+code{font-family:var(--font-mono);font-size:12px;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px;color:var(--color-text-primary)}
+</style>
+<div class="wrap">
+<h2 class="sr-only">Cloud architecture knowledge expected at FAANG — containers, serverless, multi-region, IaC, cost, and more</h2>
+<div class="tabs">
+  <div class="tab active" onclick="show('compute')">Compute</div>
+  <div class="tab" onclick="show('reliability')">Reliability</div>
+  <div class="tab" onclick="show('networking')">Networking</div>
+  <div class="tab" onclick="show('data')">Data & storage</div>
+  <div class="tab" onclick="show('iac')">IaC & DevOps</div>
+  <div class="tab" onclick="show('cost')">Cost & trade-offs</div>
+</div>
+
+<!-- COMPUTE -->
+<div class="panel active" id="p-compute">
+  <div class="tip"><strong>What FAANG tests:</strong> Not which cloud provider you prefer — but whether you can reason about the tradeoffs between compute models under different traffic patterns, latency constraints, and operational costs.</div>
+  <div class="topic-list">
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('c1')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Containers & Kubernetes</div>
+        <i class="ti ti-chevron-down chev" id="cv-c1" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-c1">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Container model:</strong> image layers, copy-on-write filesystem, namespaces + cgroups for isolation. Know why containers are not VMs — shared kernel, faster startup, no hypervisor overhead.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">K8s core objects:</strong> Pod, Deployment, Service, ConfigMap, Secret, HPA, PVC. Know the difference between a Deployment (stateless) and a StatefulSet (ordered, stable network identity — for databases, Kafka).</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Scheduling & rolling updates:</strong> how the scheduler places pods (node affinity, taints/tolerations, resource requests vs limits). Rolling update strategy — max unavailable, max surge. How readiness probes gate traffic during rollout.</div></div>
+        <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong style="color:var(--color-text-primary)">Service mesh (Istio/Linkerd):</strong> sidecar proxy model, mTLS between services, traffic shaping (canary weights), observability (distributed tracing without code changes).</div></div>
+        <div class="tag-row"><span class="tag">pod lifecycle</span><span class="tag">HPA vs VPA</span><span class="tag">StatefulSet</span><span class="tag">readiness probe</span><span class="tag">service mesh</span><span class="tag">KEDA</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Deep dive into Kubernetes — how scheduling, rolling updates, and HPA work for FAANG system design interviews')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('c2')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Serverless — functions & containers</div>
+        <i class="ti ti-chevron-down chev" id="cv-c2" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-c2">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Cold start problem:</strong> function container must be initialised on first invocation — adds 100ms–2s latency. Mitigations: provisioned concurrency (keep containers warm), smaller runtimes (Node/Python over Java), minifying dependencies.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">When to use serverless:</strong> event-driven, unpredictable traffic, short-lived tasks (image resize, webhook handler, ETL trigger). When NOT to: long-running jobs (&gt;15 min), persistent connections (WebSockets), latency-sensitive hot paths.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Concurrency model:</strong> each invocation is isolated — no shared memory between calls. State must live in external stores (DynamoDB, Redis). At-most-once vs at-least-once execution guarantees.</div></div>
+        <div class="tag-row"><span class="tag">cold start</span><span class="tag">provisioned concurrency</span><span class="tag">event-driven</span><span class="tag">execution limits</span><span class="tag">idempotency</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain serverless architecture tradeoffs — cold start, concurrency model, when to use vs avoid for FAANG design rounds')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('c3')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Medium</span>
+        <div class="topic-title">Autoscaling — reactive & predictive</div>
+        <i class="ti ti-chevron-down chev" id="cv-c3" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-c3">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">HPA (Horizontal Pod Autoscaler):</strong> scales pod count based on CPU/memory or custom metrics (queue depth via KEDA). Lag between metric crossing threshold and pods being ready — design for this gap with circuit breakers.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Scale-in risk:</strong> aggressively scaling down drops in-flight requests. Use connection draining, PodDisruptionBudgets, and termination grace periods. Scale-out is safe; scale-in needs care.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Predictive scaling:</strong> scheduled scaling for known traffic patterns (lunch rush, market open). ML-based predictive scaling (AWS) for recurring patterns. Reduces cold-start lag at known peaks.</div></div>
+        <div class="tag-row"><span class="tag">HPA / VPA</span><span class="tag">KEDA</span><span class="tag">PodDisruptionBudget</span><span class="tag">connection draining</span><span class="tag">scale-in lag</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain autoscaling strategies for Kubernetes — HPA, KEDA, predictive scaling, and scale-in risks for FAANG')">Deep dive ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELIABILITY -->
+<div class="panel" id="p-reliability">
+  <div class="tip"><strong>What FAANG tests:</strong> Given a system design, interviewers ask "what happens when X fails?" You need to enumerate failure modes and recovery strategies — not just claim "it's highly available."</div>
+  <div class="topic-list">
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('r1')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Multi-region HA architecture</div>
+        <i class="ti ti-chevron-down chev" id="cv-r1" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-r1">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Active-active vs active-passive:</strong> active-active serves traffic from multiple regions simultaneously — zero failover time but requires conflict-free data replication. Active-passive has a warm standby — failover takes seconds to minutes, but simpler consistency.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Data replication lag:</strong> cross-region replication is async — lag can be 100ms–seconds. During failover, reads may return stale data. Design decisions: can your use case tolerate stale reads? If not, synchronous replication (high write latency) or route reads to primary always.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Failover mechanics:</strong> DNS-based (Route53 health checks, TTL matters), anycast routing, global load balancer. RTO (recovery time objective) vs RPO (recovery point objective) — interviewers ask you to quantify these.</div></div>
+        <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong style="color:var(--color-text-primary)">Cell-based architecture:</strong> FAANG-specific pattern — partition users into cells (each cell is an independent stack). A failure in cell 3 doesn't affect cells 1, 2. Blast radius containment. Amazon uses this for Route53 and DynamoDB.</div></div>
+        <div class="tag-row"><span class="tag">active-active</span><span class="tag">RTO / RPO</span><span class="tag">replication lag</span><span class="tag">cell architecture</span><span class="tag">anycast</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain multi-region HA architecture — active-active vs active-passive, failover mechanics, and cell-based design for FAANG')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('r2')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Resilience patterns — circuit breaker, bulkhead, retry</div>
+        <i class="ti ti-chevron-down chev" id="cv-r2" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-r2">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Circuit breaker:</strong> three states — CLOSED (normal), OPEN (failing fast without calling downstream), HALF-OPEN (probe with limited traffic). Prevents cascading failures when a dependency is degraded. Hystrix/Resilience4j implement this.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Retry with exponential backoff + jitter:</strong> naive retries amplify load on a struggling service. Jitter randomises retry timing across clients, preventing thundering herd. Know the formula: <code>min(cap, base * 2^attempt) + random(0, jitter)</code>.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Bulkhead:</strong> isolate resource pools per dependency — separate thread pools for payment service, inventory service. A slow payment call doesn't exhaust threads serving inventory. Titanic metaphor: watertight compartments.</div></div>
+        <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong style="color:var(--color-text-primary)">Timeout + deadline propagation:</strong> always set timeouts. Propagate deadlines across service calls — if the user's request has 200ms left, don't call a service with a 500ms timeout. gRPC and HTTP context cancellation enable this.</div></div>
+        <div class="tag-row"><span class="tag">circuit breaker states</span><span class="tag">exponential backoff</span><span class="tag">jitter</span><span class="tag">bulkhead</span><span class="tag">deadline propagation</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain circuit breaker, bulkhead, and retry patterns — states, implementation, and FAANG system design applications')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('r3')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Deployment strategies — canary, blue-green, feature flags</div>
+        <i class="ti ti-chevron-down chev" id="cv-r3" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-r3">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Blue-green:</strong> two identical environments — switch traffic atomically. Instant rollback (flip DNS/LB back). Cost: double infrastructure during transition. Good for: high-risk releases, database schema changes.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Canary:</strong> route 1–5% of traffic to new version, observe error rates + latency, graduate to 100% if healthy. Slower than blue-green but cheaper and gives real-signal validation. Used by Netflix, Google.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Feature flags:</strong> decouple deploy from release. Code ships dark, flag enables it for % of users or specific cohorts. Enables A/B testing, kill switches, gradual rollout independent of deployment cadence.</div></div>
+        <div class="tag-row"><span class="tag">canary weights</span><span class="tag">rollback strategy</span><span class="tag">feature flag</span><span class="tag">dark launch</span><span class="tag">traffic shifting</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Compare blue-green vs canary vs feature flag deployments — tradeoffs and when to use each at FAANG scale')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('r4')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Medium</span>
+        <div class="topic-title">Chaos engineering & game days</div>
+        <i class="ti ti-chevron-down chev" id="cv-r4" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-r4">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Principles:</strong> form a hypothesis ("the system will serve &lt;200ms p99 if one AZ is lost"), define blast radius, run in production with limited scope, measure against SLOs. Netflix's Chaos Monkey kills random instances.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Fault injection types:</strong> latency injection (add 500ms to downstream calls), error injection (return 503 from dependency), resource exhaustion (fill disk, OOM), network partition (drop packets between services).</div></div>
+        <div class="tag-row"><span class="tag">blast radius</span><span class="tag">hypothesis-driven</span><span class="tag">fault injection</span><span class="tag">game days</span><span class="tag">Chaos Monkey</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain chaos engineering principles and how FAANG companies apply them in production')">Deep dive ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NETWORKING -->
+<div class="panel" id="p-networking">
+  <div class="tip"><strong>What FAANG tests:</strong> Cloud networking appears in every system design round — as the glue between components. Know how traffic flows from user to service and back, and what can fail at each hop.</div>
+  <div class="topic-list">
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('n1')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Load balancers — L4 vs L7, global vs regional</div>
+        <i class="ti ti-chevron-down chev" id="cv-n1" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-n1">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">L4 (TCP/UDP):</strong> routes by IP + port, no application awareness. Faster, lower overhead. Cannot do path-based routing, header inspection, or TLS termination based on hostname. Used for raw throughput (gaming, streaming).</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">L7 (HTTP/gRPC):</strong> routes by URL path, headers, cookies. Enables: path routing (<code>/api</code> → service A, <code>/static</code> → CDN), A/B traffic splitting, sticky sessions, WAF integration, TLS termination. Cost: higher CPU per connection.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Global load balancer (Anycast):</strong> single IP resolves to nearest PoP. Routes to healthiest origin. Used for latency-sensitive global services. AWS Global Accelerator, GCP Premium Tier.</div></div>
+        <div class="tag-row"><span class="tag">L4 vs L7</span><span class="tag">path routing</span><span class="tag">TLS termination</span><span class="tag">anycast</span><span class="tag">sticky sessions</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain L4 vs L7 load balancers — routing capabilities, tradeoffs, and when to use each in FAANG system design')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('n2')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">VPC, subnets, security groups, peering</div>
+        <i class="ti ti-chevron-down chev" id="cv-n2" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-n2">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">VPC fundamentals:</strong> private isolated network. Public subnets (route to internet gateway) vs private subnets (no direct internet — use NAT gateway for egress, VPC endpoints for AWS service access without traversing internet).</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Security groups vs NACLs:</strong> security groups are stateful (return traffic automatic), instance-level. NACLs are stateless (must allow both directions), subnet-level. Use security groups for service-to-service; NACLs for broad subnet policies.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">VPC peering vs Transit Gateway:</strong> peering is non-transitive (A↔B, B↔C does not give A↔C). Transit Gateway is a hub — connect hundreds of VPCs centrally. Use peering for simple two-VPC connections; Transit Gateway for mesh or hub-spoke topologies.</div></div>
+        <div class="tag-row"><span class="tag">public vs private subnet</span><span class="tag">NAT gateway</span><span class="tag">VPC endpoint</span><span class="tag">security group</span><span class="tag">Transit Gateway</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain VPC architecture — subnets, security groups, peering vs Transit Gateway for FAANG cloud design rounds')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('n3')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Medium</span>
+        <div class="topic-title">CDN architecture & edge compute</div>
+        <i class="ti ti-chevron-down chev" id="cv-n3" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-n3">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Cache hierarchy:</strong> PoP (point of presence) → regional edge → origin shield → origin. Cache-hit serves from PoP in &lt;10ms. Shield aggregates misses so origin sees one request per unique URL, not one per PoP.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Cache invalidation:</strong> TTL-based (simple but stale window), event-based purge (instant but complex). Surrogate keys allow purging all assets tagged with <code>product-123</code> in one API call.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Edge compute (Cloudflare Workers, Lambda@Edge):</strong> run code at PoP — A/B testing, auth token validation, geo-routing, response personalisation — without round-tripping to origin. Sub-5ms overhead.</div></div>
+        <div class="tag-row"><span class="tag">origin shield</span><span class="tag">cache invalidation</span><span class="tag">surrogate keys</span><span class="tag">edge compute</span><span class="tag">geo-routing</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain CDN architecture — cache hierarchy, invalidation strategies, and edge compute for FAANG system design')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('n4')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Medium</span>
+        <div class="topic-title">API gateway & service mesh</div>
+        <i class="ti ti-chevron-down chev" id="cv-n4" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-n4">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">API gateway responsibilities:</strong> authn/authz at edge, rate limiting, request routing, protocol translation (REST↔gRPC), response caching, schema validation, usage metering. Do not put business logic here.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Service mesh (east-west traffic):</strong> handles service-to-service (internal) traffic. API gateway handles north-south (external). Sidecar proxy (Envoy) intercepts all traffic — mTLS, tracing, retries, circuit breaking without app code changes.</div></div>
+        <div class="tag-row"><span class="tag">north-south vs east-west</span><span class="tag">sidecar proxy</span><span class="tag">Envoy</span><span class="tag">protocol translation</span><span class="tag">rate limiting at edge</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain API gateway vs service mesh — responsibilities, tradeoffs, and how they complement each other at FAANG scale')">Deep dive ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DATA & STORAGE -->
+<div class="panel" id="p-data">
+  <div class="tip"><strong>What FAANG tests:</strong> Storage selection is a core system design skill. Interviewers watch whether you default to "use Postgres" for everything or match the access pattern to the right store.</div>
+  <div class="grid2">
+    <div class="card">
+      <span class="badge bh">Object storage</span>
+      <div class="card-title">S3 / GCS / Blob Storage</div>
+      <div class="card-body">Immutable, infinitely scalable, cheap. For: images, video, backups, ML training data, static assets, data lake raw layer. Key design: pre-signed URLs for secure client-direct upload (avoids proxying large files through your servers). Lifecycle rules for tiering to cold storage.<br><br><strong style="color:var(--color-text-primary)">Interview use:</strong> any design that handles user media uploads.</div>
+    </div>
+    <div class="card">
+      <span class="badge bh">Managed databases</span>
+      <div class="card-title">RDS, Aurora, Spanner, Firestore</div>
+      <div class="card-body">RDS Multi-AZ = synchronous standby (automatic failover ~30s). Aurora = shared storage volume, up to 15 read replicas, faster failover. Spanner = globally distributed, externally consistent, SQL — used when you need strong consistency across regions.<br><br><strong style="color:var(--color-text-primary)">Interview use:</strong> explain why you'd pick Aurora over RDS, or Spanner over Aurora.</div>
+    </div>
+    <div class="card">
+      <span class="badge bh">Managed queues & streams</span>
+      <div class="card-title">SQS, Kinesis, Pub/Sub, EventBridge</div>
+      <div class="card-body">SQS: at-least-once, no ordering (FIFO queue for ordering). Kinesis/Kafka: ordered within partition, replay, consumer groups. EventBridge: event routing with schema registry — good for loosely coupled microservice events.<br><br><strong style="color:var(--color-text-primary)">Interview use:</strong> every async design needs a queue — explain which and why.</div>
+    </div>
+    <div class="card">
+      <span class="badge bm">Caching layer</span>
+      <div class="card-title">ElastiCache Redis vs Memcached</div>
+      <div class="card-body">Redis: rich data types (sorted sets for leaderboards, streams, geospatial), persistence, pub/sub, Lua scripting. Memcached: pure key-value, multi-threaded, simpler. Choose Redis for almost everything — only pick Memcached when you need horizontal scaling without persistence and simpler ops.<br><br><strong style="color:var(--color-text-primary)">Know:</strong> Redis Cluster vs Sentinel failover model.</div>
+    </div>
+    <div class="card">
+      <span class="badge bm">Data warehouse & lake</span>
+      <div class="card-title">Redshift, BigQuery, Snowflake, S3 + Athena</div>
+      <div class="card-body">Columnar storage, MPP (massively parallel processing), separation of storage and compute. S3 + Athena = serverless query over data lake — pay per query, no cluster. BigQuery = fully managed, serverless, automatic scaling.<br><br><strong style="color:var(--color-text-primary)">Interview use:</strong> analytics layer in any large-scale system design.</div>
+    </div>
+    <div class="card">
+      <span class="badge bl">Storage selection guide</span>
+      <div class="card-title">Match pattern to store</div>
+      <div class="card-body">Structured + ACID → RDBMS. High write throughput + simple lookup → DynamoDB/Cassandra. Full-text search → Elasticsearch. Time-series → TimescaleDB / InfluxDB. Graph traversal → Neptune / Neo4j. Files / blobs → S3. Session / cache → Redis. Leaderboard → Redis sorted set.</div>
+    </div>
+  </div>
+</div>
+
+<!-- IAC & DEVOPS -->
+<div class="panel" id="p-iac">
+  <div class="tip"><strong>What FAANG tests:</strong> You're expected to know IaC at the conceptual level — why it exists, what problems it solves, and how CI/CD pipelines gate deployments. Certification-level detail is not expected.</div>
+  <div class="topic-list">
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('i1')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">Infrastructure as Code — Terraform & CDK</div>
+        <i class="ti ti-chevron-down chev" id="cv-i1" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-i1">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Why IaC:</strong> reproducible environments, version-controlled infrastructure, drift detection, peer-reviewed changes. The alternative — clicking in console — produces snowflake servers and undocumented config.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Terraform model:</strong> declarative — describe desired state, Terraform plans the diff, applies atomically. State file tracks real-world mapping. Remote state (S3 + DynamoDB lock) for team use. Modules for reusable patterns.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">CDK:</strong> define cloud resources in TypeScript/Python — generates CloudFormation. Better for developers who think in code rather than HCL. Enables type-safe constructs and unit-testable infrastructure.</div></div>
+        <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong style="color:var(--color-text-primary)">GitOps:</strong> infrastructure changes flow through PRs. Automated plan on PR, apply on merge to main. Drift detection alerts when real infra deviates from repo state (Atlantis, Terraform Cloud).</div></div>
+        <div class="tag-row"><span class="tag">declarative vs imperative</span><span class="tag">state file</span><span class="tag">plan / apply</span><span class="tag">modules</span><span class="tag">GitOps</span><span class="tag">drift detection</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain Terraform and IaC concepts at the depth expected in FAANG system design and engineering interviews')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('i2')">
+        <span class="badge bh" style="margin:0;flex-shrink:0">High</span>
+        <div class="topic-title">CI/CD pipeline design</div>
+        <i class="ti ti-chevron-down chev" id="cv-i2" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-i2">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Pipeline stages:</strong> commit → lint + unit test → build image → integration test → security scan (SAST/SCA) → push to registry → deploy to staging → smoke test → deploy to prod (canary) → full rollout.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Shift-left:</strong> move security and quality checks earlier. SAST in pre-commit hooks, dependency scanning in CI, container image scanning before push. Cheaper to catch vulnerabilities before they reach staging.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">Rollback strategy:</strong> immutable artifacts — never patch in place, always redeploy previous image tag. Database migrations need backward-compatible schema changes (add column before removing old one, two-phase migrations).</div></div>
+        <div class="tag-row"><span class="tag">pipeline stages</span><span class="tag">shift-left security</span><span class="tag">immutable artifacts</span><span class="tag">two-phase migration</span><span class="tag">smoke test</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Design a production-grade CI/CD pipeline for a FAANG-scale service — stages, gating, rollback, and database migration strategy')">Deep dive ↗</button>
+      </div>
+    </div>
+    <div class="topic-row">
+      <div class="topic-header" onclick="tb('i3')">
+        <span class="badge bm" style="margin:0;flex-shrink:0">Medium</span>
+        <div class="topic-title">Container image security & supply chain</div>
+        <i class="ti ti-chevron-down chev" id="cv-i3" aria-hidden="true"></i>
+      </div>
+      <div class="topic-body" id="body-i3">
+        <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--color-text-primary)">Minimal base images:</strong> distroless or Alpine — fewer packages = smaller attack surface. Multi-stage builds — compile in a fat image, copy binary into a minimal runtime image.</div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--color-text-primary)">Image signing (Cosign/Sigstore):</strong> sign images at build time, verify signature at admission (Kubernetes OPA/Gatekeeper). Prevents running unsigned or tampered images in production.</div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--color-text-primary)">SBOM (Software Bill of Materials):</strong> list of all dependencies in an image. Required for vulnerability tracking and compliance. Generated by Syft, embedded in image attestation.</div></div>
+        <div class="tag-row"><span class="tag">distroless</span><span class="tag">multi-stage build</span><span class="tag">Cosign</span><span class="tag">SBOM</span><span class="tag">admission controller</span></div>
+        <button class="ask-btn" onclick="sendPrompt('Explain container image security and supply chain hardening for FAANG-level production systems')">Deep dive ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COST & TRADE-OFFS -->
+<div class="panel" id="p-cost">
+  <div class="tip"><strong>What FAANG tests:</strong> At senior+ level, interviewers explicitly ask "what would this cost at scale?" and "how would you optimise it?" Cost awareness is a signal of production experience.</div>
+  <div class="grid2">
+    <div class="card">
+      <span class="badge bh">Compute cost levers</span>
+      <div class="card-title">Spot, reserved, on-demand</div>
+      <div class="card-body">On-demand: full price, no commitment. Reserved: 30–60% discount, 1–3 year commit. Spot/preemptible: 70–90% discount, can be reclaimed in 2 min. Design for spot: stateless workers, checkpointing, graceful shutdown on SIGTERM. Use spot for batch jobs, ML training, CI workers — never for stateful or latency-sensitive workloads.</div>
+    </div>
+    <div class="card">
+      <span class="badge bh">Data transfer costs</span>
+      <div class="card-title">Egress is expensive, ingress is free</div>
+      <div class="card-body">Cross-AZ data transfer costs ~$0.01/GB — significant at scale. Cross-region is higher. CDN offload reduces egress from origin. Co-locate services that talk frequently in the same AZ. VPC endpoints for S3/DynamoDB eliminate NAT gateway egress costs. At 1PB/month egress, $90k/month in AWS data transfer charges.</div>
+    </div>
+    <div class="card">
+      <span class="badge bm">Right-sizing</span>
+      <div class="card-title">Match instance to workload</div>
+      <div class="card-body">CPU-optimised (C family) for compute-intensive. Memory-optimised (R/X family) for in-memory DBs, caches. Storage-optimised (I/D family) for high IOPS. GPU (P/G family) for ML inference. Oversizing is common — use CPU/memory utilisation data over 2 weeks, target 60–70% average utilisation for headroom.</div>
+    </div>
+    <div class="card">
+      <span class="badge bm">FinOps practices</span>
+      <div class="card-title">Cost allocation & optimisation</div>
+      <div class="card-body">Tag every resource with team, service, environment. Budget alerts at 80% + 100% of monthly target. Savings Plans for predictable base load (more flexible than reserved). S3 Intelligent Tiering for mixed-access data. Delete unused snapshots, unattached EBS volumes, idle load balancers — these silently accumulate.</div>
+    </div>
+    <div class="card">
+      <span class="badge ba">Key trade-off table</span>
+      <div class="card-title">What you give up for each gain</div>
+      <div class="card-body">Multi-region HA → 2–3× cost + replication complexity. Synchronous replication → high write latency. Active-active → conflict resolution complexity. Serverless → cold start + vendor lock-in. Spot instances → interruption risk. CDN caching → stale content window. More AZs → cross-AZ transfer cost.</div>
+    </div>
+    <div class="card">
+      <span class="badge bl">Interview signal</span>
+      <div class="card-title">How to demonstrate cost awareness</div>
+      <div class="card-body">After proposing a design, volunteer: "At 10M DAU this generates roughly X GB/day of egress — that's about $Y/month. I'd use CloudFront to cache static assets and reduce origin egress by ~80%." You don't need exact figures — order-of-magnitude estimates with clear reasoning are the signal.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){
+  const ids=['compute','reliability','networking','data','iac','cost'];
+  ids.forEach((t,i)=>{
+    document.querySelectorAll('.tab')[i].classList.toggle('active',t===id);
+    document.getElementById('p-'+t).classList.toggle('active',t===id);
+  });
+}
+function tb(id){
+  const b=document.getElementById('body-'+id);
+  const c=document.getElementById('cv-'+id);
+  const open=b.classList.toggle('open');
+  if(c)c.classList.toggle('open',open);
+}
+</script>
