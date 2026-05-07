@@ -91,12 +91,21 @@ export default function CloudArchitectureContent() {
                 {cloudComputeTopics.map((topic) => (
                   <LLDAccordion
                     key={topic.id}
+                    badge={topic.frequency}
+                    badgeClass={topic.frequency === "High" ? "fh" : topic.frequency === "Medium" ? "fm" : "fl"}
                     title={topic.title}
-                    frequency={topic.frequency}
-                    steps={topic.steps}
                     tags={topic.tags}
-                    prompt={topic.prompt}
-                  />
+                    ask={topic.prompt}
+                  >
+                    <ul className="space-y-3">
+                      {topic.steps.map((step, i) => (
+                        <li key={i} className="text-sm text-text-secondary leading-relaxed flex gap-3">
+                          <span className="text-primary font-bold">•</span>
+                          {step}
+                        </li>
+                      ))}
+                    </ul>
+                  </LLDAccordion>
                 ))}
               </div>
             </section>
@@ -111,12 +120,21 @@ export default function CloudArchitectureContent() {
                 {cloudReliabilityTopics.map((topic) => (
                   <LLDAccordion
                     key={topic.id}
+                    badge={topic.frequency}
+                    badgeClass={topic.frequency === "High" ? "fh" : topic.frequency === "Medium" ? "fm" : "fl"}
                     title={topic.title}
-                    frequency={topic.frequency}
-                    steps={topic.steps}
                     tags={topic.tags}
-                    prompt={topic.prompt}
-                  />
+                    ask={topic.prompt}
+                  >
+                    <ul className="space-y-3">
+                      {topic.steps.map((step, i) => (
+                        <li key={i} className="text-sm text-text-secondary leading-relaxed flex gap-3">
+                          <span className="text-primary font-bold">•</span>
+                          {step}
+                        </li>
+                      ))}
+                    </ul>
+                  </LLDAccordion>
                 ))}
               </div>
             </section>
@@ -131,12 +149,21 @@ export default function CloudArchitectureContent() {
                 {cloudNetworkingTopics.map((topic) => (
                   <LLDAccordion
                     key={topic.id}
+                    badge={topic.frequency}
+                    badgeClass={topic.frequency === "High" ? "fh" : topic.frequency === "Medium" ? "fm" : "fl"}
                     title={topic.title}
-                    frequency={topic.frequency}
-                    steps={topic.steps}
                     tags={topic.tags}
-                    prompt={topic.prompt}
-                  />
+                    ask={topic.prompt}
+                  >
+                    <ul className="space-y-3">
+                      {topic.steps.map((step, i) => (
+                        <li key={i} className="text-sm text-text-secondary leading-relaxed flex gap-3">
+                          <span className="text-primary font-bold">•</span>
+                          {step}
+                        </li>
+                      ))}
+                    </ul>
+                  </LLDAccordion>
                 ))}
               </div>
             </section>
@@ -179,12 +206,21 @@ export default function CloudArchitectureContent() {
                 {cloudIacTopics.map((topic) => (
                   <LLDAccordion
                     key={topic.id}
+                    badge={topic.frequency}
+                    badgeClass={topic.frequency === "High" ? "fh" : topic.frequency === "Medium" ? "fm" : "fl"}
                     title={topic.title}
-                    frequency={topic.frequency}
-                    steps={topic.steps}
                     tags={topic.tags}
-                    prompt={topic.prompt}
-                  />
+                    ask={topic.prompt}
+                  >
+                    <ul className="space-y-3">
+                      {topic.steps.map((step, i) => (
+                        <li key={i} className="text-sm text-text-secondary leading-relaxed flex gap-3">
+                          <span className="text-primary font-bold">•</span>
+                          {step}
+                        </li>
+                      ))}
+                    </ul>
+                  </LLDAccordion>
                 ))}
               </div>
             </section>
