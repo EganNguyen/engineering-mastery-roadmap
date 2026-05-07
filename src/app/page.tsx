@@ -107,13 +107,29 @@ export default function Home() {
               className="md:col-span-2 no-underline"
             >
               <motion.div
-                whileHover={{ y: -8 }}
+                initial="initial"
+                whileHover="hover"
+                variants={{
+                  hover: { y: -8 }
+                }}
                 className="card group portfolio-variant p-10"
               >
                 <div className="flex flex-col md:flex-row gap-8">
-                  <div className="w-24 h-24 rounded-2xl bg-background-secondary border border-border-tertiary flex items-center justify-center text-primary shrink-0 group-hover:scale-105 transition-transform">
+                  <motion.div 
+                    variants={{
+                      initial: { scale: 1, rotate: 0 },
+                      hover: { 
+                        scale: 1.1,
+                        rotate: [0, -2, 2, 0],
+                        transition: { 
+                          rotate: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+                        }
+                      }
+                    }}
+                    className="w-24 h-24 rounded-2xl bg-background-secondary border border-border-tertiary flex items-center justify-center text-primary shrink-0 transition-transform"
+                  >
                     <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-                  </div>
+                  </motion.div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-3">
@@ -166,9 +182,13 @@ export default function Home() {
           <div className="roadmap-node">
             <ScrollAnimation variant="stagger">
               <div className="sec-head mb-12">
-                <div className="sec-icon bg-green-500/10 border-green-500/20 text-green-500 p-3 rounded-xl border">
+                <motion.div 
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="sec-icon bg-green-500/10 border-green-500/20 text-green-500 p-3 rounded-xl border"
+                >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
-                </div>
+                </motion.div>
                 <div className="ml-4">
                   <h3 className="text-2xl font-bold text-text-primary">Foundations</h3>
                 </div>
@@ -209,9 +229,13 @@ export default function Home() {
           <div className="roadmap-node">
             <ScrollAnimation variant="stagger">
               <div className="sec-head mb-12">
-                <div className="sec-icon bg-cyan-500/10 border-cyan-500/20 text-cyan-500 p-3 rounded-xl border">
+                <motion.div 
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                  className="sec-icon bg-cyan-500/10 border-cyan-500/20 text-cyan-500 p-3 rounded-xl border"
+                >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-                </div>
+                </motion.div>
                 <div className="ml-4">
                   <h3 className="text-2xl font-bold text-text-primary">System Design</h3>
                 </div>
@@ -259,9 +283,13 @@ export default function Home() {
           <div className="roadmap-node">
             <ScrollAnimation variant="stagger">
               <div className="sec-head mb-12">
-                <div className="sec-icon bg-orange-500/10 border-orange-500/20 text-orange-500 p-3 rounded-xl border">
+                <motion.div 
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+                  className="sec-icon bg-orange-500/10 border-orange-500/20 text-orange-500 p-3 rounded-xl border"
+                >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                </div>
+                </motion.div>
                 <div className="ml-4">
                   <h3 className="text-2xl font-bold text-text-primary">Frontend Fundamentals</h3>
                 </div>
@@ -325,9 +353,13 @@ export default function Home() {
           <div className="roadmap-node">
             <ScrollAnimation variant="stagger">
               <div className="sec-head mb-12">
-                <div className="sec-icon bg-purple-500/10 border-purple-500/20 text-purple-500 p-3 rounded-xl border">
+                <motion.div 
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+                  className="sec-icon bg-purple-500/10 border-purple-500/20 text-purple-500 p-3 rounded-xl border"
+                >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-                </div>
+                </motion.div>
                 <div className="ml-4">
                   <h3 className="text-2xl font-bold text-text-primary">Quality & Production</h3>
                 </div>
@@ -383,9 +415,13 @@ export default function Home() {
           <div className="roadmap-node">
             <ScrollAnimation variant="stagger">
               <div className="sec-head mb-12">
-                <div className="sec-icon bg-blue-500/10 border-blue-500/20 text-blue-500 p-3 rounded-xl border">
+                <motion.div 
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                  className="sec-icon bg-blue-500/10 border-blue-500/20 text-blue-500 p-3 rounded-xl border"
+                >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                </div>
+                </motion.div>
                 <div className="ml-4">
                   <h3 className="text-2xl font-bold text-text-primary">AI & Emerging</h3>
                 </div>
@@ -426,9 +462,13 @@ export default function Home() {
           <div className="roadmap-node">
             <ScrollAnimation variant="stagger">
               <div className="sec-head mb-12">
-                <div className="sec-icon bg-indigo-500/10 border-indigo-500/20 text-indigo-500 p-3 rounded-xl border">
+                <motion.div 
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.0 }}
+                  className="sec-icon bg-indigo-500/10 border-indigo-500/20 text-indigo-500 p-3 rounded-xl border"
+                >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                </div>
+                </motion.div>
                 <div className="ml-4">
                   <h3 className="text-2xl font-bold text-text-primary">Leadership</h3>
                 </div>

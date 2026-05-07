@@ -36,7 +36,11 @@ export default function TopicCard({
   const CardContent = (
     <motion.div
       id={id}
-      whileHover={{ y: isPortfolio ? -8 : -4 }}
+      initial="initial"
+      whileHover="hover"
+      variants={{
+        hover: { y: isPortfolio ? -8 : -4 }
+      }}
       className={`card group relative h-full transition-all duration-300 ${
         isPortfolio ? "portfolio-variant p-10" : "roadmap-variant p-6"
       }`}
@@ -50,9 +54,23 @@ export default function TopicCard({
       <div className="card-head">
         <div className="flex items-center gap-4">
           {icon ? (
-            <div className={`p-2 rounded-lg bg-background-secondary border border-border-tertiary text-primary group-hover:text-accent transition-colors ${isPortfolio ? "w-12 h-12 flex items-center justify-center" : ""}`}>
+            <motion.div 
+              variants={{
+                initial: { scale: 1, rotate: 0, y: 0 },
+                hover: { 
+                  scale: 1.1, 
+                  rotate: [0, -5, 5, 0],
+                  y: [0, -2, 0],
+                  transition: { 
+                    rotate: { duration: 0.4 },
+                    y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+                  }
+                }
+              }}
+              className={`p-2 rounded-lg bg-background-secondary border border-border-tertiary text-primary group-hover:text-accent transition-colors ${isPortfolio ? "w-12 h-12 flex items-center justify-center" : ""}`}
+            >
               {icon}
-            </div>
+            </motion.div>
           ) : (
             <span
               className="num"
