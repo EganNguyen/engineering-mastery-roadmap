@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface DeepDiveCardProps {
   id: string;
@@ -7,6 +8,7 @@ interface DeepDiveCardProps {
   frequency: "High" | "Medium" | "Occasional";
   tags: string[];
   role?: string;
+  href?: string;
 }
 
 const freqStyles = {
@@ -15,13 +17,9 @@ const freqStyles = {
   Occasional: "freq-l",
 };
 
-export default function DeepDiveCard({ id, title, frequency, tags, role }: DeepDiveCardProps) {
-  return (
-    <motion.div
-      id={id}
-      whileHover={{ y: -4 }}
-      className="card group relative h-full"
-    >
+export default function DeepDiveCard({ id, title, frequency, tags, role, href }: DeepDiveCardProps) {
+  const content = (
+    <>
       <div className="flex justify-between items-start gap-4 mb-6">
         <h3 className="card-title text-text-primary group-hover:text-accent transition-colors">
           {title}
@@ -43,6 +41,24 @@ export default function DeepDiveCard({ id, title, frequency, tags, role }: DeepD
           </span>
         ))}
       </div>
+    </>
+  );
+
+  return (
+    <motion.div
+      id={id}
+      whileHover={{ y: -4 }}
+      className={`card group relative h-full ${href ? "cursor-pointer" : ""}`}
+    >
+      {href ? (
+        <Link href={href} className="flex flex-col h-full no-underline">
+          {content}
+        </Link>
+      ) : (
+        <div className="flex flex-col h-full">
+          {content}
+        </div>
+      )}
     </motion.div>
   );
 }

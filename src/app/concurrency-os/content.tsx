@@ -47,6 +47,7 @@ export default function ConcurrencyOSContent() {
               title="Deadlock"
               frequency="High"
               tags={["4 Coffman conditions", "lock ordering", "resource graph", "banker's algorithm"]}
+              href="/concurrency-os/deadlock"
             />
             <DeepDiveCard
               id="race-conditions"

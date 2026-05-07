@@ -283,6 +283,7 @@ export default function Home() {
                   index="09"
                   title="JavaScript / TypeScript Depth"
                   badges={["Closures", "Event Loop", "Async / Promises", "TS generics"]}
+                  href="/javascript-typescript"
                   color={coreColor}
                 />
                 <TopicCard
