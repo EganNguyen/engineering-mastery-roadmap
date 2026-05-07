@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Patrick_Hand, JetBrains_Mono } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import MotionWrapper from "@/components/MotionWrapper";
+import ScrollHandler from "@/components/ScrollHandler";
 
 const patrickHand = Patrick_Hand({
   weight: "400",
@@ -28,6 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${patrickHand.variable} ${jetbrainsMono.variable}`}>
       <body>
+        <Suspense fallback={null}>
+          <ScrollHandler />
+        </Suspense>
         <MotionWrapper>
           {children}
         </MotionWrapper>

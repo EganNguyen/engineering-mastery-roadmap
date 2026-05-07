@@ -28,10 +28,24 @@ export default function PortfolioHero() {
         </p>
 
         <div className="flex flex-wrap gap-4 mt-8">
-          <a href="#portfolio" className="btn btn-primary">
+          <a 
+            href="#portfolio" 
+            className="btn btn-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
             View Summary
           </a>
-          <a href="#roadmap" className="btn btn-secondary">
+          <a 
+            href="#roadmap" 
+            className="btn btn-secondary"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("roadmap")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
             Explore Roadmap
           </a>
         </div>

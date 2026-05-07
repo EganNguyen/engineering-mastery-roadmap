@@ -273,6 +273,7 @@ export default function Home() {
                   index="07"
                   title="Cloud Architecture"
                   badges={["Serverless", "K8s", "IaC", "Multi-region HA", "Cost opt"]}
+                  href="/cloud-architecture"
                   color={coreColor}
                 />
               </div>

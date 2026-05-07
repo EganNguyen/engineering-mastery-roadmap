@@ -8,9 +8,9 @@ export default function MLAIFundamentalsContent() {
   return (
     <main className="pb-20">
       <div className="mb-6">
-        <Link href="/" className="text-accent font-medium inline-flex items-center gap-2 hover:underline group">
+        <Link href="/#ml-ai-hub" className="text-accent font-medium inline-flex items-center gap-2 hover:underline group">
           <svg className="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-          Back to Roadmap & Portfolio
+          Back to Roadmap
         </Link>
       </div>
 
