@@ -6,6 +6,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Design Rules
 
 - Design folder is only for showing the design, don't edit it
+- UI must consistent with the design file.
+
 
 
 <!-- END:nextjs-agent-rules -->
