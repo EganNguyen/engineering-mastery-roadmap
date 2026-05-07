@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const roles = ["Backend Software Engineer", "Distributed Systems Builder", "Cloud-Native Developer"];
+const roles = ["Software Engineer", "Distributed Systems Builder", "Cloud-Native Developer"];
 
 export default function PortfolioHero() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -106,7 +106,7 @@ export default function PortfolioHero() {
               <div className="flex gap-4">
                 <span className="text-text-secondary opacity-40">3</span>
                 <span className="pl-4 text-text-secondary">role:</span>
-                <span className="text-primary">"Backend Engineer"</span>,
+                <span className="text-primary">"Software Engineer"</span>,
               </div>
               <div className="flex gap-4">
                 <span className="text-text-secondary opacity-40">4</span>

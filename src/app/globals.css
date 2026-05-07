@@ -12,13 +12,13 @@
   --color-secondary: #4A6D8C;
   --color-accent: #D97757;
   --color-surface: #212121;
-  --font-sans: var(--font-caveat), 'Inter', system-ui, sans-serif;
+  --font-sans: var(--font-patrick-hand), 'Inter', system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   --radius-lg: 12px;
 }
 
 :root {
-  font-size: 18px; /* Slightly larger for handwriting legibility */
+  font-size: 20px; /* Patrick Hand is clearer when larger */
 }
 
 * {
@@ -31,9 +31,8 @@ body {
   background-color: var(--color-background-primary);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-weight: 500; /* Caveat looks better with a bit more weight */
   overflow-x: hidden;
   min-height: 100vh;
 }
@@ -73,9 +72,9 @@ a {
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-primary);
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 h1 { font-size: 3.5rem; margin-bottom: 1rem; }
@@ -123,6 +122,32 @@ p {
   flex: 1;
   height: 1px;
   background: var(--color-border-tertiary);
+}
+
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.sec-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  background: rgba(217, 119, 87, 0.1);
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(217, 119, 87, 0.2);
+}
+
+.sec-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .grid {

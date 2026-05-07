@@ -287,6 +287,7 @@ export default function Home() {
                   index="16"
                   title="Performance Engineering"
                   badges={["Profiling", "CPU / memory", "Latency budgets", "Load testing", "Flamegraphs"]}
+                  href="/performance-engineering"
                   color={coreColor}
                 />
                 <TopicCard

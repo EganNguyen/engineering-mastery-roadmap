@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Caveat, JetBrains_Mono } from "next/font/google";
+import { Patrick_Hand, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import MotionWrapper from "@/components/MotionWrapper";
 
-const caveat = Caveat({
-  variable: "--font-caveat",
+const patrickHand = Patrick_Hand({
+  weight: "400",
+  variable: "--font-patrick-hand",
   subsets: ["latin"],
 });
 
@@ -14,9 +15,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tuan Nguyen | Backend Software Engineer & Engineering Roadmap",
-  description: "Portfolio of Tuan Nguyen, Backend Software Engineer, and a comprehensive roadmap for FAANG-level software engineering mastery.",
-  keywords: ["Backend Engineer", "Software Engineer", "Engineering Roadmap", "Tuan Nguyen"],
+  title: "Tuan Nguyen | Software Engineer & Engineering Roadmap",
+  description: "Portfolio of Tuan Nguyen, Software Engineer, and a comprehensive roadmap for FAANG-level software engineering mastery.",
+  keywords: ["Software Engineer", "Engineering Roadmap", "Tuan Nguyen"],
 };
 
 export default function RootLayout({
@@ -25,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${caveat.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${patrickHand.variable} ${jetbrainsMono.variable}`}>
       <body>
         <MotionWrapper>
           {children}

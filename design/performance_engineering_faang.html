@@ -1,0 +1,461 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  .wrap {
+    padding: 12px
+  }
+
+  .section {
+    margin-bottom: 20px
+  }
+
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px
+  }
+
+  .sec-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    letter-spacing: .04em;
+    text-transform: uppercase
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 8px
+  }
+
+  .card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: border-color .15s
+  }
+
+  .card:hover {
+    border-color: var(--color-border-primary)
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.3
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0
+  }
+
+  .freq {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap
+  }
+
+  .freq-h {
+    background: #E1F5EE;
+    color: #0F6E56;
+    border: 0.5px solid #5DCAA5
+  }
+
+  .freq-m {
+    background: #E6F1FB;
+    color: #185FA5;
+    border: 0.5px solid #85B7EB
+  }
+
+  .freq-l {
+    background: #F1EFE8;
+    color: #5F5E5A;
+    border: 0.5px solid #B4B2A9
+  }
+
+  .role {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+    background: #EEEDFE;
+    color: #3C3489;
+    border: 0.5px solid #AFA9EC
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: var(--color-background-secondary);
+    color: var(--color-text-secondary);
+    border: 0.5px solid var(--color-border-tertiary)
+  }
+
+  .legend {
+    display: flex;
+    gap: 12px;
+    padding: 0 0 10px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    flex-wrap: wrap;
+    align-items: center
+  }
+
+  .ldot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle
+  }
+
+  .lsq {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    margin-right: 4px;
+    vertical-align: middle;
+    background: #AFA9EC
+  }
+</style>
+
+<div class="wrap">
+  <div class="legend">
+    <span><span class="ldot" style="background:#1D9E75"></span>High frequency</span>
+    <span><span class="ldot" style="background:#185FA5"></span>Medium frequency</span>
+    <span><span class="ldot" style="background:#888780"></span>Occasional / staff+</span>
+    <span><span class="lsq"></span>Role context</span>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="sec-head"><span class="sec-title">📐 Latency & measurement fundamentals</span></div>
+    <div class="grid">
+
+      <div class="card"
+        onclick="sendPrompt('Explain latency percentiles — p50, p95, p99, p999 and why averages lie for FAANG performance interviews')">
+        <div class="card-top"><span class="card-title">Percentiles — p50 / p95 / p99 / p999</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+        </div>
+        <div class="tags"><span class="tag">why avg misleads</span><span class="tag">tail latency
+            amplification</span><span class="tag">HDR histogram</span><span class="tag">SLO alignment</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain latency vs throughput tradeoff and Little\'s Law for FAANG system design and performance')">
+        <div class="card-top"><span class="card-title">Latency vs throughput & Little's Law</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+        </div>
+        <div class="tags"><span class="tag">L = λW</span><span class="tag">queue depth</span><span
+            class="tag">concurrency limits</span><span class="tag">throughput ceiling</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain the USE and RED methods for performance analysis — FAANG SRE and backend depth')">
+        <div class="card-top"><span class="card-title">USE method & RED method</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">backend / SRE</span></div>
+        </div>
+        <div class="tags"><span class="tag">Utilisation / Saturation / Errors</span><span class="tag">Rate / Errors /
+            Duration</span><span class="tag">resource vs service view</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain Amdahl\'s Law and its implications for scaling and parallelism for FAANG engineers')">
+        <div class="card-top"><span class="card-title">Amdahl's Law</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / systems</span></div>
+        </div>
+        <div class="tags"><span class="tag">serial fraction bottleneck</span><span class="tag">diminishing
+            returns</span><span class="tag">parallelism ceiling</span><span class="tag">Gunther USL</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain coordinated omission in load testing — why most benchmarks lie and how to fix it for FAANG')">
+        <div class="card-top"><span class="card-title">Coordinated omission</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / perf</span></div>
+        </div>
+        <div class="tags"><span class="tag">benchmark bias</span><span class="tag">HdrHistogram fix</span><span
+            class="tag">wrk2 vs wrk</span><span class="tag">closed vs open loop</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="sec-head"><span class="sec-title">🖥 CPU & memory profiling</span></div>
+    <div class="grid">
+
+      <div class="card"
+        onclick="sendPrompt('Explain CPU profiling — flamegraphs, on-CPU vs off-CPU, sampling vs instrumentation for FAANG')">
+        <div class="card-top"><span class="card-title">CPU profiling & flamegraphs</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+        </div>
+        <div class="tags"><span class="tag">on-CPU vs off-CPU</span><span class="tag">sampling profiler</span><span
+            class="tag">flamegraph reading</span><span class="tag">perf / async-profiler</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain memory profiling — heap dumps, allocation profiling, GC pressure for FAANG backend')">
+        <div class="card-top"><span class="card-title">Memory profiling & heap analysis</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">backend / FE</span></div>
+        </div>
+        <div class="tags"><span class="tag">heap dump</span><span class="tag">allocation sampling</span><span
+            class="tag">retained size</span><span class="tag">GC pause analysis</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain garbage collector tuning — GC modes, pause targets, heap sizing for FAANG JVM or Go')">
+        <div class="card-top"><span class="card-title">GC tuning</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / JVM / Go</span></div>
+        </div>
+        <div class="tags"><span class="tag">G1 / ZGC / Shenandoah</span><span class="tag">heap ratio</span><span
+            class="tag">GOGC</span><span class="tag">GC log analysis</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain CPU cache optimisation — locality, false sharing, struct layout for FAANG performance')">
+        <div class="card-top"><span class="card-title">Cache locality & struct layout</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">systems / senior</span></div>
+        </div>
+        <div class="tags"><span class="tag">spatial locality</span><span class="tag">AoS vs SoA</span><span
+            class="tag">cache line packing</span><span class="tag">prefetching</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain continuous profiling in production — pprof, Pyroscope, always-on profiling for FAANG')">
+        <div class="card-top"><span class="card-title">Continuous profiling in production</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / SRE</span></div>
+        </div>
+        <div class="tags"><span class="tag">pprof / Pyroscope</span><span class="tag">low-overhead sampling</span><span
+            class="tag">regression detection</span><span class="tag">diff flamegraphs</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="sec-head"><span class="sec-title">🌐 Network & I/O performance</span></div>
+    <div class="grid">
+
+      <div class="card"
+        onclick="sendPrompt('Explain connection pooling — sizing, keepalive, why exhaustion happens for FAANG backend performance')">
+        <div class="card-top"><span class="card-title">Connection pooling</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">backend</span></div>
+        </div>
+        <div class="tags"><span class="tag">pool sizing formula</span><span class="tag">keepalive</span><span
+            class="tag">pool exhaustion</span><span class="tag">connection leak</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain caching strategies — read-through, write-through, write-behind, cache stampede for FAANG')">
+        <div class="card-top"><span class="card-title">Caching strategies & stampede</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+        </div>
+        <div class="tags"><span class="tag">read/write-through</span><span class="tag">write-behind</span><span
+            class="tag">cache stampede</span><span class="tag">probabilistic early expiry</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain I/O optimisation — batching, vectored I/O, zero-copy sendfile for FAANG systems performance')">
+        <div class="card-top"><span class="card-title">I/O batching & zero-copy</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">systems / backend</span></div>
+        </div>
+        <div class="tags"><span class="tag">Nagle's algorithm</span><span class="tag">TCP_NODELAY</span><span
+            class="tag">sendfile()</span><span class="tag">io_uring</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain backpressure — how to propagate it through async pipelines and queues for FAANG backend')">
+        <div class="card-top"><span class="card-title">Backpressure & flow control</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">backend / streaming</span></div>
+        </div>
+        <div class="tags"><span class="tag">bounded queues</span><span class="tag">reactive streams</span><span
+            class="tag">TCP flow control</span><span class="tag">load shedding</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain CDN and edge performance optimisation — cache hit ratio, origin offload for FAANG design')">
+        <div class="card-top"><span class="card-title">CDN & edge optimisation</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">frontend / infra</span></div>
+        </div>
+        <div class="tags"><span class="tag">cache hit ratio</span><span class="tag">origin offload</span><span
+            class="tag">stale-while-revalidate</span><span class="tag">edge compute</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="sec-head"><span class="sec-title">🗄 Database performance</span></div>
+    <div class="grid">
+
+      <div class="card"
+        onclick="sendPrompt('Explain slow query analysis — EXPLAIN plan, index selection, query rewriting for FAANG backend')">
+        <div class="card-top"><span class="card-title">Slow query analysis</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">backend</span></div>
+        </div>
+        <div class="tags"><span class="tag">EXPLAIN ANALYZE</span><span class="tag">seq scan vs index</span><span
+            class="tag">N+1 queries</span><span class="tag">query rewrite</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain N+1 query problem and how to fix it — batching, DataLoader, eager loading for FAANG')">
+        <div class="card-top"><span class="card-title">N+1 problem & DataLoader</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">backend / fullstack</span></div>
+        </div>
+        <div class="tags"><span class="tag">eager loading</span><span class="tag">DataLoader batching</span><span
+            class="tag">GraphQL N+1</span><span class="tag">query count</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain database connection pool tuning and the impact of long-running transactions for FAANG')">
+        <div class="card-top"><span class="card-title">DB pool tuning & transactions</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend</span></div>
+        </div>
+        <div class="tags"><span class="tag">pool exhaustion</span><span class="tag">idle-in-transaction</span><span
+            class="tag">lock contention</span><span class="tag">PgBouncer</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain read replica routing and CQRS for database read performance at FAANG scale')">
+        <div class="card-top"><span class="card-title">Read replicas & CQRS</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / design</span></div>
+        </div>
+        <div class="tags"><span class="tag">replication lag</span><span class="tag">read-your-writes</span><span
+            class="tag">CQRS pattern</span><span class="tag">materialized views</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="sec-head"><span class="sec-title">🖼 Frontend performance</span></div>
+    <div class="grid">
+
+      <div class="card"
+        onclick="sendPrompt('Explain Core Web Vitals — LCP, INP, CLS — how to measure and optimise each for FAANG frontend')">
+        <div class="card-top"><span class="card-title">Core Web Vitals — LCP / INP / CLS</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">frontend</span></div>
+        </div>
+        <div class="tags"><span class="tag">LCP causes</span><span class="tag">INP interaction budget</span><span
+            class="tag">CLS layout shifts</span><span class="tag">field vs lab data</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain JavaScript bundle optimisation — code splitting, tree shaking, lazy loading for FAANG frontend')">
+        <div class="card-top"><span class="card-title">Bundle optimisation</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">frontend</span></div>
+        </div>
+        <div class="tags"><span class="tag">code splitting</span><span class="tag">tree shaking</span><span
+            class="tag">dynamic import</span><span class="tag">bundle analyser</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain image optimisation for web — formats, lazy loading, responsive images for FAANG frontend')">
+        <div class="card-top"><span class="card-title">Image & asset optimisation</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">frontend</span></div>
+        </div>
+        <div class="tags"><span class="tag">WebP / AVIF</span><span class="tag">srcset / sizes</span><span
+            class="tag">lazy loading</span><span class="tag">blur-up LQIP</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain React performance optimisation — memo, useMemo, useCallback, virtualisation for FAANG')">
+        <div class="card-top"><span class="card-title">React rendering performance</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">frontend</span></div>
+        </div>
+        <div class="tags"><span class="tag">React.memo</span><span class="tag">useMemo / useCallback</span><span
+            class="tag">list virtualisation</span><span class="tag">React Compiler</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain font loading performance — font-display, preload, variable fonts, FOIT vs FOUT for FAANG')">
+        <div class="card-top"><span class="card-title">Font loading performance</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">frontend</span></div>
+        </div>
+        <div class="tags"><span class="tag">FOIT vs FOUT</span><span class="tag">font-display: swap</span><span
+            class="tag">preload font</span><span class="tag">variable fonts</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section">
+    <div class="sec-head"><span class="sec-title">🔬 Load testing & capacity planning</span></div>
+    <div class="grid">
+
+      <div class="card"
+        onclick="sendPrompt('Explain load testing methodology — load vs stress vs soak vs spike tests for FAANG engineers')">
+        <div class="card-top"><span class="card-title">Load testing methodology</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">backend / SRE</span></div>
+        </div>
+        <div class="tags"><span class="tag">load vs stress vs soak</span><span class="tag">spike test</span><span
+            class="tag">k6 / Gatling</span><span class="tag">realistic traffic shape</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain capacity planning — how to estimate resource needs from traffic projections for FAANG design')">
+        <div class="card-top"><span class="card-title">Capacity planning</span>
+          <div class="right"><span class="freq freq-h">High</span><span class="role">system design</span></div>
+        </div>
+        <div class="tags"><span class="tag">back-of-envelope</span><span class="tag">headroom target</span><span
+            class="tag">traffic forecasting</span><span class="tag">autoscaling thresholds</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain chaos engineering — principles, blast radius, fault injection for FAANG senior engineers')">
+        <div class="card-top"><span class="card-title">Chaos engineering</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / SRE</span></div>
+        </div>
+        <div class="tags"><span class="tag">blast radius</span><span class="tag">hypothesis-driven</span><span
+            class="tag">Chaos Monkey</span><span class="tag">game days</span></div>
+      </div>
+
+      <div class="card"
+        onclick="sendPrompt('Explain autoscaling strategies — reactive vs predictive, scale-in risk, cold start for FAANG cloud')">
+        <div class="card-top"><span class="card-title">Autoscaling strategies</span>
+          <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / infra</span></div>
+        </div>
+        <div class="tags"><span class="tag">reactive vs predictive</span><span class="tag">scale-in lag</span><span
+            class="tag">cold start cost</span><span class="tag">HPA / KEDA</span></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
