@@ -15,7 +15,7 @@ export default function PortfolioHero() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <p className="eyebrow">Senior Software Engineer</p>
+        <p className="eyebrow">Software Engineer</p>
 
         <h1 className="hero-title">
           Building scalable<br />
@@ -23,7 +23,7 @@ export default function PortfolioHero() {
         </h1>
 
         <p className="hero-description">
-          A hybrid approach to engineering: building robust distributed systems while 
+          A hybrid approach to engineering: building robust distributed systems while
           architecting the definitive roadmap for technical mastery.
         </p>
 

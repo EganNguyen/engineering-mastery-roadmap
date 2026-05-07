@@ -37,7 +37,7 @@ export default function Home() {
           <div className="border-b border-border-tertiary pb-6 mb-12">
             <h2 className="text-4xl font-extrabold tracking-tight">Summary</h2>
             <p className="text-lg text-text-secondary max-w-3xl mt-4">
-              Senior fullstack engineer focused on distributed systems,
+              Software engineer focused on distributed systems,
               backend architecture, cloud infrastructure, observability,
               and production-grade engineering.
             </p>
