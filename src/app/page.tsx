@@ -298,6 +298,7 @@ export default function Home() {
                   index="11"
                   title="Frontend Performance"
                   badges={["Web Vitals", "Code Splitting", "Lazy Loading", "Bundle optimisation"]}
+                  href="/frontend-performance"
                   color={coreColor}
                 />
                 <TopicCard

@@ -1,0 +1,224 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:12px}
+.section{margin-bottom:20px}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sec-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.04em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-primary)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.freq{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap}
+.freq-h{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.freq-m{background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB}
+.freq-l{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.role{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap;background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:2px 7px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.legend{display:flex;gap:12px;padding:0 0 10px;font-size:12px;color:var(--color-text-secondary);flex-wrap:wrap;align-items:center}
+.ldot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.lsq{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:middle;background:#AFA9EC}
+</style>
+<div class="wrap">
+<div class="legend">
+  <span><span class="ldot" style="background:#1D9E75"></span>High frequency</span>
+  <span><span class="ldot" style="background:#185FA5"></span>Medium frequency</span>
+  <span><span class="ldot" style="background:#888780"></span>Occasional / senior+</span>
+  <span><span class="lsq"></span>Context</span>
+</div>
+
+<!-- METRICS -->
+<div class="section">
+  <div class="sec-head"><span class="sec-title">📊 Metrics & measurement</span></div>
+  <div class="grid">
+    <div class="card" onclick="sendPrompt('Explain Core Web Vitals LCP, INP, CLS in depth — causes, targets, and how to fix each for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Core Web Vitals — LCP / INP / CLS</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">LCP ≤ 2.5s</span><span class="tag">INP ≤ 200ms</span><span class="tag">CLS ≤ 0.1</span><span class="tag">field vs lab data</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain TTFB, FCP, TTI, TBT — what each measures and how to improve them for FAANG interviews')">
+      <div class="card-top"><span class="card-title">TTFB / FCP / TTI / TBT</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">time to first byte</span><span class="tag">first contentful paint</span><span class="tag">time to interactive</span><span class="tag">total blocking time</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain RUM vs synthetic monitoring — how to use both for frontend performance at FAANG scale')">
+      <div class="card-top"><span class="card-title">RUM vs synthetic monitoring</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">real user metrics</span><span class="tag">Lighthouse CI</span><span class="tag">percentile budgets</span><span class="tag">segment by device</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain performance budgets — how to set, enforce, and integrate them in CI for FAANG frontend teams')">
+      <div class="card-top"><span class="card-title">Performance budgets & CI enforcement</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">bundle size budget</span><span class="tag">LCP budget</span><span class="tag">Lighthouse CI gate</span><span class="tag">regression alerting</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain the Performance Observer API and how to instrument custom metrics in the browser for FAANG')">
+      <div class="card-top"><span class="card-title">PerformanceObserver & custom metrics</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">PerformanceObserver</span><span class="tag">User Timing API</span><span class="tag">mark / measure</span><span class="tag">Long Tasks API</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div class="section">
+  <div class="sec-head"><span class="sec-title">📦 Loading & resource strategy</span></div>
+  <div class="grid">
+    <div class="card" onclick="sendPrompt('Explain code splitting strategies — route-based, component-based, vendor chunks for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Code splitting strategies</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">route-based split</span><span class="tag">dynamic import()</span><span class="tag">vendor chunk</span><span class="tag">granularity tradeoffs</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain lazy loading — images, components, routes, and intersection observer pattern for FAANG')">
+      <div class="card-top"><span class="card-title">Lazy loading — images & components</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">loading="lazy"</span><span class="tag">IntersectionObserver</span><span class="tag">React.lazy + Suspense</span><span class="tag">below-fold deferral</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain resource hints — preload vs prefetch vs preconnect vs modulepreload for FAANG frontend performance')">
+      <div class="card-top"><span class="card-title">Resource hints</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">preload critical</span><span class="tag">prefetch next page</span><span class="tag">preconnect origins</span><span class="tag">fetchpriority</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain tree shaking — how it works, what breaks it, and how to verify it for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Tree shaking</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">static ESM analysis</span><span class="tag">sideEffects flag</span><span class="tag">dead code elimination</span><span class="tag">barrel file problem</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain browser caching for static assets — cache-control, immutable, content hash for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Asset caching & cache busting</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">content hash filename</span><span class="tag">immutable directive</span><span class="tag">long max-age</span><span class="tag">stale-while-revalidate</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain image optimisation — WebP/AVIF, responsive images, srcset, LQIP for FAANG frontend performance')">
+      <div class="card-top"><span class="card-title">Image optimisation</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">WebP / AVIF</span><span class="tag">srcset / sizes</span><span class="tag">LQIP blur-up</span><span class="tag">aspect-ratio reserve</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain service worker caching strategies — cache-first, network-first, stale-while-revalidate for FAANG')">
+      <div class="card-top"><span class="card-title">Service worker caching strategies</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">cache-first</span><span class="tag">network-first</span><span class="tag">stale-while-revalidate</span><span class="tag">offline fallback</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- RENDERING -->
+<div class="section">
+  <div class="sec-head"><span class="sec-title">🎨 Rendering performance</span></div>
+  <div class="grid">
+    <div class="card" onclick="sendPrompt('Explain layout thrashing and how to fix it — read/write batching, rAF for FAANG frontend performance')">
+      <div class="card-top"><span class="card-title">Layout thrashing</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">forced sync layout</span><span class="tag">batch reads then writes</span><span class="tag">FastDOM</span><span class="tag">rAF deferral</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain animation performance — compositor-only properties, will-change, GSAP vs CSS for FAANG')">
+      <div class="card-top"><span class="card-title">Animation — compositor-only props</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">transform / opacity only</span><span class="tag">will-change caution</span><span class="tag">GPU layer</span><span class="tag">60fps budget</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain virtual list / windowing — how react-window works and when to use it for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Virtualisation / windowing</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">render visible rows only</span><span class="tag">react-window</span><span class="tag">variable height</span><span class="tag">scroll anchoring</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain contain and content-visibility CSS properties for rendering performance at FAANG')">
+      <div class="card-top"><span class="card-title">CSS contain & content-visibility</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">layout / paint / size contain</span><span class="tag">content-visibility: auto</span><span class="tag">skip off-screen</span><span class="tag">containment</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain long task optimisation — task chunking, scheduler.yield, React concurrent mode for FAANG')">
+      <div class="card-top"><span class="card-title">Long task chunking & scheduler.yield</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">50ms threshold</span><span class="tag">scheduler.yield()</span><span class="tag">React concurrent</span><span class="tag">INP impact</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<div class="section">
+  <div class="sec-head"><span class="sec-title">⚙️ JavaScript execution performance</span></div>
+  <div class="grid">
+    <div class="card" onclick="sendPrompt('Explain React memo, useMemo, useCallback — when they help and when they hurt for FAANG frontend')">
+      <div class="card-top"><span class="card-title">React.memo / useMemo / useCallback</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">referential equality</span><span class="tag">memoisation cost</span><span class="tag">when NOT to memo</span><span class="tag">React Compiler</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain JavaScript parsing and execution cost — parse time, bytecode caching for FAANG frontend')">
+      <div class="card-top"><span class="card-title">JS parse & execution cost</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">parse time on low-end devices</span><span class="tag">bytecode cache</span><span class="tag">script evaluation</span><span class="tag">coverage tool</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain Web Workers for off-main-thread JavaScript — what to offload and communication cost for FAANG')">
+      <div class="card-top"><span class="card-title">Web Workers & off-main-thread</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">structured clone cost</span><span class="tag">Transferable</span><span class="tag">Comlink</span><span class="tag">what to offload</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain WASM for frontend performance — when it beats JS, and integration patterns for FAANG')">
+      <div class="card-top"><span class="card-title">WebAssembly (WASM)</span>
+        <div class="right"><span class="freq freq-l">Occasional</span><span class="role">senior / staff</span></div>
+      </div>
+      <div class="tags"><span class="tag">compute-bound use cases</span><span class="tag">JS interop cost</span><span class="tag">memory model</span><span class="tag">vs JS JIT</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SSR / HYDRATION -->
+<div class="section">
+  <div class="sec-head"><span class="sec-title">🌐 SSR, hydration & delivery</span></div>
+  <div class="grid">
+    <div class="card" onclick="sendPrompt('Explain SSR vs CSR vs SSG vs ISR — performance tradeoffs for FAANG frontend design rounds')">
+      <div class="card-top"><span class="card-title">SSR / CSR / SSG / ISR tradeoffs</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">TTFB vs TTI</span><span class="tag">hydration cost</span><span class="tag">stale content risk</span><span class="tag">edge rendering</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain hydration performance — hydration cost, partial hydration, islands architecture for FAANG')">
+      <div class="card-top"><span class="card-title">Hydration & islands architecture</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">hydration mismatch</span><span class="tag">progressive hydration</span><span class="tag">islands / Astro</span><span class="tag">resumability</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain React Server Components — how they eliminate JS bundle weight for FAANG frontend performance')">
+      <div class="card-top"><span class="card-title">React Server Components</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">zero client JS</span><span class="tag">server/client boundary</span><span class="tag">streaming RSC</span><span class="tag">bundle reduction</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain streaming HTML — HTTP chunked transfer, React Suspense streaming for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Streaming HTML & Suspense</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">chunked transfer</span><span class="tag">out-of-order streaming</span><span class="tag">Suspense boundaries</span><span class="tag">TTFB vs FCP</span></div>
+    </div>
+    <div class="card" onclick="sendPrompt('Explain HTTP/2 multiplexing and push for frontend performance — when HTTP/3 matters for FAANG')">
+      <div class="card-top"><span class="card-title">HTTP/2 multiplexing & HTTP/3</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">HOL blocking</span><span class="tag">multiplexing</span><span class="tag">QUIC / HTTP/3</span><span class="tag">domain sharding anti-pattern</span></div>
+    </div>
+  </div>
+</div>
+
+</div>
