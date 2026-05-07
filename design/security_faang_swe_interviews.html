@@ -1,0 +1,233 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:12px}
+.section{margin-bottom:20px}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sec-icon{font-size:18px;color:var(--color-text-secondary)}
+.sec-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.04em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-primary)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.freq{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap}
+.freq-h{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.freq-m{background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB}
+.freq-l{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.role{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap;background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:2px 7px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.legend{display:flex;gap:12px;padding:0 0 10px;font-size:12px;color:var(--color-text-secondary);flex-wrap:wrap;align-items:center}
+.ldot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.lsq{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:middle;background:#AFA9EC}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">Security topics tested in FAANG software engineering interviews, grouped by category with frequency and role context</h2>
+
+<div class="legend">
+  <span><span class="ldot" style="background:#1D9E75"></span>High frequency</span>
+  <span><span class="ldot" style="background:#185FA5"></span>Medium frequency</span>
+  <span><span class="ldot" style="background:#888780"></span>Occasional / senior+</span>
+  <span><span class="lsq"></span>Role context</span>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-lock sec-icon" aria-hidden="true"></i><span class="sec-title">Authentication & authorisation</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain OAuth 2.0 flows — authorization code, PKCE, client credentials for FAANG depth')">
+      <div class="card-top"><span class="card-title">OAuth 2.0 & OIDC</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">auth code + PKCE</span><span class="tag">access vs refresh token</span><span class="tag">OIDC id_token</span><span class="tag">token introspection</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain JWT internals — structure, signing, validation, and common vulnerabilities for FAANG')">
+      <div class="card-top"><span class="card-title">JWT — internals & pitfalls</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">header.payload.sig</span><span class="tag">alg:none attack</span><span class="tag">RS256 vs HS256</span><span class="tag">expiry / revocation</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain session management — cookie security, session fixation, token rotation for FAANG')">
+      <div class="card-top"><span class="card-title">Session management</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">HttpOnly / Secure / SameSite</span><span class="tag">session fixation</span><span class="tag">token rotation</span><span class="tag">sliding expiry</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain RBAC vs ABAC — how to design fine-grained authorisation systems at FAANG scale')">
+      <div class="card-top"><span class="card-title">RBAC vs ABAC</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">role hierarchy</span><span class="tag">policy engine</span><span class="tag">Zanzibar / ReBAC</span><span class="tag">least privilege</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain password hashing — bcrypt, Argon2, PBKDF2 and why MD5/SHA1 are wrong for FAANG')">
+      <div class="card-top"><span class="card-title">Password hashing</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend</span></div>
+      </div>
+      <div class="tags"><span class="tag">bcrypt / Argon2</span><span class="tag">salt</span><span class="tag">work factor</span><span class="tag">rainbow table defence</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain mTLS and service-to-service authentication — zero trust for FAANG backend')">
+      <div class="card-top"><span class="card-title">mTLS & service identity</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / infra</span></div>
+      </div>
+      <div class="tags"><span class="tag">mutual TLS</span><span class="tag">SPIFFE / SPIRE</span><span class="tag">cert rotation</span><span class="tag">zero trust</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-bug sec-icon" aria-hidden="true"></i><span class="sec-title">Injection & input attacks</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain SQL injection — how it works, how to prevent it, and parameterised queries for FAANG')">
+      <div class="card-top"><span class="card-title">SQL injection</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">parameterised queries</span><span class="tag">ORM pitfalls</span><span class="tag">second-order injection</span><span class="tag">WAF limitations</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain XSS — stored, reflected, DOM-based, how to prevent each for FAANG frontend')">
+      <div class="card-top"><span class="card-title">XSS — all three types</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">frontend / fullstack</span></div>
+      </div>
+      <div class="tags"><span class="tag">stored vs reflected</span><span class="tag">DOM-based XSS</span><span class="tag">output encoding</span><span class="tag">trusted types</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain CSRF — how it works, SameSite cookies, CSRF tokens for FAANG interviews')">
+      <div class="card-top"><span class="card-title">CSRF</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">frontend / backend</span></div>
+      </div>
+      <div class="tags"><span class="tag">forged cross-origin request</span><span class="tag">SameSite=Strict/Lax</span><span class="tag">double-submit cookie</span><span class="tag">CSRF token</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain command injection, path traversal, SSRF — how to prevent them for FAANG backend')">
+      <div class="card-top"><span class="card-title">Command injection, SSRF & path traversal</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend</span></div>
+      </div>
+      <div class="tags"><span class="tag">shell injection</span><span class="tag">SSRF to internal services</span><span class="tag">../traversal</span><span class="tag">allowlist validation</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain prototype pollution and why it matters in JavaScript — FAANG frontend security')">
+      <div class="card-top"><span class="card-title">Prototype pollution</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">frontend / Node.js</span></div>
+      </div>
+      <div class="tags"><span class="tag">__proto__ mutation</span><span class="tag">Object.create(null)</span><span class="tag">deep merge risk</span><span class="tag">JSON parse safety</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-shield-lock sec-icon" aria-hidden="true"></i><span class="sec-title">Transport & data security</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain TLS 1.3 handshake, certificate validation, and HSTS for FAANG depth')">
+      <div class="card-top"><span class="card-title">TLS 1.3 & HSTS</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">1-RTT handshake</span><span class="tag">0-RTT resumption</span><span class="tag">cert pinning</span><span class="tag">HSTS preload</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain encryption at rest vs in transit — key management, envelope encryption for FAANG')">
+      <div class="card-top"><span class="card-title">Encryption at rest & in transit</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / infra</span></div>
+      </div>
+      <div class="tags"><span class="tag">AES-GCM</span><span class="tag">envelope encryption</span><span class="tag">KMS / HSM</span><span class="tag">key rotation</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain secrets management — Vault, AWS Secrets Manager, avoiding secrets in code for FAANG')">
+      <div class="card-top"><span class="card-title">Secrets management</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / infra</span></div>
+      </div>
+      <div class="tags"><span class="tag">no secrets in env vars</span><span class="tag">Vault dynamic secrets</span><span class="tag">short-lived creds</span><span class="tag">audit logs</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain secure data tokenisation and PII handling at scale for FAANG system design')">
+      <div class="card-top"><span class="card-title">Tokenisation & PII handling</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">format-preserving encryption</span><span class="tag">tokenisation vault</span><span class="tag">data minimisation</span><span class="tag">GDPR compliance</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-layout-grid sec-icon" aria-hidden="true"></i><span class="sec-title">System design security</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('How do you design rate limiting and abuse prevention in a system design interview at FAANG')">
+      <div class="card-top"><span class="card-title">Rate limiting & abuse prevention</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">system design</span></div>
+      </div>
+      <div class="tags"><span class="tag">token bucket</span><span class="tag">IP vs user-level</span><span class="tag">distributed rate limit</span><span class="tag">bot detection</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain zero trust architecture and how it applies to microservices at FAANG scale')">
+      <div class="card-top"><span class="card-title">Zero trust architecture</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / infra</span></div>
+      </div>
+      <div class="tags"><span class="tag">never trust, always verify</span><span class="tag">service mesh</span><span class="tag">workload identity</span><span class="tag">network segmentation</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain supply chain security — SBOMs, dependency scanning, signing for FAANG engineers')">
+      <div class="card-top"><span class="card-title">Supply chain security</span>
+        <div class="right"><span class="freq freq-l">Occasional</span><span class="role">senior / staff+</span></div>
+      </div>
+      <div class="tags"><span class="tag">SBOM</span><span class="tag">Sigstore / cosign</span><span class="tag">dependency confusion</span><span class="tag">SLSA framework</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('How do you design secure API gateways — authn, authz, input validation, audit for FAANG')">
+      <div class="card-top"><span class="card-title">Secure API gateway design</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">system design</span></div>
+      </div>
+      <div class="tags"><span class="tag">authn at edge</span><span class="tag">schema validation</span><span class="tag">threat modelling</span><span class="tag">audit trail</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-checklist sec-icon" aria-hidden="true"></i><span class="sec-title">OWASP & secure coding</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Walk me through the OWASP Top 10 and which ones matter most for FAANG engineers')">
+      <div class="card-top"><span class="card-title">OWASP Top 10</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">broken access control</span><span class="tag">cryptographic failures</span><span class="tag">injection</span><span class="tag">insecure design</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain threat modelling — STRIDE, attack surface analysis for FAANG design rounds')">
+      <div class="card-top"><span class="card-title">Threat modelling</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">STRIDE</span><span class="tag">data flow diagram</span><span class="tag">trust boundaries</span><span class="tag">attack surface</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain secure coding principles — input validation, output encoding, least privilege for FAANG')">
+      <div class="card-top"><span class="card-title">Secure coding principles</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">input validation</span><span class="tag">output encoding</span><span class="tag">fail secure</span><span class="tag">defence in depth</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain timing attacks and side-channel vulnerabilities — how to write constant-time comparisons')">
+      <div class="card-top"><span class="card-title">Timing attacks & side channels</span>
+        <div class="right"><span class="freq freq-l">Occasional</span><span class="role">senior / crypto</span></div>
+      </div>
+      <div class="tags"><span class="tag">early-exit comparison</span><span class="tag">constant-time compare</span><span class="tag">cache side channel</span><span class="tag">Spectre</span></div>
+    </div>
+
+  </div>
+</div>
+
+</div>

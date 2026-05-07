@@ -1,0 +1,210 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:12px}
+.section{margin-bottom:20px}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sec-icon{font-size:18px;color:var(--color-text-secondary)}
+.sec-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.04em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-primary)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.freq{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.freq-h{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.freq-m{background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB}
+.freq-l{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:2px 7px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.legend{display:flex;gap:14px;padding:0 0 10px;font-size:12px;color:var(--color-text-secondary);flex-wrap:wrap}
+.ldot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">Core browser and rendering knowledge tested in FAANG frontend interviews, grouped by category with interview frequency</h2>
+
+<div class="legend">
+  <span><span class="ldot" style="background:#1D9E75"></span>High frequency</span>
+  <span><span class="ldot" style="background:#185FA5"></span>Medium frequency</span>
+  <span><span class="ldot" style="background:#888780"></span>Occasional / senior roles</span>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-layout sec-icon" aria-hidden="true"></i><span class="sec-title">Critical rendering path</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain the browser critical rendering path end to end — FAANG frontend interview depth')">
+      <div class="card-top"><span class="card-title">Critical rendering path</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">HTML parse → DOM</span><span class="tag">CSS parse → CSSOM</span><span class="tag">render tree</span><span class="tag">layout → paint → composite</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain reflow vs repaint vs compositing — how to avoid them for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Reflow vs repaint vs composite</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">layout triggers</span><span class="tag">paint triggers</span><span class="tag">composite-only props</span><span class="tag">will-change</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('What CSS properties trigger layout, paint, or composite only — FAANG performance')">
+      <div class="card-top"><span class="card-title">CSS property cost model</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">width/height → layout</span><span class="tag">color → paint</span><span class="tag">transform/opacity → composite</span><span class="tag">contain</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain render-blocking resources — scripts, stylesheets, fonts and how to fix them')">
+      <div class="card-top"><span class="card-title">Render-blocking resources</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">parser-blocking scripts</span><span class="tag">defer / async</span><span class="tag">preload / preconnect</span><span class="tag">font-display</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain how browser layer promotion works and when to use GPU compositing layers')">
+      <div class="card-top"><span class="card-title">Layer promotion & GPU compositing</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">compositor thread</span><span class="tag">layer explosion</span><span class="tag">transform hack</span><span class="tag">DevTools layers panel</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-binary-tree sec-icon" aria-hidden="true"></i><span class="sec-title">DOM & CSSOM</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain DOM construction and how the HTML parser works including error handling')">
+      <div class="card-top"><span class="card-title">DOM construction & HTML parsing</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">tokenization</span><span class="tag">tree construction</span><span class="tag">speculative parsing</span><span class="tag">parser errors</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain CSSOM construction and how CSS selector matching works in browsers')">
+      <div class="card-top"><span class="card-title">CSSOM & selector matching</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">right-to-left matching</span><span class="tag">specificity cascade</span><span class="tag">selector cost</span><span class="tag">style recalc</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain Shadow DOM — encapsulation, slots, style scoping for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Shadow DOM</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">open vs closed mode</span><span class="tag">slots</span><span class="tag">style encapsulation</span><span class="tag">web components</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain layout algorithms — normal flow, flexbox, grid, BFC, IFC for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Layout algorithms</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">block formatting context</span><span class="tag">flex algorithm</span><span class="tag">grid placement</span><span class="tag">contain: layout</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('What is layout thrashing and how do you fix it — forced synchronous layout for FAANG')">
+      <div class="card-top"><span class="card-title">Layout thrashing</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">forced sync layout</span><span class="tag">read-write batching</span><span class="tag">requestAnimationFrame</span><span class="tag">FastDOM</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-clock-play sec-icon" aria-hidden="true"></i><span class="sec-title">Event loop & concurrency</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain the browser event loop in depth — task queue, microtask queue, rAF for FAANG')">
+      <div class="card-top"><span class="card-title">Browser event loop</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">call stack</span><span class="tag">task queue</span><span class="tag">microtask queue</span><span class="tag">rendering steps</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain microtasks vs macrotasks — Promises vs setTimeout execution order for FAANG')">
+      <div class="card-top"><span class="card-title">Microtasks vs macrotasks</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">Promise.then order</span><span class="tag">queueMicrotask</span><span class="tag">setTimeout(0)</span><span class="tag">MutationObserver</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain requestAnimationFrame vs requestIdleCallback — when to use each for FAANG')">
+      <div class="card-top"><span class="card-title">rAF vs requestIdleCallback</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">16ms frame budget</span><span class="tag">idle periods</span><span class="tag">animation timing</span><span class="tag">React scheduler</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain Web Workers and how they communicate with the main thread — structured clone')">
+      <div class="card-top"><span class="card-title">Web Workers & off-main-thread</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">dedicated worker</span><span class="tag">structured clone</span><span class="tag">Transferable objects</span><span class="tag">SharedArrayBuffer</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain long tasks and how they block the main thread — INP, scheduler.yield for FAANG')">
+      <div class="card-top"><span class="card-title">Long tasks & main thread blocking</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">50ms threshold</span><span class="tag">INP metric</span><span class="tag">task chunking</span><span class="tag">scheduler.yield</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-network sec-icon" aria-hidden="true"></i><span class="sec-title">Navigation & resource loading</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain what happens when you type a URL and press enter — full browser journey for FAANG')">
+      <div class="card-top"><span class="card-title">URL to first pixel — full flow</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">DNS lookup</span><span class="tag">TCP + TLS</span><span class="tag">HTTP request</span><span class="tag">parse → render</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain browser caching — HTTP cache headers, service worker cache, memory cache for FAANG')">
+      <div class="card-top"><span class="card-title">Browser caching layers</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">Cache-Control</span><span class="tag">ETag / Last-Modified</span><span class="tag">service worker</span><span class="tag">memory vs disk cache</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain resource hints — preload, prefetch, preconnect, modulepreload for FAANG performance')">
+      <div class="card-top"><span class="card-title">Resource hints</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">preload</span><span class="tag">prefetch</span><span class="tag">preconnect</span><span class="tag">modulepreload</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain service workers — lifecycle, fetch interception, caching strategies for FAANG')">
+      <div class="card-top"><span class="card-title">Service workers</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">install/activate/fetch</span><span class="tag">cache-first</span><span class="tag">stale-while-revalidate</span><span class="tag">offline support</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain CORS — preflight, simple requests, credentials and how to debug it for FAANG')">
+      <div class="card-top"><span class="card-title">CORS</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">preflight OPTIONS</span><span class="tag">simple vs preflighted</span><span class="tag">credentials mode</span><span class="tag">CORB / COEP</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-cursor-text sec-icon" aria-hidden="true"></i><span class="sec-title">Events & interaction</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain event bubbling, capturing, and delegation — FAANG frontend interview depth')">
+      <div class="card-top"><span class="card-title">Event bubbling & delegation</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">capture phase</span><span class="tag">bubble phase</span><span class="tag">stopPropagation</span><span class="tag">event delegation pattern</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain passive event listeners and how they improve scroll performance in browsers')">
+      <div class="card-top"><span class="card-title">Passive event listeners</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">scroll jank</span><span class="tag">touch event block</span><span class="tag">passive: true</span><span class="tag">compositor thread</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain Intersection Observer, Mutation Observer, Resize Observer APIs for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Observer APIs</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">IntersectionObserver</span><span class="tag">MutationObserver</span><span class="tag">ResizeObserver</span><span class="tag">lazy loading</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain pointer events, touch events, and input latency optimisation for FAANG')">
+      <div class="card-top"><span class="card-title">Pointer & touch events</span><span class="freq freq-l">Occasional</span></div>
+      <div class="tags"><span class="tag">pointer capture</span><span class="tag">touch-action CSS</span><span class="tag">coalesced events</span><span class="tag">input latency</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-shield sec-icon" aria-hidden="true"></i><span class="sec-title">Browser security model</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain the same-origin policy and how browsers enforce it — FAANG frontend security')">
+      <div class="card-top"><span class="card-title">Same-origin policy</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">origin = scheme+host+port</span><span class="tag">iframe isolation</span><span class="tag">document.domain</span><span class="tag">postMessage</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain Content Security Policy — directives, nonces, reporting for FAANG frontend security')">
+      <div class="card-top"><span class="card-title">Content Security Policy</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">script-src / style-src</span><span class="tag">nonce / hash</span><span class="tag">report-only mode</span><span class="tag">trusted types</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain Spectre, COEP, COOP and cross-origin isolation for high-performance browser apps')">
+      <div class="card-top"><span class="card-title">Cross-origin isolation & Spectre</span><span class="freq freq-l">Occasional</span></div>
+      <div class="tags"><span class="tag">COEP / COOP headers</span><span class="tag">SharedArrayBuffer gating</span><span class="tag">site isolation</span><span class="tag">Spectre mitigation</span></div>
+    </div>
+
+  </div>
+</div>
+
+</div>

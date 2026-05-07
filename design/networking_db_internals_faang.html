@@ -1,0 +1,145 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:12px}
+.section{margin-bottom:20px}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sec-icon{font-size:18px;color:var(--color-text-secondary)}
+.sec-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.04em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-primary)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.freq{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.freq-h{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.freq-m{background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB}
+.freq-l{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:2px 7px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.legend{display:flex;gap:14px;padding:0 0 10px;font-size:12px;color:var(--color-text-secondary);flex-wrap:wrap}
+.ldot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+</style>
+<div class="wrap">
+<h2 class="sr-only">Networking and database internals topics tested at FAANG, grouped by category and frequency</h2>
+<div class="legend">
+  <span><span class="ldot" style="background:#1D9E75"></span>High frequency</span>
+  <span><span class="ldot" style="background:#185FA5"></span>Medium frequency</span>
+  <span><span class="ldot" style="background:#888780"></span>Occasional / senior roles</span>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-network sec-icon" aria-hidden="true"></i><span class="sec-title">Networking</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain TCP vs UDP and when to choose each — FAANG interview depth')">
+      <div class="card-top"><span class="card-title">TCP vs UDP</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">3-way handshake</span><span class="tag">flow control</span><span class="tag">congestion control</span><span class="tag">reliable delivery</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain HTTP/1.1 vs HTTP/2 vs HTTP/3 and QUIC for FAANG interviews')">
+      <div class="card-top"><span class="card-title">HTTP/1.1 → HTTP/2 → HTTP/3 / QUIC</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">multiplexing</span><span class="tag">head-of-line blocking</span><span class="tag">server push</span><span class="tag">QUIC over UDP</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('How does DNS resolution work end to end — FAANG interview answer')">
+      <div class="card-top"><span class="card-title">DNS resolution</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">recursive vs iterative</span><span class="tag">TTL & caching</span><span class="tag">anycast</span><span class="tag">DNS over HTTPS</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('How does TLS handshake work and what is mTLS — FAANG depth')">
+      <div class="card-top"><span class="card-title">TLS & mTLS</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">certificate chain</span><span class="tag">symmetric vs asymmetric</span><span class="tag">TLS 1.3</span><span class="tag">session resumption</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain CDN architecture and how caching works at the edge for FAANG')">
+      <div class="card-top"><span class="card-title">CDN & edge caching</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">cache-control headers</span><span class="tag">origin shield</span><span class="tag">cache invalidation</span><span class="tag">geo-routing</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('How do WebSockets and long polling differ — when to use each in system design')">
+      <div class="card-top"><span class="card-title">WebSockets vs long polling vs SSE</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">bidirectional</span><span class="tag">heartbeat</span><span class="tag">backpressure</span><span class="tag">fan-out</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain load balancing algorithms — L4 vs L7, consistent hashing for FAANG')">
+      <div class="card-top"><span class="card-title">Load balancing</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">L4 vs L7</span><span class="tag">round-robin</span><span class="tag">least connections</span><span class="tag">sticky sessions</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('What is BGP and how does internet routing work — senior SWE FAANG')">
+      <div class="card-top"><span class="card-title">BGP & internet routing</span><span class="freq freq-l">Occasional</span></div>
+      <div class="tags"><span class="tag">AS paths</span><span class="tag">peering</span><span class="tag">route flapping</span><span class="tag">anycast</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-database sec-icon" aria-hidden="true"></i><span class="sec-title">Database internals</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain B-tree vs LSM tree internals and when each is better — FAANG depth')">
+      <div class="card-top"><span class="card-title">B-tree vs LSM tree</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">write amplification</span><span class="tag">read amplification</span><span class="tag">compaction</span><span class="tag">SSTables</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain database indexing internals — clustered, covering, composite indexes for FAANG')">
+      <div class="card-top"><span class="card-title">Indexes in depth</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">clustered vs secondary</span><span class="tag">covering index</span><span class="tag">index scan vs seek</span><span class="tag">partial index</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain MVCC and how databases implement transaction isolation levels')">
+      <div class="card-top"><span class="card-title">MVCC & isolation levels</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">read committed</span><span class="tag">repeatable read</span><span class="tag">serializable</span><span class="tag">phantom reads</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('How does the query planner and query optimizer work in a relational DB — FAANG')">
+      <div class="card-top"><span class="card-title">Query planner & optimizer</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">cost-based optimizer</span><span class="tag">statistics / cardinality</span><span class="tag">join order</span><span class="tag">EXPLAIN plan</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain WAL (write-ahead log) and how databases achieve durability and crash recovery')">
+      <div class="card-top"><span class="card-title">WAL & crash recovery</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">REDO / UNDO log</span><span class="tag">checkpoint</span><span class="tag">ARIES algorithm</span><span class="tag">fsync</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain database replication — synchronous vs async, leader-follower vs multi-leader')">
+      <div class="card-top"><span class="card-title">Replication strategies</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">leader-follower</span><span class="tag">sync vs async</span><span class="tag">replication lag</span><span class="tag">multi-leader conflicts</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain database sharding strategies — range, hash, directory-based for FAANG')">
+      <div class="card-top"><span class="card-title">Sharding strategies</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">range vs hash shard</span><span class="tag">hotspot avoidance</span><span class="tag">resharding</span><span class="tag">cross-shard joins</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('How do ACID transactions work at the engine level — locking, 2PL, MVCC for FAANG')">
+      <div class="card-top"><span class="card-title">ACID & locking internals</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">2-phase locking</span><span class="tag">deadlock detection</span><span class="tag">optimistic concurrency</span><span class="tag">gap locks</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain consistent hashing and how it is used in distributed databases and caches')">
+      <div class="card-top"><span class="card-title">Consistent hashing</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">virtual nodes</span><span class="tag">minimal disruption</span><span class="tag">ring topology</span><span class="tag">hot partitions</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain column-oriented storage vs row-oriented — OLAP vs OLTP tradeoffs for FAANG')">
+      <div class="card-top"><span class="card-title">Columnar vs row storage</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">OLAP vs OLTP</span><span class="tag">compression</span><span class="tag">vectorised execution</span><span class="tag">Parquet / Arrow</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('How does a distributed transaction work — 2PC, Saga pattern, and their tradeoffs')">
+      <div class="card-top"><span class="card-title">Distributed transactions</span><span class="freq freq-l">Occasional</span></div>
+      <div class="tags"><span class="tag">2-phase commit</span><span class="tag">Saga pattern</span><span class="tag">coordinator failure</span><span class="tag">eventual consistency</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('How do vector databases work internally — indexing, ANN search, HNSW for FAANG')">
+      <div class="card-top"><span class="card-title">Vector DB internals</span><span class="freq freq-l">Occasional</span></div>
+      <div class="tags"><span class="tag">ANN search</span><span class="tag">HNSW graph</span><span class="tag">IVF / PQ</span><span class="tag">embedding distance</span></div>
+    </div>
+
+  </div>
+</div>
+
+</div>

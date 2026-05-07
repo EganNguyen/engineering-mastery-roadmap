@@ -1,0 +1,361 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;padding:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-primary)}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.num{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.title{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.badge-row{display:flex;flex-wrap:wrap;gap:5px}
+.badge{font-size:11px;padding:2px 8px;border-radius:12px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.badge.hi{background:#E1F5EE;color:#0F6E56;border-color:#5DCAA5}
+.badge.new{background:#E6F1FB;color:#185FA5;border-color:#85B7EB}
+.badge.warn{background:#FAEEDA;color:#854F0B;border-color:#EF9F27}
+.section-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);padding:12px 12px 2px;letter-spacing:.05em;text-transform:uppercase}
+.legend{display:flex;flex-wrap:wrap;gap:12px;padding:8px 12px 4px;font-size:12px;color:var(--color-text-secondary);align-items:center}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle}
+</style>
+
+<div class="legend">
+  <span><span class="dot" style="background:#1D9E75"></span>Core — always tested</span>
+  <span><span class="dot" style="background:#185FA5"></span>Emerging — rising weight</span>
+  <span><span class="dot" style="background:#7F77DD"></span>Supplementary</span>
+</div>
+
+<div class="section-label">Foundations</div>
+<div class="grid">
+
+<div class="card" onclick="sendPrompt('Give me a deep-dive study plan for DSA + Patterns for FAANG')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">01</span>
+    <span class="title">DSA + Patterns</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Arrays / trees / graphs</span>
+    <span class="badge">Sliding window</span>
+    <span class="badge">Two pointers</span>
+    <span class="badge">DP</span>
+    <span class="badge">Backtracking</span>
+    <span class="badge">Bit manipulation</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What LLD topics are tested at FAANG and how should I prepare?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">02</span>
+    <span class="title">Low-Level Design (LLD)</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">OOP + SOLID</span>
+    <span class="badge">Design patterns</span>
+    <span class="badge">Class diagrams</span>
+    <span class="badge">LRU / parking lot</span>
+    <span class="badge">State machines</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What concurrency and OS depth topics are tested at FAANG senior level?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">03</span>
+    <span class="title">Concurrency & OS</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Threads / locks / semaphores</span>
+    <span class="badge">Deadlock</span>
+    <span class="badge">Scheduling</span>
+    <span class="badge">Memory model</span>
+    <span class="badge">Virtual memory</span>
+  </div>
+</div>
+
+</div>
+
+<div class="section-label">System Design</div>
+<div class="grid">
+
+<div class="card" onclick="sendPrompt('What HLD + distributed systems topics are tested at FAANG?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">04</span>
+    <span class="title">System Design (HLD)</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">CAP / consistency</span>
+    <span class="badge">Sharding</span>
+    <span class="badge">Caching layers</span>
+    <span class="badge">Message queues</span>
+    <span class="badge">Rate limiting</span>
+    <span class="badge">Leader election</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What API design knowledge is tested at FAANG senior SWE level?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">05</span>
+    <span class="title">API Design</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">REST vs GraphQL vs gRPC</span>
+    <span class="badge">Versioning</span>
+    <span class="badge">Idempotency</span>
+    <span class="badge">Pagination</span>
+    <span class="badge">Webhooks</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What networking and database internals are tested at FAANG?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">06</span>
+    <span class="title">Networking + DB Internals</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">TCP / HTTP/2 / QUIC</span>
+    <span class="badge">DNS / CDN</span>
+    <span class="badge">B-trees / LSM</span>
+    <span class="badge">MVCC</span>
+    <span class="badge">Query planner</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What cloud architecture knowledge is expected at FAANG?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">07</span>
+    <span class="title">Cloud Architecture</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Serverless</span>
+    <span class="badge">Containers / K8s</span>
+    <span class="badge">IaC</span>
+    <span class="badge">Multi-region HA</span>
+    <span class="badge">Cost optimisation</span>
+  </div>
+</div>
+
+</div>
+
+<div class="section-label">Frontend Fundamentals</div>
+<div class="grid">
+
+<div class="card" onclick="sendPrompt('What core browser and rendering knowledge is tested in FAANG frontend interviews?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">08</span>
+    <span class="title">Browser & Rendering</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">DOM / CSSOM</span>
+    <span class="badge">Paint / layout / composite</span>
+    <span class="badge">Reflow vs repaint</span>
+    <span class="badge">Event loop</span>
+    <span class="badge">Shadow DOM</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What JavaScript and TypeScript depth is expected in FAANG frontend interviews?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">09</span>
+    <span class="title">JavaScript / TypeScript Depth</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Closures / prototypes</span>
+    <span class="badge">Event loop / microtasks</span>
+    <span class="badge">Async / Promises</span>
+    <span class="badge">TS generics</span>
+    <span class="badge">Memory leaks</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What React and state management knowledge is tested at FAANG frontend interviews?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">10</span>
+    <span class="title">Frameworks & State Management</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">React reconciliation</span>
+    <span class="badge">Hooks internals</span>
+    <span class="badge">Virtual DOM</span>
+    <span class="badge">Redux / Zustand</span>
+    <span class="badge">SSR / hydration</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What frontend performance optimisation topics are tested at FAANG?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">11</span>
+    <span class="title">Frontend Performance</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Core Web Vitals</span>
+    <span class="badge">Code splitting</span>
+    <span class="badge">Lazy loading</span>
+    <span class="badge">Bundle optimisation</span>
+    <span class="badge">Cache strategies</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What accessibility and CSS knowledge is tested in FAANG frontend interviews?')">
+  <div class="card-head">
+    <span class="num" style="background:#7F77DD;color:#fff;border:none">12</span>
+    <span class="title">CSS Depth & Accessibility</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Flexbox / Grid</span>
+    <span class="badge">CSS specificity</span>
+    <span class="badge">ARIA / WCAG</span>
+    <span class="badge">Responsive design</span>
+    <span class="badge">CSS-in-JS</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What frontend security topics come up in FAANG interviews?')">
+  <div class="card-head">
+    <span class="num" style="background:#7F77DD;color:#fff;border:none">13</span>
+    <span class="title">Frontend Security</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">XSS / CSRF</span>
+    <span class="badge">CSP headers</span>
+    <span class="badge">CORS</span>
+    <span class="badge">OAuth / PKCE</span>
+    <span class="badge">Secure storage</span>
+  </div>
+</div>
+
+</div>
+
+<div class="section-label">Quality & Production</div>
+<div class="grid">
+
+<div class="card" onclick="sendPrompt('What security topics are tested in FAANG software engineering interviews?')">
+  <div class="card-head">
+    <span class="num" style="background:#7F77DD;color:#fff;border:none">14</span>
+    <span class="title">Security (Backend)</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Auth / OAuth / JWT</span>
+    <span class="badge">OWASP top 10</span>
+    <span class="badge">TLS / mTLS</span>
+    <span class="badge">Secrets mgmt</span>
+    <span class="badge">Zero trust</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What observability and SRE practices are tested at FAANG?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">15</span>
+    <span class="title">Observability & SRE</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Metrics / logs / traces</span>
+    <span class="badge">SLO / SLA / SLI</span>
+    <span class="badge">Incident response</span>
+    <span class="badge">On-call design</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What performance engineering topics should I know for FAANG?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">16</span>
+    <span class="title">Performance Engineering</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Profiling</span>
+    <span class="badge">CPU / memory</span>
+    <span class="badge">Latency budgets</span>
+    <span class="badge">Load testing</span>
+    <span class="badge">Flamegraphs</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What testing and production quality topics are tested at FAANG?')">
+  <div class="card-head">
+    <span class="num" style="background:#7F77DD;color:#fff;border:none">17</span>
+    <span class="title">Testing & Production Quality</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Unit / integration / E2E</span>
+    <span class="badge">Contract tests</span>
+    <span class="badge">Feature flags</span>
+    <span class="badge">Canary / blue-green</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What data engineering pipeline knowledge is expected at FAANG?')">
+  <div class="card-head">
+    <span class="num" style="background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB">18</span>
+    <span class="title">Data Engineering Pipelines</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge new">Rising</span>
+    <span class="badge">Batch vs streaming</span>
+    <span class="badge">Kafka / Flink</span>
+    <span class="badge">Data lake / warehouse</span>
+  </div>
+</div>
+
+</div>
+
+<div class="section-label">AI & Emerging</div>
+<div class="grid">
+
+<div class="card" onclick="sendPrompt('How do I use AI-assisted coding tools effectively in FAANG-style interviews?')">
+  <div class="card-head">
+    <span class="num" style="background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB">19</span>
+    <span class="title">AI-Enabled Coding</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge new">Rising</span>
+    <span class="badge">Copilot / Cursor workflow</span>
+    <span class="badge">Prompt-to-code</span>
+    <span class="badge">AI code review</span>
+    <span class="badge">Test generation</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What ML and AI fundamentals should a software engineer know for FAANG interviews?')">
+  <div class="card-head">
+    <span class="num" style="background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB">20</span>
+    <span class="title">ML / AI Fundamentals for SWEs</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge new">Rising</span>
+    <span class="badge">Embeddings / vectors</span>
+    <span class="badge">RAG architecture</span>
+    <span class="badge">LLM APIs</span>
+    <span class="badge">Fine-tuning basics</span>
+    <span class="badge">Vector DBs</span>
+  </div>
+</div>
+
+<div class="card" onclick="sendPrompt('What ethics, privacy, and compliance topics come up in FAANG interviews?')">
+  <div class="card-head">
+    <span class="num" style="background:#7F77DD;color:#fff;border:none">21</span>
+    <span class="title">Ethics, Privacy & Compliance</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">GDPR / data residency</span>
+    <span class="badge">Responsible AI</span>
+    <span class="badge">Bias in ML</span>
+    <span class="badge">Privacy by design</span>
+  </div>
+</div>
+
+</div>
+
+<div class="section-label">Leadership</div>
+<div class="grid">
+
+<div class="card" onclick="sendPrompt('How should I prepare for behavioral and leadership interviews at FAANG?')">
+  <div class="card-head">
+    <span class="num" style="background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5">22</span>
+    <span class="title">Behavioral / Leadership Thinking</span>
+  </div>
+  <div class="badge-row">
+    <span class="badge">STAR method</span>
+    <span class="badge">Conflict resolution</span>
+    <span class="badge">Ownership & bias for action</span>
+    <span class="badge">Navigating ambiguity</span>
+    <span class="badge">Cross-team influence</span>
+  </div>
+</div>
+
+</div>

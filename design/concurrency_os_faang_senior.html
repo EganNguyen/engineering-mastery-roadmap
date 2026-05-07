@@ -1,0 +1,217 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:12px}
+.section{margin-bottom:20px}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sec-icon{font-size:18px;color:var(--color-text-secondary)}
+.sec-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.04em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-primary)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.freq{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.freq-h{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.freq-m{background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB}
+.freq-l{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:2px 7px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.legend{display:flex;gap:14px;padding:0 0 10px;font-size:12px;color:var(--color-text-secondary);flex-wrap:wrap}
+.ldot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">Concurrency and OS depth topics tested at FAANG senior level, grouped by category with interview frequency</h2>
+
+<div class="legend">
+  <span><span class="ldot" style="background:#1D9E75"></span>High frequency</span>
+  <span><span class="ldot" style="background:#185FA5"></span>Medium frequency</span>
+  <span><span class="ldot" style="background:#888780"></span>Occasional / staff+ roles</span>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-arrows-shuffle sec-icon" aria-hidden="true"></i><span class="sec-title">Concurrency primitives</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain mutex vs semaphore vs monitor — FAANG senior interview depth')">
+      <div class="card-top"><span class="card-title">Mutex, semaphore & monitor</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">binary vs counting semaphore</span><span class="tag">ownership</span><span class="tag">condition variables</span><span class="tag">spurious wakeup</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain deadlock — conditions, detection, prevention, avoidance for FAANG')">
+      <div class="card-top"><span class="card-title">Deadlock</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">4 Coffman conditions</span><span class="tag">lock ordering</span><span class="tag">resource graph</span><span class="tag">banker's algorithm</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain race conditions and how to prevent them — locks, atomics, immutability for FAANG')">
+      <div class="card-top"><span class="card-title">Race conditions</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">data race vs race condition</span><span class="tag">TOCTOU</span><span class="tag">atomic operations</span><span class="tag">volatile</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain read-write locks and when to use them over a mutex — FAANG depth')">
+      <div class="card-top"><span class="card-title">Read-write locks</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">writer starvation</span><span class="tag">reader preference</span><span class="tag">RWMutex</span><span class="tag">upgrade deadlock</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain lock-free and wait-free data structures — CAS, ABA problem for FAANG')">
+      <div class="card-top"><span class="card-title">Lock-free & wait-free structures</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">compare-and-swap</span><span class="tag">ABA problem</span><span class="tag">atomic reference</span><span class="tag">Michael-Scott queue</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('What is livelock and starvation and how do you avoid them in concurrent systems')">
+      <div class="card-top"><span class="card-title">Livelock & starvation</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">vs deadlock</span><span class="tag">backoff strategies</span><span class="tag">fair scheduling</span><span class="tag">priority inversion</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain the Java or Go memory model and happens-before guarantees for FAANG')">
+      <div class="card-top"><span class="card-title">Memory model & happens-before</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">happens-before</span><span class="tag">visibility guarantees</span><span class="tag">reordering</span><span class="tag">volatile / sync.atomic</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-cpu sec-icon" aria-hidden="true"></i><span class="sec-title">Threading & scheduling</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain thread vs process vs coroutine vs goroutine — FAANG senior depth')">
+      <div class="card-top"><span class="card-title">Thread vs process vs coroutine</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">kernel vs user threads</span><span class="tag">M:N threading</span><span class="tag">goroutines</span><span class="tag">context switch cost</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain thread pool design — sizing, work stealing, rejection policies for FAANG')">
+      <div class="card-top"><span class="card-title">Thread pool design</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">pool sizing formula</span><span class="tag">work stealing</span><span class="tag">bounded queue</span><span class="tag">rejection policies</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain CPU scheduling algorithms — preemptive, CFS, real-time for FAANG OS depth')">
+      <div class="card-top"><span class="card-title">CPU scheduling</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">CFS / Linux scheduler</span><span class="tag">preemptive vs cooperative</span><span class="tag">priority queues</span><span class="tag">time slice</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain async/await and the event loop model vs multi-threading — FAANG depth')">
+      <div class="card-top"><span class="card-title">Async / event loop model</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">single-threaded event loop</span><span class="tag">I/O multiplexing</span><span class="tag">epoll / kqueue</span><span class="tag">callback vs promise</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain work stealing schedulers — how Go and Java ForkJoin implement them')">
+      <div class="card-top"><span class="card-title">Work stealing schedulers</span><span class="freq freq-l">Occasional</span></div>
+      <div class="tags"><span class="tag">deque per thread</span><span class="tag">ForkJoinPool</span><span class="tag">Go GMP model</span><span class="tag">locality</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-device-desktop-analytics sec-icon" aria-hidden="true"></i><span class="sec-title">Memory & hardware</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain virtual memory, paging, and TLB — OS internals for FAANG senior interviews')">
+      <div class="card-top"><span class="card-title">Virtual memory & paging</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">page table</span><span class="tag">TLB miss</span><span class="tag">page fault</span><span class="tag">huge pages</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain CPU cache hierarchy and cache coherence — L1/L2/L3, MESI protocol for FAANG')">
+      <div class="card-top"><span class="card-title">CPU cache & cache coherence</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">L1/L2/L3 latency</span><span class="tag">MESI protocol</span><span class="tag">false sharing</span><span class="tag">cache line</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain false sharing and how to avoid it in concurrent code — FAANG performance depth')">
+      <div class="card-top"><span class="card-title">False sharing</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">cache line padding</span><span class="tag">@Contended</span><span class="tag">NUMA awareness</span><span class="tag">perf counters</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain memory barriers and CPU instruction reordering — FAANG low-level depth')">
+      <div class="card-top"><span class="card-title">Memory barriers & reordering</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">store/load barrier</span><span class="tag">acquire/release semantics</span><span class="tag">StoreLoad fence</span><span class="tag">x86 vs ARM</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain stack vs heap memory management and GC internals for FAANG senior interviews')">
+      <div class="card-top"><span class="card-title">Stack, heap & GC internals</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">stack frame</span><span class="tag">escape analysis</span><span class="tag">GC pause (STW)</span><span class="tag">generational GC</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain NUMA architecture and how it affects multi-threaded performance — staff+ FAANG')">
+      <div class="card-top"><span class="card-title">NUMA architecture</span><span class="freq freq-l">Occasional</span></div>
+      <div class="tags"><span class="tag">local vs remote memory</span><span class="tag">NUMA-aware allocation</span><span class="tag">CPU pinning</span><span class="tag">memory latency</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-server sec-icon" aria-hidden="true"></i><span class="sec-title">OS & I/O model</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain system calls and context switching cost — OS internals for FAANG')">
+      <div class="card-top"><span class="card-title">System calls & context switching</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">user vs kernel mode</span><span class="tag">syscall overhead</span><span class="tag">vDSO</span><span class="tag">interrupt handling</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain blocking vs non-blocking I/O, select/poll/epoll for FAANG senior interviews')">
+      <div class="card-top"><span class="card-title">I/O models — blocking to epoll</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">blocking I/O</span><span class="tag">select/poll O(n)</span><span class="tag">epoll O(1)</span><span class="tag">io_uring</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain process isolation — namespaces, cgroups and how containers work at OS level')">
+      <div class="card-top"><span class="card-title">Namespaces, cgroups & containers</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">PID/net namespace</span><span class="tag">cgroup limits</span><span class="tag">container runtime</span><span class="tag">seccomp</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain signals, inter-process communication — pipes, sockets, shared memory for FAANG')">
+      <div class="card-top"><span class="card-title">IPC mechanisms</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">pipes / FIFOs</span><span class="tag">Unix domain sockets</span><span class="tag">shared memory</span><span class="tag">message queues</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain copy-on-write semantics in OS forking and how it relates to Redis snapshots')">
+      <div class="card-top"><span class="card-title">Copy-on-write (CoW)</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">fork() semantics</span><span class="tag">page sharing</span><span class="tag">Redis RDB snapshot</span><span class="tag">CoW in data structures</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain io_uring and how it differs from epoll — when would you use it at FAANG scale')">
+      <div class="card-top"><span class="card-title">io_uring</span><span class="freq freq-l">Occasional</span></div>
+      <div class="tags"><span class="tag">submission ring</span><span class="tag">completion ring</span><span class="tag">zero syscall I/O</span><span class="tag">vs epoll</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-tools sec-icon" aria-hidden="true"></i><span class="sec-title">Applied concurrency patterns</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain producer-consumer pattern implementations — bounded buffer, disruptor for FAANG')">
+      <div class="card-top"><span class="card-title">Producer-consumer & bounded buffer</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">blocking queue</span><span class="tag">backpressure</span><span class="tag">LMAX disruptor</span><span class="tag">ring buffer</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Design a thread-safe rate limiter using concurrency primitives — FAANG coding round')">
+      <div class="card-top"><span class="card-title">Thread-safe rate limiter</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">token bucket</span><span class="tag">atomic counters</span><span class="tag">sliding window</span><span class="tag">distributed rate limit</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Design a concurrent cache with eviction — LRU, lock striping, read-write lock for FAANG')">
+      <div class="card-top"><span class="card-title">Concurrent LRU cache design</span><span class="freq freq-h">High</span></div>
+      <div class="tags"><span class="tag">lock striping</span><span class="tag">ConcurrentHashMap</span><span class="tag">doubly linked list</span><span class="tag">eviction policy</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain the actor model and how it avoids shared state — Erlang, Akka for FAANG depth')">
+      <div class="card-top"><span class="card-title">Actor model</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">message passing</span><span class="tag">mailbox</span><span class="tag">Akka / Erlang</span><span class="tag">no shared state</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain STM (software transactional memory) and when it is better than locks')">
+      <div class="card-top"><span class="card-title">Software transactional memory</span><span class="freq freq-l">Occasional</span></div>
+      <div class="tags"><span class="tag">optimistic concurrency</span><span class="tag">retry / commit</span><span class="tag">Clojure STM</span><span class="tag">vs locks</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain the reactor and proactor I/O patterns used in high-performance servers')">
+      <div class="card-top"><span class="card-title">Reactor & proactor patterns</span><span class="freq freq-m">Medium</span></div>
+      <div class="tags"><span class="tag">event demultiplexer</span><span class="tag">Netty / Nginx model</span><span class="tag">proactor async I/O</span><span class="tag">IOCP</span></div>
+    </div>
+
+  </div>
+</div>
+</div>

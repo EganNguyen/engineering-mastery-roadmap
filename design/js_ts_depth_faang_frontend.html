@@ -1,0 +1,293 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:12px}
+.section{margin-bottom:20px}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sec-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.04em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-primary)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.freq{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap}
+.freq-h{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.freq-m{background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB}
+.freq-l{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.role{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap;background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:2px 7px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.legend{display:flex;gap:12px;padding:0 0 10px;font-size:12px;color:var(--color-text-secondary);flex-wrap:wrap;align-items:center}
+.ldot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.lsq{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:middle;background:#AFA9EC}
+</style>
+
+<div class="wrap">
+<div class="legend">
+  <span><span class="ldot" style="background:#1D9E75"></span>High frequency</span>
+  <span><span class="ldot" style="background:#185FA5"></span>Medium frequency</span>
+  <span><span class="ldot" style="background:#888780"></span>Occasional / senior+</span>
+  <span><span class="lsq"></span>Role context</span>
+</div>
+
+<div class="section">
+  <div class="sec-head"><span class="sec-title">⚙️ Core language mechanics</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript closures in depth — scope chain, practical uses, memory implications for FAANG')">
+      <div class="card-top"><span class="card-title">Closures & scope chain</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">lexical scope</span><span class="tag">closure over loop var</span><span class="tag">module pattern</span><span class="tag">memory retention</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript prototype chain and prototypal inheritance for FAANG frontend interviews')">
+      <div class="card-top"><span class="card-title">Prototype chain & inheritance</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">__proto__ vs prototype</span><span class="tag">Object.create</span><span class="tag">class sugar</span><span class="tag">instanceof chain</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript this binding — call, apply, bind, arrow functions, class methods for FAANG')">
+      <div class="card-top"><span class="card-title">this binding rules</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">implicit binding</span><span class="tag">explicit call/apply/bind</span><span class="tag">new binding</span><span class="tag">arrow vs function</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript coercion — == vs ===, type coercion rules, common gotchas for FAANG')">
+      <div class="card-top"><span class="card-title">Type coercion & equality</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">abstract equality</span><span class="tag">ToNumber / ToString</span><span class="tag">falsy values</span><span class="tag">NaN pitfalls</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain hoisting in JavaScript — var vs let vs const, function hoisting for FAANG interviews')">
+      <div class="card-top"><span class="card-title">Hoisting & TDZ</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">var hoisting</span><span class="tag">temporal dead zone</span><span class="tag">function declaration</span><span class="tag">let/const</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript generators and iterators — Symbol.iterator, lazy sequences for FAANG')">
+      <div class="card-top"><span class="card-title">Generators & iterators</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">Symbol.iterator</span><span class="tag">yield / next()</span><span class="tag">lazy evaluation</span><span class="tag">infinite sequences</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript Proxy and Reflect — use cases, traps, and Vue 3 reactivity for FAANG')">
+      <div class="card-top"><span class="card-title">Proxy & Reflect</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">get/set traps</span><span class="tag">validation</span><span class="tag">Vue 3 reactivity</span><span class="tag">meta-programming</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><span class="sec-title">⏱ Async & concurrency model</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript event loop in depth — call stack, task queue, microtask queue execution order for FAANG')">
+      <div class="card-top"><span class="card-title">Event loop — full execution model</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">call stack</span><span class="tag">macrotask queue</span><span class="tag">microtask drain</span><span class="tag">render timing</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain Promise internals — states, chaining, error handling, Promise.all vs allSettled for FAANG')">
+      <div class="card-top"><span class="card-title">Promise internals & combinators</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">pending/fulfilled/rejected</span><span class="tag">Promise.all/race/any</span><span class="tag">unhandled rejection</span><span class="tag">microtask timing</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain async/await under the hood — how it compiles to promises and generators for FAANG')">
+      <div class="card-top"><span class="card-title">async/await under the hood</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">syntactic sugar</span><span class="tag">implicit promise wrap</span><span class="tag">try/catch vs .catch</span><span class="tag">top-level await</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Implement a custom Promise from scratch — FAANG frontend coding round approach')">
+      <div class="card-top"><span class="card-title">Implement Promise from scratch</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">coding round</span></div>
+      </div>
+      <div class="tags"><span class="tag">state machine</span><span class="tag">callback queues</span><span class="tag">thenable chaining</span><span class="tag">Promises/A+</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Implement debounce and throttle from scratch — FAANG frontend coding interview')">
+      <div class="card-top"><span class="card-title">Implement debounce & throttle</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">coding round</span></div>
+      </div>
+      <div class="tags"><span class="tag">setTimeout / clearTimeout</span><span class="tag">leading/trailing edge</span><span class="tag">requestAnimationFrame</span><span class="tag">use cases</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain AbortController and cancellation patterns in JavaScript for FAANG frontend interviews')">
+      <div class="card-top"><span class="card-title">Cancellation & AbortController</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">AbortSignal</span><span class="tag">fetch cancellation</span><span class="tag">race condition fix</span><span class="tag">cleanup pattern</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><span class="sec-title">🧠 Memory & runtime</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript memory management — heap, GC, mark-and-sweep, memory leaks for FAANG')">
+      <div class="card-top"><span class="card-title">Memory management & GC</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">heap allocation</span><span class="tag">mark-and-sweep</span><span class="tag">generational GC</span><span class="tag">V8 internals</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain common JavaScript memory leaks — closures, event listeners, timers, detached DOM for FAANG')">
+      <div class="card-top"><span class="card-title">Memory leak patterns</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">retained closures</span><span class="tag">event listener leak</span><span class="tag">detached DOM</span><span class="tag">setInterval</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain WeakMap and WeakRef — use cases for avoiding memory leaks in JavaScript for FAANG')">
+      <div class="card-top"><span class="card-title">WeakMap, WeakSet & WeakRef</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">weak reference</span><span class="tag">GC-eligible</span><span class="tag">private data pattern</span><span class="tag">FinalizationRegistry</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain V8 engine internals — JIT compilation, hidden classes, deoptimisation for FAANG performance')">
+      <div class="card-top"><span class="card-title">V8 JIT & hidden classes</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / perf</span></div>
+      </div>
+      <div class="tags"><span class="tag">Ignition interpreter</span><span class="tag">TurboFan JIT</span><span class="tag">hidden class shapes</span><span class="tag">deopt triggers</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><span class="sec-title">🏗 Functional & design patterns</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain functional programming in JavaScript — map/filter/reduce, immutability, pure functions for FAANG')">
+      <div class="card-top"><span class="card-title">Functional programming patterns</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">pure functions</span><span class="tag">immutability</span><span class="tag">composition</span><span class="tag">currying / partial application</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Implement Function.prototype.bind, call, apply from scratch — FAANG frontend coding round')">
+      <div class="card-top"><span class="card-title">Implement bind / call / apply</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">coding round</span></div>
+      </div>
+      <div class="tags"><span class="tag">this context</span><span class="tag">spread args</span><span class="tag">new + bind edge case</span><span class="tag">polyfill pattern</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Implement deep clone, deep merge, and deep equal in JavaScript — FAANG frontend coding')">
+      <div class="card-top"><span class="card-title">Deep clone / merge / equal</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">coding round</span></div>
+      </div>
+      <div class="tags"><span class="tag">circular reference</span><span class="tag">structuredClone</span><span class="tag">prototype chain</span><span class="tag">Map/Set handling</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Implement a JavaScript event emitter from scratch — FAANG frontend coding interview')">
+      <div class="card-top"><span class="card-title">Implement EventEmitter</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">coding round</span></div>
+      </div>
+      <div class="tags"><span class="tag">on / off / emit</span><span class="tag">once wrapper</span><span class="tag">listener map</span><span class="tag">wildcard events</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Implement memoize, compose, and pipe utility functions in JavaScript for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Implement memoize / compose / pipe</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">coding round</span></div>
+      </div>
+      <div class="tags"><span class="tag">cache by args</span><span class="tag">reduceRight compose</span><span class="tag">variadic pipe</span><span class="tag">WeakMap cache</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><span class="sec-title">🔷 TypeScript depth</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain TypeScript generics in depth — constraints, conditional types, infer for FAANG interviews')">
+      <div class="card-top"><span class="card-title">Generics & constraints</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">extends constraint</span><span class="tag">default generics</span><span class="tag">infer keyword</span><span class="tag">conditional types</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain TypeScript utility types — Partial, Required, Pick, Omit, ReturnType implementation for FAANG')">
+      <div class="card-top"><span class="card-title">Utility types & their implementation</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">Partial / Required</span><span class="tag">Pick / Omit</span><span class="tag">ReturnType</span><span class="tag">Awaited</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain TypeScript type narrowing — discriminated unions, type guards, assertion functions for FAANG')">
+      <div class="card-top"><span class="card-title">Type narrowing & guards</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">discriminated union</span><span class="tag">typeof / instanceof</span><span class="tag">is predicate</span><span class="tag">asserts never</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain TypeScript mapped types and template literal types — advanced patterns for FAANG')">
+      <div class="card-top"><span class="card-title">Mapped & template literal types</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">keyof / in</span><span class="tag">as remapping</span><span class="tag">template literal</span><span class="tag">recursive types</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain TypeScript declaration merging, module augmentation and ambient types for FAANG')">
+      <div class="card-top"><span class="card-title">Declaration merging & module augmentation</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">interface merging</span><span class="tag">global augment</span><span class="tag">ambient .d.ts</span><span class="tag">triple-slash</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain TypeScript structural vs nominal typing — why it matters in large codebases for FAANG')">
+      <div class="card-top"><span class="card-title">Structural vs nominal typing</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">duck typing</span><span class="tag">brand types</span><span class="tag">opaque types</span><span class="tag">excess property check</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><span class="sec-title">🔧 Modules & tooling internals</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript module systems — CommonJS vs ESM, circular deps, tree shaking for FAANG')">
+      <div class="card-top"><span class="card-title">CJS vs ESM & tree shaking</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all FE roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">static vs dynamic</span><span class="tag">live bindings</span><span class="tag">tree shaking</span><span class="tag">circular deps</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain bundler internals — how webpack and Vite work, code splitting for FAANG frontend')">
+      <div class="card-top"><span class="card-title">Bundler internals</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">dependency graph</span><span class="tag">chunk splitting</span><span class="tag">Vite ESM dev</span><span class="tag">sourcemaps</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain JavaScript runtime environments — browser vs Node.js vs edge runtimes — FAANG context')">
+      <div class="card-top"><span class="card-title">Runtime environments</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">fullstack FE</span></div>
+      </div>
+      <div class="tags"><span class="tag">browser vs Node</span><span class="tag">edge runtime limits</span><span class="tag">Deno / Bun</span><span class="tag">Web APIs</span></div>
+    </div>
+
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,254 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:12px}
+.section{margin-bottom:20px}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sec-icon{font-size:18px;color:var(--color-text-secondary)}
+.sec-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.04em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:var(--color-border-primary)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.freq{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap}
+.freq-h{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.freq-m{background:#E6F1FB;color:#185FA5;border:0.5px solid #85B7EB}
+.freq-l{background:#F1EFE8;color:#5F5E5A;border:0.5px solid #B4B2A9}
+.role{font-size:11px;padding:2px 7px;border-radius:10px;white-space:nowrap;background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:2px 7px;border-radius:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary)}
+.legend{display:flex;gap:12px;padding:0 0 10px;font-size:12px;color:var(--color-text-secondary);flex-wrap:wrap;align-items:center}
+.ldot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.lsq{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:middle;background:#AFA9EC}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">ML and AI fundamentals for software engineers in FAANG interviews, grouped by category with frequency and role context</h2>
+
+<div class="legend">
+  <span><span class="ldot" style="background:#1D9E75"></span>High frequency</span>
+  <span><span class="ldot" style="background:#185FA5"></span>Medium frequency</span>
+  <span><span class="ldot" style="background:#888780"></span>Occasional / senior+</span>
+  <span><span class="lsq"></span>Role context</span>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-brain sec-icon" aria-hidden="true"></i><span class="sec-title">LLM & foundation model literacy</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain how transformer architecture works at the level a software engineer needs for FAANG interviews')">
+      <div class="card-top"><span class="card-title">Transformer architecture</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">attention mechanism</span><span class="tag">encoder vs decoder</span><span class="tag">positional encoding</span><span class="tag">context window</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain tokenisation — BPE, SentencePiece, token count impact on cost and latency for FAANG')">
+      <div class="card-top"><span class="card-title">Tokenisation</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">BPE / WordPiece</span><span class="tag">token ≠ word</span><span class="tag">context window limits</span><span class="tag">cost per token</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain LLM inference — temperature, top-p, top-k sampling, and how to tune them for FAANG')">
+      <div class="card-top"><span class="card-title">Inference & sampling parameters</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">temperature</span><span class="tag">top-p / nucleus</span><span class="tag">top-k</span><span class="tag">greedy vs beam search</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain fine-tuning vs prompt engineering vs RAG — when to use each for FAANG system design')">
+      <div class="card-top"><span class="card-title">Fine-tuning vs prompting vs RAG</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">full fine-tune</span><span class="tag">LoRA / PEFT</span><span class="tag">few-shot prompting</span><span class="tag">RAG tradeoffs</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain LLM context window limits and strategies for handling long documents — FAANG system design')">
+      <div class="card-top"><span class="card-title">Context window management</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">chunking strategies</span><span class="tag">sliding window</span><span class="tag">map-reduce</span><span class="tag">KV cache</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain LLM hallucination — causes, detection, mitigation strategies for FAANG engineers')">
+      <div class="card-top"><span class="card-title">Hallucination — causes & mitigations</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">grounding</span><span class="tag">citation enforcement</span><span class="tag">self-consistency</span><span class="tag">guardrails</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-vector sec-icon" aria-hidden="true"></i><span class="sec-title">Embeddings & vector search</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain embeddings — what they are, how to use them, and cosine similarity for FAANG interviews')">
+      <div class="card-top"><span class="card-title">Embeddings fundamentals</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">dense vector representation</span><span class="tag">cosine similarity</span><span class="tag">semantic search</span><span class="tag">embedding models</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain approximate nearest neighbour search — HNSW, IVF, PQ for FAANG system design')">
+      <div class="card-top"><span class="card-title">ANN search & vector indexes</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">backend / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">HNSW graph</span><span class="tag">IVF flat</span><span class="tag">product quantisation</span><span class="tag">recall vs latency</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain vector database internals and how to choose one — Pinecone, Weaviate, pgvector for FAANG')">
+      <div class="card-top"><span class="card-title">Vector DB internals & selection</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">backend / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">Pinecone / Weaviate</span><span class="tag">pgvector</span><span class="tag">hybrid search</span><span class="tag">metadata filtering</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain hybrid search — combining dense and sparse retrieval, BM25 + embeddings for FAANG')">
+      <div class="card-top"><span class="card-title">Hybrid search (dense + sparse)</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">backend / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">BM25 sparse</span><span class="tag">dense embedding</span><span class="tag">RRF fusion</span><span class="tag">re-ranking</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-circuit-board sec-icon" aria-hidden="true"></i><span class="sec-title">RAG system design</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain RAG architecture end to end — indexing pipeline, retrieval, generation for FAANG system design')">
+      <div class="card-top"><span class="card-title">RAG pipeline — full architecture</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">system design</span></div>
+      </div>
+      <div class="tags"><span class="tag">document ingestion</span><span class="tag">chunking</span><span class="tag">embed + index</span><span class="tag">retrieve → augment → generate</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain chunking strategies for RAG — fixed, semantic, hierarchical, sliding window for FAANG')">
+      <div class="card-top"><span class="card-title">Chunking strategies</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">system design</span></div>
+      </div>
+      <div class="tags"><span class="tag">fixed-size</span><span class="tag">sentence-level</span><span class="tag">hierarchical</span><span class="tag">chunk overlap</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain RAG evaluation — retrieval quality, generation quality, RAGAS metrics for FAANG')">
+      <div class="card-top"><span class="card-title">RAG evaluation & metrics</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">system design</span></div>
+      </div>
+      <div class="tags"><span class="tag">context precision</span><span class="tag">faithfulness</span><span class="tag">answer relevance</span><span class="tag">RAGAS</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain agentic RAG and tool use — how LLMs call tools, ReAct pattern for FAANG engineers')">
+      <div class="card-top"><span class="card-title">Agentic RAG & tool use</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">system design</span></div>
+      </div>
+      <div class="tags"><span class="tag">ReAct pattern</span><span class="tag">function calling</span><span class="tag">tool schema</span><span class="tag">multi-step reasoning</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('What are the failure modes of RAG systems and how do you debug them for FAANG interviews')">
+      <div class="card-top"><span class="card-title">RAG failure modes & debugging</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">system design</span></div>
+      </div>
+      <div class="tags"><span class="tag">retrieval miss</span><span class="tag">context stuffing</span><span class="tag">lost in the middle</span><span class="tag">reranker</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-server-cog sec-icon" aria-hidden="true"></i><span class="sec-title">ML system design & infrastructure</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain ML system design — feature stores, training pipelines, model serving for FAANG')">
+      <div class="card-top"><span class="card-title">ML system design overview</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">senior / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">feature store</span><span class="tag">training pipeline</span><span class="tag">model registry</span><span class="tag">serving infra</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain LLM serving infrastructure — batching, KV cache, quantisation, latency vs cost for FAANG')">
+      <div class="card-top"><span class="card-title">LLM serving & latency optimisation</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">backend / infra</span></div>
+      </div>
+      <div class="tags"><span class="tag">continuous batching</span><span class="tag">KV cache</span><span class="tag">quantisation (INT8/4)</span><span class="tag">TTFT vs TPS</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain model monitoring — data drift, concept drift, shadow deployment for FAANG ML systems')">
+      <div class="card-top"><span class="card-title">Model monitoring & drift</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">data drift</span><span class="tag">concept drift</span><span class="tag">PSI / KL divergence</span><span class="tag">shadow mode</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain A/B testing and online experimentation for ML models — FAANG system design')">
+      <div class="card-top"><span class="card-title">A/B testing ML models</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">traffic splitting</span><span class="tag">statistical significance</span><span class="tag">multi-armed bandit</span><span class="tag">guardrail metrics</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain ML feature stores — online vs offline, point-in-time correctness for FAANG design')">
+      <div class="card-top"><span class="card-title">Feature stores</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / ML infra</span></div>
+      </div>
+      <div class="tags"><span class="tag">online vs offline store</span><span class="tag">point-in-time correct</span><span class="tag">feature skew</span><span class="tag">Feast / Tecton</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><i class="ti ti-math-symbols sec-icon" aria-hidden="true"></i><span class="sec-title">Core ML concepts for SWEs</span></div>
+  <div class="grid">
+
+    <div class="card" onclick="sendPrompt('Explain bias-variance tradeoff intuitively — what it means for model selection for FAANG SWEs')">
+      <div class="card-top"><span class="card-title">Bias-variance tradeoff</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">underfitting vs overfitting</span><span class="tag">regularisation</span><span class="tag">model complexity</span><span class="tag">cross-validation</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain precision vs recall, F1, AUC-ROC — when to optimise each for FAANG ML interviews')">
+      <div class="card-top"><span class="card-title">Evaluation metrics</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">precision / recall</span><span class="tag">F1 score</span><span class="tag">AUC-ROC</span><span class="tag">class imbalance</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain gradient descent intuitively — SGD, Adam, learning rate schedules for FAANG SWEs')">
+      <div class="card-top"><span class="card-title">Gradient descent & optimisers</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">all roles</span></div>
+      </div>
+      <div class="tags"><span class="tag">SGD / Adam / AdamW</span><span class="tag">learning rate</span><span class="tag">momentum</span><span class="tag">loss landscape</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain recommendation system design — collaborative filtering, two-tower model for FAANG')">
+      <div class="card-top"><span class="card-title">Recommendation systems</span>
+        <div class="right"><span class="freq freq-h">High</span><span class="role">system design</span></div>
+      </div>
+      <div class="tags"><span class="tag">collaborative filtering</span><span class="tag">two-tower model</span><span class="tag">candidate retrieval</span><span class="tag">ranking stage</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain responsible AI — fairness, bias detection, explainability for FAANG engineer interviews')">
+      <div class="card-top"><span class="card-title">Responsible AI & fairness</span>
+        <div class="right"><span class="freq freq-m">Medium</span><span class="role">senior / design</span></div>
+      </div>
+      <div class="tags"><span class="tag">demographic parity</span><span class="tag">disparate impact</span><span class="tag">SHAP / LIME</span><span class="tag">model cards</span></div>
+    </div>
+
+    <div class="card" onclick="sendPrompt('Explain RLHF and how it is used to align LLMs — reward model, PPO for FAANG SWE context')">
+      <div class="card-top"><span class="card-title">RLHF & alignment</span>
+        <div class="right"><span class="freq freq-l">Occasional</span><span class="role">senior / AI teams</span></div>
+      </div>
+      <div class="tags"><span class="tag">reward model</span><span class="tag">PPO / DPO</span><span class="tag">preference data</span><span class="tag">constitutional AI</span></div>
+    </div>
+
+  </div>
+</div>
+
+</div>
