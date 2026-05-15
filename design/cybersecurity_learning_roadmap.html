@@ -1,0 +1,459 @@
+
+<style>
+:root {
+  --phase-0: #E1F5EE; --phase-0t: #085041;
+  --phase-1: #E6F1FB; --phase-1t: #0C447C;
+  --phase-2: #FAEEDA; --phase-2t: #633806;
+  --phase-3: #FCEBEB; --phase-3t: #791F1F;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --phase-0: #04342C; --phase-0t: #9FE1CB;
+    --phase-1: #042C53; --phase-1t: #B5D4F4;
+    --phase-2: #412402; --phase-2t: #FAC775;
+    --phase-3: #501313; --phase-3t: #F7C1C1;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans, sans-serif); }
+.sr-only { position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+
+.roadmap { padding: 1rem 0 2rem; }
+
+.timeline-header { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1.5rem; }
+.phase-pill {
+  padding: 10px 12px; border-radius: var(--border-radius-lg, 12px);
+  cursor: pointer; border: 1.5px solid transparent;
+  transition: all .2s; text-align: center;
+}
+.phase-pill h3 { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+.phase-pill p { font-size: 11px; opacity: .75; }
+.phase-pill.p0 { background: var(--phase-0); color: var(--phase-0t); }
+.phase-pill.p1 { background: var(--phase-1); color: var(--phase-1t); }
+.phase-pill.p2 { background: var(--phase-2); color: var(--phase-2t); }
+.phase-pill.p3 { background: var(--phase-3); color: var(--phase-3t); }
+.phase-pill.active { border-color: currentColor; transform: translateY(-2px); }
+.phase-pill:hover { transform: translateY(-2px); }
+
+.domain-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+.dtab {
+  font-size: 12px; padding: 5px 12px; border-radius: 20px;
+  border: 0.5px solid var(--color-border-secondary, rgba(0,0,0,0.3));
+  cursor: pointer; background: transparent; color: var(--color-text-secondary);
+  transition: all .15s;
+}
+.dtab.active, .dtab:hover {
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+}
+.dtab.active { border-color: var(--color-border-primary, rgba(0,0,0,0.4)); font-weight: 500; }
+
+.content-area { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .content-area { grid-template-columns: 1fr; } .timeline-header { grid-template-columns: repeat(2,1fr); } }
+
+.card {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg, 12px);
+  padding: 14px 16px;
+}
+.card-full { grid-column: 1 / -1; }
+.card h4 { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.card h4 i { font-size: 16px; }
+
+.tag-list { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag {
+  font-size: 11px; padding: 3px 9px; border-radius: 12px;
+  border: 0.5px solid var(--color-border-tertiary);
+  color: var(--color-text-secondary); background: var(--color-background-secondary);
+}
+.tag.danger { background: #FCEBEB; color: #791F1F; border-color: #F7C1C1; }
+.tag.safe  { background: #EAF3DE; color: #27500A; border-color: #C0DD97; }
+.tag.info  { background: #E6F1FB; color: #0C447C; border-color: #B5D4F4; }
+.tag.amber { background: #FAEEDA; color: #633806; border-color: #FAC775; }
+@media (prefers-color-scheme: dark) {
+  .tag.danger { background: #501313; color: #F7C1C1; border-color: #791F1F; }
+  .tag.safe   { background: #173404; color: #C0DD97; border-color: #3B6D11; }
+  .tag.info   { background: #042C53; color: #B5D4F4; border-color: #185FA5; }
+  .tag.amber  { background: #412402; color: #FAC775; border-color: #854F0B; }
+}
+
+.item-list { list-style: none; }
+.item-list li {
+  font-size: 13px; color: var(--color-text-primary);
+  padding: 5px 0; border-bottom: 0.5px solid var(--color-border-tertiary);
+  display: flex; align-items: flex-start; gap: 7px; line-height: 1.45;
+}
+.item-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.item-list li::before { content: '→'; color: var(--color-text-secondary); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+
+.cert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.cert-card {
+  padding: 10px 12px; border-radius: var(--border-radius-md, 8px);
+  border: 0.5px solid var(--color-border-tertiary);
+}
+.cert-card .level { font-size: 10px; font-weight: 500; margin-bottom: 4px; text-transform: uppercase; letter-spacing: .5px; }
+.cert-card .name { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+.cert-card .body { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+.cert-card.entry { border-top: 2px solid #1D9E75; }
+.cert-card.mid   { border-top: 2px solid #378ADD; }
+.cert-card.adv   { border-top: 2px solid #D85A30; }
+.cert-card .level.entry { color: #0F6E56; }
+.cert-card .level.mid   { color: #185FA5; }
+.cert-card .level.adv   { color: #993C1D; }
+@media (prefers-color-scheme: dark) {
+  .cert-card.entry { border-top-color: #5DCAA5; }
+  .cert-card.mid   { border-top-color: #85B7EB; }
+  .cert-card.adv   { border-top-color: #F0997B; }
+  .cert-card .level.entry { color: #5DCAA5; }
+  .cert-card .level.mid   { color: #85B7EB; }
+  .cert-card .level.adv   { color: #F0997B; }
+}
+
+.resource-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.resource-item { font-size: 12px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px; }
+.resource-item i { font-size: 14px; }
+
+.phase-note {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md, 8px);
+  padding: 10px 14px;
+  font-size: 13px; color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--color-border-secondary);
+}
+
+.nav-row { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1rem; }
+.nav-btn {
+  font-size: 12px; padding: 6px 14px;
+  border-radius: var(--border-radius-md, 8px);
+  border: 0.5px solid var(--color-border-secondary);
+  background: transparent; color: var(--color-text-primary);
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+}
+.nav-btn:hover { background: var(--color-background-secondary); }
+
+.section-divider { height: 0.5px; background: var(--color-border-tertiary); margin: 14px 0; }
+</style>
+
+<h2 class="sr-only">Interactive cybersecurity learning roadmap from foundational to advanced level, covering 5 security domains across 4 phases.</h2>
+
+<div class="roadmap">
+
+<div class="timeline-header" id="phasePills">
+  <div class="phase-pill p0 active" onclick="setPhase(0)" id="pill-0">
+    <h3>Phase 1</h3><p>Months 1–3 · Foundations</p>
+  </div>
+  <div class="phase-pill p1" onclick="setPhase(1)" id="pill-1">
+    <h3>Phase 2</h3><p>Months 3–6 · Core Domains</p>
+  </div>
+  <div class="phase-pill p2" onclick="setPhase(2)" id="pill-2">
+    <h3>Phase 3</h3><p>Months 6–9 · Specialise</p>
+  </div>
+  <div class="phase-pill p3" onclick="setPhase(3)" id="pill-3">
+    <h3>Phase 4</h3><p>Months 9–12 · Job-Ready</p>
+  </div>
+</div>
+
+<div class="domain-tabs" id="domainTabs"></div>
+
+<div id="phaseNote" class="phase-note"></div>
+
+<div class="content-area" id="contentArea"></div>
+
+<div class="nav-row">
+  <button class="nav-btn" onclick="prevDomain()"><i class="ti ti-arrow-left" aria-hidden="true"></i> Prev domain</button>
+  <button class="nav-btn" onclick="nextDomain()">Next domain <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+</div>
+
+</div>
+
+<script>
+const phases = [
+  {
+    label: "Phase 1", color: "p0",
+    note: "Build your technical foundation: networking, Linux, scripting, and core security concepts. This phase makes everything else click.",
+    domains: [
+      {
+        name: "Foundations",
+        icon: "ti-school",
+        concepts: ["OSI & TCP/IP model", "DNS, HTTP/S, TLS handshake", "Linux command line & permissions", "Python/Bash scripting basics", "CIA Triad, threat modelling", "PKI & certificate chains"],
+        attacks: ["Reconnaissance & OSINT", "Social engineering basics", "Phishing anatomy", "Weak credential attacks"],
+        defenses: ["Principle of least privilege", "Patch management discipline", "Strong password policies + MFA", "Security awareness mindset"],
+        labs: ["OverTheWire: Bandit (Linux wargame)", "TryHackMe: Pre-Security Path", "Set up a home lab with VirtualBox + Kali", "Packet capture with Wireshark on your own traffic"],
+        courses: [
+          { name: "CS50 Cybersecurity (Harvard, free)", type: "free" },
+          { name: "Google Cybersecurity Certificate (Coursera)", type: "paid" },
+          { name: "TryHackMe Pre-Security Path (free tier)", type: "free" },
+          { name: "Professor Messer's CompTIA Security+ (free)", type: "free" },
+        ],
+        tools: ["Kali Linux", "Wireshark", "Nmap", "VirtualBox / VMware", "TryHackMe", "OverTheWire"]
+      }
+    ]
+  },
+  {
+    label: "Phase 2", color: "p1",
+    note: "Dive into the five security domains. Work through them in parallel or sequentially — aim to complete at least 2 domain labs per week.",
+    domains: [
+      {
+        name: "Network Security",
+        icon: "ti-network",
+        concepts: ["Firewalls: stateful vs stateless", "IDS/IPS signatures & anomaly detection", "VPN tunnelling (IPSec, WireGuard)", "Zero Trust architecture", "Network segmentation & VLANs", "BGP security & route hijacking"],
+        attacks: ["Man-in-the-Middle (ARP poisoning)", "DDoS & amplification attacks", "DNS spoofing & cache poisoning", "VLAN hopping", "Rogue access points"],
+        defenses: ["Firewall rule hardening (deny-all default)", "Network monitoring with SIEM", "TLS everywhere; mutual TLS for services", "Ingress/egress filtering (BCP38)", "DNSSEC & DoH/DoT"],
+        labs: ["Build a pfSense firewall in a VM lab", "ARP spoofing with Ettercap on isolated VM network", "Set up Zeek/Suricata for network monitoring", "TryHackMe: Network Security Module"],
+        courses: [
+          { name: "Cisco NetAcad: Cybersecurity Essentials (free)", type: "free" },
+          { name: "TCM Security: Practical Network Pentesting", type: "paid" },
+          { name: "INE/eLearnSecurity Network Security Path", type: "paid" },
+        ],
+        tools: ["Wireshark", "Nmap / Masscan", "Ettercap", "Zeek / Suricata", "pfSense", "Scapy"]
+      },
+      {
+        name: "Web / Frontend Security",
+        icon: "ti-world",
+        concepts: ["OWASP Top 10 (2021)", "Same-origin policy & CORS", "Content Security Policy (CSP)", "Cookie security: HttpOnly, Secure, SameSite", "Subresource Integrity (SRI)", "Browser security model & sandbox"],
+        attacks: ["XSS (Stored, Reflected, DOM)", "CSRF & clickjacking", "SQL / NoSQL injection", "SSRF & prototype pollution", "Dependency supply-chain attacks"],
+        defenses: ["Input validation & output encoding", "Parameterised queries / prepared statements", "CSP headers & Trusted Types", "Dependency scanning (Snyk, Dependabot)", "WAF rules for common patterns"],
+        labs: ["DVWA (Damn Vulnerable Web App) on local VM", "OWASP WebGoat — full module completion", "PentesterLab: Essential Badge", "PortSwigger Web Security Academy (free, excellent)"],
+        courses: [
+          { name: "PortSwigger Web Security Academy (free)", type: "free" },
+          { name: "TCM Security: Practical Bug Bounty", type: "paid" },
+          { name: "PentesterLab Pro Subscription", type: "paid" },
+        ],
+        tools: ["Burp Suite Community/Pro", "OWASP ZAP", "sqlmap", "Nikto", "PortSwigger Academy", "DVWA"]
+      },
+      {
+        name: "Backend / Server Security",
+        icon: "ti-server",
+        concepts: ["Authentication: JWT, OAuth 2.0, OIDC", "API security (REST & GraphQL)", "Server hardening & CIS Benchmarks", "Secrets management (Vault, AWS Secrets Manager)", "Secure coding patterns (OWASP)", "Logging & audit trails"],
+        attacks: ["Broken auth & session hijacking", "IDOR & privilege escalation", "XXE injection", "Mass assignment / over-posting", "Insecure deserialization", "Path traversal"],
+        defenses: ["Token rotation & short-lived JWTs", "Rate limiting & brute-force protection", "Disable unnecessary services/ports", "Immutable infrastructure patterns", "SAST in CI pipeline (Semgrep, CodeQL)"],
+        labs: ["Build a deliberately vulnerable API (DVAPI)", "OWASP crAPI (Car API) challenges", "HackTheBox: Starting Point machines", "Set up Semgrep in a GitHub Actions pipeline"],
+        courses: [
+          { name: "OWASP API Security Top 10 (free docs)", type: "free" },
+          { name: "TCM Security: API Pentesting", type: "paid" },
+          { name: "Secure Code Warrior — developer training", type: "paid" },
+        ],
+        tools: ["Postman / Insomnia", "Burp Suite", "Semgrep", "HashiCorp Vault", "OWASP crAPI", "HackTheBox"]
+      },
+      {
+        name: "Infrastructure Security",
+        icon: "ti-building-factory",
+        concepts: ["Threat modelling (STRIDE, PASTA)", "Vulnerability management lifecycle", "Container security (Docker, Kubernetes)", "IaC security (Terraform, Ansible)", "SIEM & log management", "Incident response playbooks"],
+        attacks: ["Container escape exploits", "Misconfigured IAM / overprivileged roles", "Lateral movement techniques", "Persistence via cron / services", "Log tampering & evasion"],
+        defenses: ["CIS Benchmark hardening", "Image scanning in CI (Trivy, Grype)", "Runtime security with Falco", "Immutable logging (WORM storage)", "Least-privilege IAM design"],
+        labs: ["Kubernetes Goat — intentionally vulnerable cluster", "Terraform IaC scanning with Checkov", "Set up Wazuh SIEM on a VM", "Incident response tabletop with Blue Team Labs Online"],
+        courses: [
+          { name: "Kubernetes Security Essentials (Linux Foundation)", type: "paid" },
+          { name: "Blue Team Labs Online (free tier)", type: "free" },
+          { name: "TCM Security: Practical SOC Analyst", type: "paid" },
+        ],
+        tools: ["Trivy", "Falco", "Checkov / tfsec", "Wazuh", "Kubernetes Goat", "Blue Team Labs Online"]
+      },
+      {
+        name: "Cloud Security",
+        icon: "ti-cloud",
+        concepts: ["Shared responsibility model", "IAM: roles, policies, trust boundaries", "VPC design & security groups", "Data encryption at rest & in transit", "CSPM & cloud misconfiguration", "CloudTrail / Cloud audit logs"],
+        attacks: ["S3 bucket exposure", "Metadata API SSRF (IMDSv1)", "Privilege escalation via IAM misconfig", "Lateral movement between services", "Cryptojacking via exposed keys"],
+        defenses: ["IMDSv2 enforcement", "S3 Block Public Access + bucket policies", "GuardDuty / Security Hub / Defender for Cloud", "Least-privilege IAM with SCPs", "Infrastructure as Code for all config"],
+        labs: ["CloudGoat (Rhino Security Labs) — AWS attack scenarios", "flaws.cloud & flaws2.cloud (free)", "PwnedLabs.io AWS challenges", "Deploy and remediate a misconfigured Terraform AWS setup"],
+        courses: [
+          { name: "flaws.cloud & flaws2.cloud (free)", type: "free" },
+          { name: "A Cloud Guru / Pluralsight: AWS Security Specialty", type: "paid" },
+          { name: "CloudSecDocs.com reference (free)", type: "free" },
+        ],
+        tools: ["CloudGoat", "Pacu (AWS exploit framework)", "Scout Suite", "Prowler", "AWS Security Hub", "Trivy"]
+      }
+    ]
+  },
+  {
+    label: "Phase 3", color: "p2",
+    note: "Go deeper on your chosen track: AppSec, Cloud Security, or Detection Engineering. Start CTFs seriously and pursue your first intermediate cert.",
+    domains: [
+      {
+        name: "AppSec / DevSecOps",
+        icon: "ti-code",
+        concepts: ["Threat modelling in SDLC", "SAST, DAST, SCA integration", "Secrets scanning (Gitleaks, Trufflehog)", "Security gates in CI/CD (GitHub Actions)", "SBOM generation & management", "Secure design patterns"],
+        attacks: ["Supply chain attacks (dependency confusion)", "Pipeline injection & CI/CD abuse", "Hardcoded secrets in repos", "Container image vulnerabilities", "Insecure IaC patterns"],
+        defenses: ["Shift-left security — fix at PR time", "SLSA framework for build integrity", "Signed commits & container images", "Dependency pinning & lockfiles", "Security champion programmes"],
+        labs: ["Juice Shop with full OWASP suite", "Set up a full DevSecOps pipeline on GitHub", "Gitleaks pre-commit hooks on personal projects", "DAST scan a staging environment with ZAP"],
+        courses: [
+          { name: "SANS SEC540: Cloud & DevSecOps (expensive but gold)", type: "paid" },
+          { name: "DevSecOps.org free resources", type: "free" },
+          { name: "Snyk Learn (free)", type: "free" },
+        ],
+        tools: ["Semgrep", "Snyk", "Gitleaks", "Trivy", "OWASP ZAP", "GitHub Advanced Security"]
+      },
+      {
+        name: "Detection & Response",
+        icon: "ti-radar",
+        concepts: ["MITRE ATT&CK framework", "Detection engineering lifecycle", "Sigma rules & YARA", "Threat hunting methodology", "Digital forensics basics (disk, memory)", "Threat intelligence feeds (IOCs)"],
+        attacks: ["Living-off-the-land binaries (LOLBins)", "Process injection & hollowing", "Credential dumping (Mimikatz)", "C2 frameworks (Cobalt Strike, Metasploit)", "Anti-forensics techniques"],
+        defenses: ["SIEM correlation rules (Elastic/Splunk)", "EDR deployment & tuning", "Network traffic analysis (NTA)", "Honeypots & deception technology", "Threat hunting with MITRE ATT&CK"],
+        labs: ["Elastic SIEM free tier — build detection rules", "Boss of the SOC (BOTS) Splunk challenges", "DFIR.training memory forensics challenges", "LetsDefend.io Blue Team SOC platform"],
+        courses: [
+          { name: "LetsDefend.io (free + paid tiers)", type: "free" },
+          { name: "TCM Security: Practical Malware Analysis", type: "paid" },
+          { name: "SANS FOR508: DFIR (advanced, expensive)", type: "paid" },
+        ],
+        tools: ["Elastic SIEM", "Splunk Free", "Volatility (memory forensics)", "Sigma / YARA", "Autopsy", "ANY.RUN sandbox"]
+      }
+    ]
+  },
+  {
+    label: "Phase 4", color: "p3",
+    note: "Polish your portfolio, pursue advanced certs, and apply. One strong CTF writeup or real bug bounty finding is worth ten tutorial completions on a résumé.",
+    domains: [
+      {
+        name: "Certifications",
+        icon: "ti-certificate",
+        concepts: [],
+        attacks: [],
+        defenses: [],
+        labs: [],
+        courses: [],
+        tools: [],
+        isCerts: true,
+        certs: [
+          { level: "entry", name: "CompTIA Security+", body: "Broad baseline, vendor-neutral. Good first cert." },
+          { level: "entry", name: "eJPT (INE)", body: "Hands-on entry pentest cert. Affordable, practical." },
+          { level: "entry", name: "Google Cybersecurity Cert", body: "Accessible intro, recognised by employers." },
+          { level: "mid", name: "CEH (EC-Council)", body: "Widely recognised but theory-heavy. Good for HR filters." },
+          { level: "mid", name: "PNPT (TCM Security)", body: "Practical pentest. Excellent value, real-world focus." },
+          { level: "mid", name: "AWS Security Specialty", body: "Best cloud security cert for AWS engineers." },
+          { level: "adv", name: "OSCP (OffSec)", body: "Gold standard offensive cert. 24h exam, no shortcuts." },
+          { level: "adv", name: "CISSP (ISC²)", body: "Senior security management. 5yr exp required." },
+          { level: "adv", name: "SANS GIAC (GWAPT/GCLD)", body: "Top-tier technical. Expensive but employer-loved." },
+        ]
+      },
+      {
+        name: "Practice Platforms",
+        icon: "ti-trophy",
+        concepts: ["CTF competition strategy", "Bug bounty recon methodology", "Writing quality security reports", "Building a public portfolio (GitHub)", "Contributing to open-source security tools"],
+        attacks: [],
+        defenses: [],
+        labs: ["HackTheBox: Pro Labs (Offshore, RastaLabs)", "CTFtime.org — join weekly competitions", "Bugcrowd / HackerOne — start with VDP programs", "VulnHub — offline VM challenges"],
+        courses: [
+          { name: "HackTheBox Academy (free + paid)", type: "free" },
+          { name: "PentesterLab Pro", type: "paid" },
+        ],
+        tools: ["HackTheBox", "TryHackMe", "VulnHub", "CTFtime", "Bugcrowd", "HackerOne"]
+      }
+    ]
+  }
+];
+
+let currentPhase = 0;
+let currentDomain = 0;
+
+function setPhase(p) {
+  currentPhase = p;
+  currentDomain = 0;
+  document.querySelectorAll('.phase-pill').forEach((el,i) => el.classList.toggle('active', i===p));
+  renderTabs();
+  renderContent();
+}
+
+function renderTabs() {
+  const tabs = document.getElementById('domainTabs');
+  const doms = phases[currentPhase].domains;
+  tabs.innerHTML = doms.map((d, i) =>
+    `<button class="dtab${i===currentDomain?' active':''}" onclick="setDomain(${i})"><i class="ti ${d.icon}" aria-hidden="true" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>${d.name}</button>`
+  ).join('');
+}
+
+function setDomain(i) {
+  currentDomain = i;
+  renderTabs();
+  renderContent();
+}
+
+function nextDomain() {
+  const doms = phases[currentPhase].domains;
+  if (currentDomain < doms.length - 1) { setDomain(currentDomain + 1); }
+  else if (currentPhase < phases.length - 1) { setPhase(currentPhase + 1); }
+}
+function prevDomain() {
+  if (currentDomain > 0) { setDomain(currentDomain - 1); }
+  else if (currentPhase > 0) {
+    currentPhase--;
+    currentDomain = phases[currentPhase].domains.length - 1;
+    document.querySelectorAll('.phase-pill').forEach((el,i) => el.classList.toggle('active', i===currentPhase));
+    renderTabs(); renderContent();
+  }
+}
+
+function tags(arr, cls) {
+  return arr.map(t => `<span class="tag ${cls||''}">${t}</span>`).join('');
+}
+
+function renderContent() {
+  const phase = phases[currentPhase];
+  const dom = phase.domains[currentDomain];
+  document.getElementById('phaseNote').textContent = phase.note;
+
+  if (dom.isCerts) {
+    const entryC = dom.certs.filter(c=>c.level==='entry');
+    const midC = dom.certs.filter(c=>c.level==='mid');
+    const advC = dom.certs.filter(c=>c.level==='adv');
+    const certRow = (c) => `<div class="cert-card ${c.level}">
+      <div class="level ${c.level}">${c.level==='entry'?'Entry':''}${c.level==='mid'?'Intermediate':''}${c.level==='adv'?'Advanced':''}</div>
+      <div class="name">${c.name}</div>
+      <div class="body">${c.body}</div>
+    </div>`;
+    document.getElementById('contentArea').innerHTML = `
+      <div class="card card-full">
+        <h4><i class="ti ti-certificate" aria-hidden="true"></i> Certification roadmap</h4>
+        <div class="cert-grid">
+          ${dom.certs.map(certRow).join('')}
+        </div>
+      </div>`;
+    return;
+  }
+
+  let html = '';
+
+  if (dom.concepts && dom.concepts.length) {
+    html += `<div class="card"><h4><i class="ti ti-bulb" aria-hidden="true"></i> Core concepts</h4>
+      <ul class="item-list">${dom.concepts.map(c=>`<li>${c}</li>`).join('')}</ul></div>`;
+  }
+
+  if (dom.attacks && dom.attacks.length) {
+    html += `<div class="card"><h4><i class="ti ti-bug" aria-hidden="true"></i> Attacks to know</h4>
+      <div class="tag-list">${tags(dom.attacks,'danger')}</div></div>`;
+  }
+
+  if (dom.defenses && dom.defenses.length) {
+    html += `<div class="card"><h4><i class="ti ti-shield-check" aria-hidden="true"></i> Defensive techniques</h4>
+      <div class="tag-list">${tags(dom.defenses,'safe')}</div></div>`;
+  }
+
+  if (dom.labs && dom.labs.length) {
+    html += `<div class="card"><h4><i class="ti ti-flask" aria-hidden="true"></i> Hands-on labs</h4>
+      <ul class="item-list">${dom.labs.map(l=>`<li>${l}</li>`).join('')}</ul></div>`;
+  }
+
+  if (dom.courses && dom.courses.length) {
+    html += `<div class="card"><h4><i class="ti ti-book" aria-hidden="true"></i> Courses</h4>
+      ${dom.courses.map(c=>`<div class="resource-row">
+        <span class="resource-item">
+          <i class="ti ${c.type==='free'?'ti-gift':'ti-credit-card'}" aria-hidden="true"></i>
+          <span class="tag ${c.type==='free'?'safe':'info'}" style="margin-right:4px">${c.type}</span>
+          <span style="font-size:12px;color:var(--color-text-primary)">${c.name}</span>
+        </span>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  if (dom.tools && dom.tools.length) {
+    html += `<div class="card"><h4><i class="ti ti-tools" aria-hidden="true"></i> Tools & platforms</h4>
+      <div class="tag-list">${tags(dom.tools,'amber')}</div></div>`;
+  }
+
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+renderTabs();
+renderContent();
+</script>
