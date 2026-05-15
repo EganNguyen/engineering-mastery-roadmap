@@ -1,0 +1,637 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.root{padding:1.5rem 0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
+.tab{padding:6px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;font-size:13px;font-weight:400;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.tab:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+.tab.active{background:var(--color-background-tertiary);border-color:var(--color-border-primary);color:var(--color-text-primary);font-weight:500}
+.panel{display:none}.panel.active{display:block}
+.steps{display:flex;flex-direction:column;gap:12px}
+.step{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.step-header{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none;background:var(--color-background-primary)}
+.step-header:hover{background:var(--color-background-secondary)}
+.step-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0}
+.s1 .step-num{background:#EEEDFE;color:#3C3489}
+.s2 .step-num{background:#E1F5EE;color:#085041}
+.s3 .step-num{background:#FAEEDA;color:#633806}
+.s4 .step-num{background:#FAECE7;color:#4A1B0C}
+.s5 .step-num{background:#E6F1FB;color:#0C447C}
+.s6 .step-num{background:#FBEAF0;color:#4B1528}
+.step-title{font-size:13px;font-weight:500;color:var(--color-text-primary);flex:1}
+.step-label{font-size:11px;color:var(--color-text-secondary)}
+.chevron{font-size:14px;color:var(--color-text-tertiary);transition:transform .2s}
+.step.open .chevron{transform:rotate(180deg)}
+.step-body{display:none;padding:12px 14px;border-top:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary)}
+.step.open .step-body{display:block}
+.section{margin-bottom:14px}
+.section:last-child{margin-bottom:0}
+.sec-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.tag{font-size:12px;padding:3px 9px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary)}
+.tag.purple{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC}
+.tag.teal{background:#E1F5EE;color:#085041;border-color:#5DCAA5}
+.tag.amber{background:#FAEEDA;color:#633806;border-color:#EF9F27}
+.tag.coral{background:#FAECE7;color:#712B13;border-color:#F0997B}
+.tag.blue{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
+.tag.pink{background:#FBEAF0;color:#4B1528;border-color:#ED93B1}
+.tag.gray{background:#F1EFE8;color:#444441;border-color:#B4B2A9}
+.code{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary);line-height:1.7;white-space:pre;overflow-x:auto}
+.tip{font-size:12px;color:var(--color-text-secondary);padding:8px 10px;background:var(--color-background-primary);border-left:2px solid #7F77DD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;margin-top:6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:2px 8px;border-radius:100px;background:var(--color-background-info);color:var(--color-text-info);border:0.5px solid var(--color-border-info)}
+</style>
+
+<div class="root">
+<h2 class="sr-only">LLD & OOD Framework — 6 System Design Problems</h2>
+
+<div class="tabs">
+  <button class="tab active" onclick="showPanel('parking')">Parking Lot</button>
+  <button class="tab" onclick="showPanel('lru')">LRU Cache</button>
+  <button class="tab" onclick="showPanel('ratelimiter')">Rate Limiter</button>
+  <button class="tab" onclick="showPanel('meeting')">Meeting Room</button>
+  <button class="tab" onclick="showPanel('elevator')">Elevator System</button>
+  <button class="tab" onclick="showPanel('scheduler')">Task Scheduler</button>
+</div>
+
+<div id="parking" class="panel active"></div>
+<div id="lru" class="panel"></div>
+<div id="ratelimiter" class="panel"></div>
+<div id="meeting" class="panel"></div>
+<div id="elevator" class="panel"></div>
+<div id="scheduler" class="panel"></div>
+</div>
+
+<script>
+const DATA = {
+parking:{
+  title:"Parking Lot",
+  steps:[
+    {
+      num:"01",label:"Setup",title:"Clarify requirements",cls:"s1",
+      actors:["Admin","Customer","System (gate controller)"],
+      functional:["Park / unpark a vehicle","Multiple vehicle types (bike, car, truck)","Multiple levels","Ticket generation on entry","Calculate fee on exit","Display available spots"],
+      nonfunctional:["Thread-safe spot allocation","High read (available spots), low write","Single building, not distributed"],
+      scale:"Single machine. Concurrency matters — two cars entering simultaneously.",
+      tip:"Ask: Do different vehicle sizes take multiple spots? Is pricing time-based or flat?"
+    },
+    {
+      num:"02",label:"Entities",title:"Define entities",cls:"s2",
+      nouns:["ParkingLot","ParkingFloor","ParkingSpot","Vehicle","Car / Bike / Truck","Ticket","Payment","Gate (Entry/Exit)"],
+      enums:["SpotType: SMALL, MEDIUM, LARGE","SpotStatus: FREE, OCCUPIED","VehicleType: BIKE, CAR, TRUCK","PaymentStatus: PENDING, PAID"],
+      tip:"Map VehicleType → SpotType: Bike→SMALL, Car→MEDIUM, Truck→LARGE"
+    },
+    {
+      num:"03",label:"APIs",title:"Define APIs / behaviors",cls:"s3",
+      apis:["Ticket park(Vehicle v)","double calculateFee(Ticket t)","boolean unpark(Ticket t)","int getAvailableSpots(SpotType type)","List<ParkingSpot> getFreeSpotsOnFloor(int floor)"],
+      tip:"park() returns a Ticket (not void). Always model the 'what do I get back?' for real use."
+    },
+    {
+      num:"04",label:"Architecture",title:"Establish relationships",cls:"s4",
+      relations:[
+        "ParkingLot HAS-A List<ParkingFloor> → Composition",
+        "ParkingFloor HAS-A List<ParkingSpot> → Composition",
+        "ParkingSpot HAS-A Vehicle (nullable) → Association",
+        "Car / Bike / Truck IS-A Vehicle → Inheritance",
+        "Ticket HAS-A ParkingSpot + timestamps → Composition"
+      ],
+      cardinality:"ParkingLot 1→N ParkingFloor 1→N ParkingSpot",
+      tip:"Prefer Composition. ParkingLot owns Floors; destroy the lot, floors go too."
+    },
+    {
+      num:"05",label:"Patterns",title:"Apply design patterns",cls:"s5",
+      patterns:[
+        {name:"Singleton",use:"ParkingLot — only one instance"},
+        {name:"Factory",use:"VehicleFactory.create(type) → Vehicle"},
+        {name:"Strategy",use:"PricingStrategy: HourlyPricing, FlatPricing"},
+        {name:"Observer",use:"DisplayBoard subscribes to SpotStatus changes"}
+      ],
+      tip:"Strategy for pricing = easy A/B testing and weekend rates. Don't Singleton everything."
+    },
+    {
+      num:"06",label:"Code",title:"Code & concurrency",cls:"s6",
+      concurrency:["synchronized on ParkingSpot.assign()","ReentrantLock per floor for spot allocation","AtomicInteger for available spot count per type"],
+      code:`class ParkingSpot {
+  private SpotType type;
+  private Vehicle vehicle;
+  private final Lock lock = new ReentrantLock();
+
+  public synchronized boolean assign(Vehicle v) {
+    if (vehicle != null) return false;
+    this.vehicle = v;
+    return true;
+  }
+  public synchronized void release() {
+    this.vehicle = null;
+  }
+}
+
+// Strategy pattern for pricing
+interface PricingStrategy {
+  double calculate(Ticket ticket);
+}
+class HourlyPricing implements PricingStrategy {
+  public double calculate(Ticket t) {
+    long hours = ChronoUnit.HOURS.between(
+      t.getEntryTime(), LocalDateTime.now());
+    return hours * t.getSpot().getRate();
+  }
+}`,
+      tip:"Mention synchronized on assign() + release(). Two threads assigning same spot is the key race condition."
+    }
+  ]
+},
+lru:{
+  title:"LRU Cache",
+  steps:[
+    {
+      num:"01",label:"Setup",title:"Clarify requirements",cls:"s1",
+      actors:["Client application","Cache system"],
+      functional:["get(key) → value or -1","put(key, value) with capacity constraint","Evict least recently used on overflow","O(1) get and put"],
+      nonfunctional:["Thread-safe for concurrent reads/writes","In-memory only (single machine)","Fixed capacity"],
+      scale:"Single machine, in-process cache. Can become distributed (Redis) but start simple.",
+      tip:"Ask: What is the capacity? Do we need TTL (time-to-live) or just LRU eviction?"
+    },
+    {
+      num:"02",label:"Entities",title:"Define entities",cls:"s2",
+      nouns:["LRUCache","Node (doubly linked list)","HashMap<key, Node>","Dummy head / tail sentinels"],
+      enums:["No enums needed — key insight is the data structure choice"],
+      tip:"The insight: HashMap for O(1) lookup + DoublyLinkedList for O(1) move-to-front and eviction."
+    },
+    {
+      num:"03",label:"APIs",title:"Define APIs / behaviors",cls:"s3",
+      apis:["int get(int key)  // -1 if absent","void put(int key, int value)","private void moveToFront(Node n)","private void evictLRU()","private void addToFront(Node n)"],
+      tip:"Keep internal helpers private. The public contract is just get() and put()."
+    },
+    {
+      num:"04",label:"Architecture",title:"Establish relationships",cls:"s4",
+      relations:[
+        "LRUCache HAS-A HashMap<Integer,Node> → Composition",
+        "LRUCache HAS-A DoublyLinkedList (via head/tail) → Composition",
+        "Node HAS-A key + value + prev + next → Composition",
+        "head ↔ most-recent, tail ↔ least-recent (evict from tail)"
+      ],
+      cardinality:"Cache 1→N Nodes (bounded by capacity)",
+      tip:"Sentinel head/tail nodes eliminate null checks on edge cases (empty list, single element)."
+    },
+    {
+      num:"05",label:"Patterns",title:"Apply design patterns",cls:"s5",
+      patterns:[
+        {name:"None forced",use:"Pure data structure design — resist over-engineering"},
+        {name:"Template Method",use:"BaseCache with abstract evict() → LRUCache, LFUCache"},
+        {name:"Decorator",use:"LoggingCache wraps LRUCache for observability"},
+        {name:"Strategy (advanced)",use:"EvictionStrategy — swap LRU ↔ LFU ↔ MRU"}
+      ],
+      tip:"If asked to extend to LFU later, the Strategy pattern on eviction makes it clean."
+    },
+    {
+      num:"06",label:"Code",title:"Code & concurrency",cls:"s6",
+      concurrency:["ReadWriteLock: multiple readers, exclusive writer","Or use ConcurrentHashMap + synchronized linked list ops","Java: LinkedHashMap(cap, 0.75f, true) as shortcut"],
+      code:`class LRUCache {
+  private final int capacity;
+  private final Map<Integer, Node> map;
+  private final Node head, tail; // sentinels
+  private final ReadWriteLock lock = new ReentrantReadWriteLock();
+
+  public int get(int key) {
+    lock.readLock().lock();
+    try {
+      if (!map.containsKey(key)) return -1;
+      Node n = map.get(key);
+      moveToFront(n);   // upgrade to write lock in real impl
+      return n.val;
+    } finally { lock.readLock().unlock(); }
+  }
+
+  public void put(int key, int value) {
+    lock.writeLock().lock();
+    try {
+      if (map.containsKey(key)) {
+        map.get(key).val = value;
+        moveToFront(map.get(key));
+      } else {
+        if (map.size() == capacity) evictLRU();
+        Node n = new Node(key, value);
+        addToFront(n);
+        map.put(key, n);
+      }
+    } finally { lock.writeLock().unlock(); }
+  }
+}`,
+      tip:"Mention ReadWriteLock — reads don't block each other, only writes are exclusive."
+    }
+  ]
+},
+ratelimiter:{
+  title:"Rate Limiter",
+  steps:[
+    {
+      num:"01",label:"Setup",title:"Clarify requirements",cls:"s1",
+      actors:["API client","Rate Limiter middleware","Backend service"],
+      functional:["Allow N requests per user per time window","Block / throttle excess requests","Support per-user and global limits","Return 429 Too Many Requests on exceed"],
+      nonfunctional:["Low latency (<5ms overhead)","Thread-safe counter updates","Distributed or single node?"],
+      scale:"Critical question: single server or distributed? Distributed needs Redis atomic ops.",
+      tip:"Ask which algorithm: Token Bucket (bursty ok), Sliding Window (strict), Fixed Window (simple)?"
+    },
+    {
+      num:"02",label:"Entities",title:"Define entities",cls:"s2",
+      nouns:["RateLimiter (interface)","TokenBucketLimiter","SlidingWindowLimiter","FixedWindowLimiter","RateLimitRule (userId, limit, windowSec)","RateLimitResult (allowed, remainingTokens, retryAfter)"],
+      enums:["Algorithm: TOKEN_BUCKET, SLIDING_WINDOW, FIXED_WINDOW","LimitScope: PER_USER, PER_IP, GLOBAL"],
+      tip:"Model RateLimitResult as a value object — callers need retry-after, not just true/false."
+    },
+    {
+      num:"03",label:"APIs",title:"Define APIs / behaviors",cls:"s3",
+      apis:["RateLimitResult tryAcquire(String userId)","boolean isAllowed(String userId)","void reset(String userId)","RateLimitRule getRule(String userId)","int getRemainingTokens(String userId)"],
+      tip:"tryAcquire() is richer than isAllowed() — returns remaining tokens and retry-after time."
+    },
+    {
+      num:"04",label:"Architecture",title:"Establish relationships",cls:"s4",
+      relations:[
+        "RateLimiter is an interface → Strategy pattern",
+        "TokenBucketLimiter HAS-A Map<userId, TokenBucket>",
+        "TokenBucket HAS-A tokens (double) + lastRefillTime",
+        "SlidingWindowLimiter HAS-A Map<userId, Deque<Long>> (timestamps)",
+        "RateLimiterFactory creates the right impl → Factory"
+      ],
+      cardinality:"Limiter 1→N Buckets/Windows (one per user)",
+      tip:"Token Bucket: refill tokens at rate r/sec, consume 1 per request. Supports bursting."
+    },
+    {
+      num:"05",label:"Patterns",title:"Apply design patterns",cls:"s5",
+      patterns:[
+        {name:"Strategy",use:"RateLimiter interface → swap algorithms without changing callers"},
+        {name:"Factory",use:"RateLimiterFactory.create(Algorithm) → correct impl"},
+        {name:"Decorator",use:"LoggingRateLimiter wraps any impl for metrics"},
+        {name:"Singleton",use:"One limiter instance per service (use carefully)"}
+      ],
+      tip:"Strategy is the star here. Mention 'we can swap Token Bucket → Sliding Window at config time.'"
+    },
+    {
+      num:"06",label:"Code",title:"Code & concurrency",cls:"s6",
+      concurrency:["synchronized on per-user bucket (fine-grained locks)","AtomicReference for lock-free token updates","Distributed: Redis EVAL (Lua script) for atomic check-and-decrement"],
+      code:`interface RateLimiter {
+  RateLimitResult tryAcquire(String userId);
+}
+
+class TokenBucketLimiter implements RateLimiter {
+  private final double refillRate;    // tokens/sec
+  private final double capacity;
+  private final Map<String, TokenBucket> buckets
+    = new ConcurrentHashMap<>();
+
+  public RateLimitResult tryAcquire(String userId) {
+    TokenBucket bucket = buckets.computeIfAbsent(
+      userId, k -> new TokenBucket(capacity));
+    synchronized (bucket) {
+      bucket.refill(refillRate);
+      if (bucket.tokens >= 1) {
+        bucket.tokens--;
+        return new RateLimitResult(true, (int)bucket.tokens, 0);
+      }
+      long retryAfter = (long)((1 - bucket.tokens) / refillRate * 1000);
+      return new RateLimitResult(false, 0, retryAfter);
+    }
+  }
+}`,
+      tip:"Synchronized on the bucket object (not the method) = fine-grained locks. One user's request doesn't block another's."
+    }
+  ]
+},
+meeting:{
+  title:"Meeting Room Booking",
+  steps:[
+    {
+      num:"01",label:"Setup",title:"Clarify requirements",cls:"s1",
+      actors:["Employee","Admin","Calendar system"],
+      functional:["Book a room for a time slot","Check room availability","Cancel a booking","List available rooms by capacity/date","Prevent double booking"],
+      nonfunctional:["Concurrent booking attempts must be safe","Notification on booking confirmation","Single building"],
+      scale:"Single building, potentially hundreds of concurrent booking requests.",
+      tip:"Ask: Can rooms be partially booked (e.g., just a projector)? Recurring meetings?"
+    },
+    {
+      num:"02",label:"Entities",title:"Define entities",cls:"s2",
+      nouns:["MeetingRoomSystem","MeetingRoom","Booking","TimeSlot","Employee","Notification"],
+      enums:["BookingStatus: CONFIRMED, CANCELLED, PENDING","RoomAmenity: PROJECTOR, WHITEBOARD, VIDEO_CONF","RoomStatus: AVAILABLE, BOOKED, MAINTENANCE"],
+      tip:"TimeSlot as a value object (start + end) makes overlap checks clean and reusable."
+    },
+    {
+      num:"03",label:"APIs",title:"Define APIs / behaviors",cls:"s3",
+      apis:["Booking bookRoom(int roomId, TimeSlot slot, Employee e)","boolean cancelBooking(String bookingId)","List<MeetingRoom> findAvailable(TimeSlot slot, int capacity)","List<Booking> getBookingsByEmployee(Employee e)","boolean hasConflict(int roomId, TimeSlot slot)"],
+      tip:"findAvailable() filters BOTH by capacity AND no conflict in that slot — combine the checks."
+    },
+    {
+      num:"04",label:"Architecture",title:"Establish relationships",cls:"s4",
+      relations:[
+        "MeetingRoomSystem HAS-A List<MeetingRoom> → Composition",
+        "MeetingRoom HAS-A List<Booking> → Composition",
+        "Booking HAS-A TimeSlot + MeetingRoom + Employee → Composition",
+        "TimeSlot IS-A value object (immutable, overlap() method)",
+        "Employee USES Booking → Association"
+      ],
+      cardinality:"MeetingRoom 1→N Bookings; Employee 1→N Bookings",
+      tip:"Put overlap() logic in TimeSlot: slot1.overlaps(slot2) → clean and testable."
+    },
+    {
+      num:"05",label:"Patterns",title:"Apply design patterns",cls:"s5",
+      patterns:[
+        {name:"Observer",use:"NotificationService subscribes to BookingEvent (CREATED, CANCELLED)"},
+        {name:"Command",use:"BookRoomCommand / CancelCommand — supports undo/audit log"},
+        {name:"Repository",use:"BookingRepository abstracts storage (DB or in-memory)"},
+        {name:"Builder",use:"BookingBuilder for optional fields (title, attendees, amenities)"}
+      ],
+      tip:"Observer for notifications is natural. Mention 'Command pattern enables audit trail' — interviewers love that."
+    },
+    {
+      num:"06",label:"Code",title:"Code & concurrency",cls:"s6",
+      concurrency:["ReentrantLock per room (not global lock)","Double-check after acquiring lock","Use database transactions in prod (SELECT FOR UPDATE)"],
+      code:`class MeetingRoom {
+  private final int id;
+  private final List<Booking> bookings = new ArrayList<>();
+  private final ReentrantLock lock = new ReentrantLock();
+
+  public Booking book(TimeSlot slot, Employee e) {
+    lock.lock();
+    try {
+      if (hasConflict(slot))
+        throw new RoomUnavailableException(id, slot);
+      Booking b = new Booking(UUID.randomUUID().toString(),
+                              this, slot, e);
+      bookings.add(b);
+      return b;
+    } finally { lock.lock(); }  // always release
+  }
+
+  private boolean hasConflict(TimeSlot newSlot) {
+    return bookings.stream()
+      .filter(b -> b.getStatus() == CONFIRMED)
+      .anyMatch(b -> b.getSlot().overlaps(newSlot));
+  }
+}
+
+// TimeSlot value object
+record TimeSlot(LocalDateTime start, LocalDateTime end) {
+  public boolean overlaps(TimeSlot other) {
+    return start.isBefore(other.end) && end.isAfter(other.start);
+  }
+}`,
+      tip:"Lock per room (not global) = concurrent bookings in different rooms don't block each other."
+    }
+  ]
+},
+elevator:{
+  title:"Elevator System",
+  steps:[
+    {
+      num:"01",label:"Setup",title:"Clarify requirements",cls:"s1",
+      actors:["Passenger","Elevator controller","Building system"],
+      functional:["Request elevator from floor (external button: UP/DOWN)","Select destination floor (internal panel)","Multiple elevators in one building","Open/close doors","Emergency stop"],
+      nonfunctional:["Minimize wait time (scheduling algorithm)","Concurrent requests from multiple floors","Thread-safe state transitions"],
+      scale:"Single building, multiple elevators. Controller dispatches optimally.",
+      tip:"Ask: How many elevators? Any priority floors (emergency, VIP)? Capacity constraints?"
+    },
+    {
+      num:"02",label:"Entities",title:"Define entities",cls:"s2",
+      nouns:["ElevatorSystem / Controller","Elevator","Floor","Request (ExternalRequest, InternalRequest)","Door","Display"],
+      enums:["Direction: UP, DOWN, IDLE","DoorState: OPEN, CLOSED","ElevatorState: MOVING, IDLE, MAINTENANCE","RequestType: EXTERNAL (hall button), INTERNAL (car button)"],
+      tip:"Separate ExternalRequest (floor + direction) from InternalRequest (destination) — different scheduling logic."
+    },
+    {
+      num:"03",label:"APIs",title:"Define APIs / behaviors",cls:"s3",
+      apis:["void requestElevator(int floor, Direction dir)","void selectFloor(int elevatorId, int floor)","int dispatchElevator(Request r)","ElevatorState getState(int elevatorId)","void emergencyStop(int elevatorId)"],
+      tip:"dispatchElevator() returns the elevator ID chosen. The scheduling algorithm lives here."
+    },
+    {
+      num:"04",label:"Architecture",title:"Establish relationships",cls:"s4",
+      relations:[
+        "ElevatorController HAS-A List<Elevator> → Composition",
+        "Elevator HAS-A Door + Display + RequestQueue → Composition",
+        "ExternalRequest / InternalRequest IS-A Request → Inheritance",
+        "ElevatorController USES-A SchedulingStrategy → Association",
+        "Elevator HAS-A current floor + direction + state"
+      ],
+      cardinality:"Controller 1→N Elevators; Elevator 1→N PendingRequests",
+      tip:"Controller is the brain. Elevator is just a state machine. Keep them separate."
+    },
+    {
+      num:"05",label:"Patterns",title:"Apply design patterns",cls:"s5",
+      patterns:[
+        {name:"Strategy",use:"SchedulingStrategy: FCFS, SCAN (look algorithm), SSTF"},
+        {name:"State",use:"Elevator state machine: IDLE→MOVING→DOOR_OPEN→IDLE"},
+        {name:"Observer",use:"Display/Floor indicators observe Elevator state changes"},
+        {name:"Singleton",use:"ElevatorController — one controller per building"}
+      ],
+      tip:"SCAN algorithm (like disk scheduling): service all requests in one direction before reversing. Say this."
+    },
+    {
+      num:"06",label:"Code",title:"Code & concurrency",cls:"s6",
+      concurrency:["Synchronized request queue per elevator","Main controller loop in dedicated thread","BlockingPriorityQueue for requests sorted by optimal floor order"],
+      code:`// State pattern for Elevator
+interface ElevatorState {
+  void handleRequest(Elevator e, int targetFloor);
+  void openDoor(Elevator e);
+}
+
+class IdleState implements ElevatorState {
+  public void handleRequest(Elevator e, int floor) {
+    e.setDirection(floor > e.getCurrentFloor() ? UP : DOWN);
+    e.setState(new MovingState());
+    e.addDestination(floor);
+  }
+}
+
+// SCAN scheduling in controller
+class ScanScheduler implements SchedulingStrategy {
+  public Elevator dispatch(List<Elevator> elevators, Request r) {
+    return elevators.stream()
+      .filter(e -> e.isMovingToward(r.getFloor()))
+      .min(Comparator.comparingInt(
+        e -> Math.abs(e.getCurrentFloor() - r.getFloor())))
+      .orElse(findIdleOrLeastLoaded(elevators));
+  }
+}`,
+      tip:"Mention the SCAN/LOOK algorithm. It's the elevator scheduling analog of disk I/O scheduling."
+    }
+  ]
+},
+scheduler:{
+  title:"Task Scheduler",
+  steps:[
+    {
+      num:"01",label:"Setup",title:"Clarify requirements",cls:"s1",
+      actors:["Client / Job submitter","Scheduler","Worker threads","Job store"],
+      functional:["Submit task with priority / delay","Execute tasks at scheduled time","Cron-like recurring tasks","Cancel a pending task","Task retry on failure"],
+      nonfunctional:["Thread-safe priority queue","Bounded worker thread pool","Persist tasks across restarts (optional)"],
+      scale:"Single JVM (like ScheduledExecutorService). Distributed = separate problem (Quartz, Airflow).",
+      tip:"Ask: One-time vs recurring? Priority-based or FIFO? Max concurrent tasks (thread pool size)?"
+    },
+    {
+      num:"02",label:"Entities",title:"Define entities",cls:"s2",
+      nouns:["TaskScheduler","Task / Job","WorkerThread / ExecutorService","PriorityQueue<ScheduledTask>","TaskResult","RetryPolicy"],
+      enums:["TaskStatus: PENDING, RUNNING, COMPLETED, FAILED, CANCELLED","TaskPriority: LOW, MEDIUM, HIGH, CRITICAL","RecurrenceType: ONCE, FIXED_RATE, FIXED_DELAY, CRON"],
+      tip:"ScheduledTask wraps Task + scheduledTime + priority — this is what goes in the priority queue."
+    },
+    {
+      num:"03",label:"APIs",title:"Define APIs / behaviors",cls:"s3",
+      apis:["String schedule(Task t, long delayMs)","String scheduleRecurring(Task t, long periodMs)","boolean cancel(String taskId)","TaskStatus getStatus(String taskId)","void shutdown()"],
+      tip:"Return a taskId from schedule() — clients need a handle to cancel or query status."
+    },
+    {
+      num:"04",label:"Architecture",title:"Establish relationships",cls:"s4",
+      relations:[
+        "TaskScheduler HAS-A PriorityBlockingQueue<ScheduledTask>",
+        "TaskScheduler HAS-A ThreadPoolExecutor (worker pool)",
+        "ScheduledTask HAS-A Task + scheduledTime + RetryPolicy",
+        "Task IS-A Callable<TaskResult> or Runnable",
+        "Scheduler USES-A dispatcher thread (polls the queue)"
+      ],
+      cardinality:"Scheduler 1→N ScheduledTasks; ThreadPool 1→N WorkerThreads",
+      tip:"The dispatcher thread polls the queue for tasks whose time ≤ now, then submits to pool."
+    },
+    {
+      num:"05",label:"Patterns",title:"Apply design patterns",cls:"s5",
+      patterns:[
+        {name:"Strategy",use:"RetryPolicy: NoRetry, FixedRetry, ExponentialBackoff"},
+        {name:"Template Method",use:"AbstractTask with execute() + onSuccess() + onFailure()"},
+        {name:"Observer",use:"TaskEventListener notified on COMPLETED / FAILED"},
+        {name:"Builder",use:"TaskBuilder for optional fields (delay, priority, retryPolicy)"}
+      ],
+      tip:"ExponentialBackoff via Strategy is a real-world pattern — mention 'base * 2^attempt' formula."
+    },
+    {
+      num:"06",label:"Code",title:"Code & concurrency",cls:"s6",
+      concurrency:["PriorityBlockingQueue — thread-safe, blocks when empty","ThreadPoolExecutor with bounded queue + rejection policy","ReentrantLock for task cancellation (ConcurrentHashMap<id, Future>)"],
+      code:`class TaskScheduler {
+  private final PriorityBlockingQueue<ScheduledTask> queue
+    = new PriorityBlockingQueue<>(16, Comparator
+        .comparingLong(ScheduledTask::getScheduledTime)
+        .thenComparing(ScheduledTask::getPriority));
+  private final ExecutorService pool;
+  private final Map<String, Future<?>> futures = new ConcurrentHashMap<>();
+  private final ScheduledExecutorService dispatcher
+    = Executors.newSingleThreadScheduledExecutor();
+
+  public String schedule(Task task, long delayMs) {
+    ScheduledTask st = new ScheduledTask(task,
+        System.currentTimeMillis() + delayMs);
+    queue.offer(st);
+    return st.getId();
+  }
+
+  private void dispatchLoop() {
+    while (!Thread.currentThread().isInterrupted()) {
+      ScheduledTask st = queue.peek();
+      if (st != null && st.getScheduledTime() <= System.currentTimeMillis()) {
+        queue.poll();
+        Future<?> f = pool.submit(st.getTask());
+        futures.put(st.getId(), f);
+      } else {
+        LockSupport.parkNanos(1_000_000); // 1ms sleep
+      }
+    }
+  }
+}`,
+      tip:"PriorityBlockingQueue sorted by (scheduledTime, priority). Dispatcher thread parks 1ms when nothing is due."
+    }
+  ]
+}
+};
+
+function buildStep(s, idx){
+  const open = idx===0;
+  let html=`<div class="step ${s.cls}${open?' open':''}">
+  <div class="step-header" onclick="toggleStep(this)">
+    <div class="step-num">${s.num}</div>
+    <div>
+      <div class="step-title">${s.title}</div>
+    </div>
+    <span class="step-label">${s.label}</span>
+    <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+  </div>
+  <div class="step-body">`;
+
+  if(s.actors){
+    html+=`<div class="section"><div class="sec-title">Actors</div><div class="tags">`;
+    s.actors.forEach(a=>html+=`<span class="tag purple">${a}</span>`);
+    html+=`</div>`;
+    html+=`<div class="sec-title" style="margin-top:8px">Functional requirements</div><div class="tags">`;
+    s.functional.forEach(f=>html+=`<span class="tag teal">${f}</span>`);
+    html+=`</div>`;
+    html+=`<div class="sec-title" style="margin-top:8px">Non-functional</div><div class="tags">`;
+    s.nonfunctional.forEach(f=>html+=`<span class="tag gray">${f}</span>`);
+    html+=`</div>`;
+    html+=`<div class="sec-title" style="margin-top:8px">Scale</div><span style="font-size:13px;color:var(--color-text-primary)">${s.scale}</span></div>`;
+  }
+  if(s.nouns){
+    html+=`<div class="section"><div class="sec-title">Core nouns (entities)</div><div class="tags">`;
+    s.nouns.forEach(n=>html+=`<span class="tag blue">${n}</span>`);
+    html+=`</div>`;
+    html+=`<div class="sec-title" style="margin-top:8px">Enums</div><div class="tags">`;
+    s.enums.forEach(e=>html+=`<span class="tag amber">${e}</span>`);
+    html+=`</div></div>`;
+  }
+  if(s.apis){
+    html+=`<div class="section"><div class="sec-title">Entry points</div>`;
+    html+=`<div class="code">${s.apis.join('\n')}</div></div>`;
+  }
+  if(s.relations){
+    html+=`<div class="section"><div class="sec-title">Relationships</div><div class="tags" style="flex-direction:column;gap:4px">`;
+    s.relations.forEach(r=>{
+      const parts=r.split(' → ');
+      const tag=parts[1]||'';
+      const color=tag==='Composition'?'coral':tag==='Inheritance'?'purple':tag==='Association'?'teal':'gray';
+      html+=`<div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="flex:1;color:var(--color-text-primary)">${parts[0]}</span><span class="tag ${color}" style="flex-shrink:0">${tag}</span></div>`;
+    });
+    html+=`</div>`;
+    if(s.cardinality) html+=`<div style="font-size:12px;color:var(--color-text-secondary);margin-top:8px">${s.cardinality}</div>`;
+    html+=`</div>`;
+  }
+  if(s.patterns){
+    html+=`<div class="section"><div class="sec-title">Design patterns</div>`;
+    s.patterns.forEach(p=>{
+      html+=`<div style="display:flex;align-items:baseline;gap:8px;padding:4px 0;font-size:12px;border-bottom:0.5px solid var(--color-border-tertiary)"><span style="font-weight:500;color:var(--color-text-primary);min-width:110px">${p.name}</span><span style="color:var(--color-text-secondary)">${p.use}</span></div>`;
+    });
+    html+=`</div>`;
+  }
+  if(s.concurrency){
+    html+=`<div class="section"><div class="sec-title">Thread safety</div><div class="tags">`;
+    s.concurrency.forEach(c=>html+=`<span class="tag pink">${c}</span>`);
+    html+=`</div></div>`;
+  }
+  if(s.code){
+    html+=`<div class="section"><div class="sec-title">Sample implementation</div><div class="code">${escHtml(s.code)}</div></div>`;
+  }
+  html+=`<div class="tip">💡 ${s.tip}</div>`;
+  html+=`</div></div>`;
+  return html;
+}
+
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function buildPanel(key){
+  const d=DATA[key];
+  let html=`<div class="steps">`;
+  d.steps.forEach((s,i)=>html+=buildStep(s,i));
+  html+=`</div>`;
+  return html;
+}
+
+function toggleStep(header){
+  const step=header.parentElement;
+  step.classList.toggle('open');
+}
+
+function showPanel(key){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const panel=document.getElementById(key);
+  if(!panel.innerHTML) panel.innerHTML=buildPanel(key);
+  panel.classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Init first panel
+document.getElementById('parking').innerHTML=buildPanel('parking');
+</script>

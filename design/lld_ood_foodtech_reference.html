@@ -1,0 +1,759 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  .root {
+    padding: 1.5rem 0
+  }
+
+  .tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem
+  }
+
+  .tab {
+    padding: 6px 14px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: transparent;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all .15s
+  }
+
+  .tab:hover {
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary)
+  }
+
+  .tab.active {
+    background: var(--color-background-tertiary);
+    border-color: var(--color-border-primary);
+    color: var(--color-text-primary);
+    font-weight: 500
+  }
+
+  .panel {
+    display: none
+  }
+
+  .panel.active {
+    display: block
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px
+  }
+
+  .step {
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--color-background-primary)
+  }
+
+  .step-header:hover {
+    background: var(--color-background-secondary)
+  }
+
+  .snum {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0
+  }
+
+  .s1 .snum {
+    background: #EEEDFE;
+    color: #3C3489
+  }
+
+  .s2 .snum {
+    background: #E1F5EE;
+    color: #085041
+  }
+
+  .s3 .snum {
+    background: #FAEEDA;
+    color: #633806
+  }
+
+  .s4 .snum {
+    background: #FAECE7;
+    color: #712B13
+  }
+
+  .s5 .snum {
+    background: #E6F1FB;
+    color: #0C447C
+  }
+
+  .s6 .snum {
+    background: #FBEAF0;
+    color: #4B1528
+  }
+
+  .stitle {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    flex: 1
+  }
+
+  .slabel {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    flex-shrink: 0
+  }
+
+  .chev {
+    font-size: 14px;
+    color: var(--color-text-tertiary);
+    transition: transform .2s
+  }
+
+  .step.open .chev {
+    transform: rotate(180deg)
+  }
+
+  .sbody {
+    display: none;
+    padding: 12px 14px;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-secondary)
+  }
+
+  .step.open .sbody {
+    display: block
+  }
+
+  .sec {
+    margin-bottom: 14px
+  }
+
+  .sec:last-child {
+    margin-bottom: 0
+  }
+
+  .sectitle {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 6px
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 4px
+  }
+
+  .tag {
+    font-size: 12px;
+    padding: 3px 9px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-tertiary)
+  }
+
+  .tp {
+    background: #EEEDFE;
+    color: #3C3489;
+    border-color: #AFA9EC
+  }
+
+  .tt {
+    background: #E1F5EE;
+    color: #085041;
+    border-color: #5DCAA5
+  }
+
+  .ta {
+    background: #FAEEDA;
+    color: #633806;
+    border-color: #EF9F27
+  }
+
+  .tc {
+    background: #FAECE7;
+    color: #712B13;
+    border-color: #F0997B
+  }
+
+  .tb {
+    background: #E6F1FB;
+    color: #0C447C;
+    border-color: #85B7EB
+  }
+
+  .tk {
+    background: #FBEAF0;
+    color: #4B1528;
+    border-color: #ED93B1
+  }
+
+  .tg {
+    background: #F1EFE8;
+    color: #444441;
+    border-color: #B4B2A9
+  }
+
+  .code {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    white-space: pre;
+    overflow-x: auto
+  }
+
+  .tip {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    padding: 8px 10px;
+    background: var(--color-background-primary);
+    border-left: 2px solid #7F77DD;
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+    margin-top: 6px
+  }
+
+  .rel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    padding: 4px 0;
+    border-bottom: 0.5px solid var(--color-border-tertiary)
+  }
+
+  .pat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 12px;
+    border-bottom: 0.5px solid var(--color-border-tertiary)
+  }
+</style>
+
+<div class="root">
+  <h2 class="sr-only">LLD & OOD Framework — 5 System Design Problems (batch 2)</h2>
+
+  <div class="tabs">
+    <button class="tab active" onclick="show('restaurant',event)">Restaurant Ordering</button>
+    <button class="tab" onclick="show('parking',event)">Parking Lot</button>
+    <button class="tab" onclick="show('notification',event)">Notification Service</button>
+    <button class="tab" onclick="show('elevator',event)">Elevator System</button>
+    <button class="tab" onclick="show('carrental',event)">Car Rental</button>
+  </div>
+
+  <div id="restaurant" class="panel active"></div>
+  <div id="parking" class="panel"></div>
+  <div id="notification" class="panel"></div>
+  <div id="elevator" class="panel"></div>
+  <div id="carrental" class="panel"></div>
+</div>
+
+<script>
+  const D = {
+    restaurant: {
+      steps: [
+        {
+          n: "01", l: "Setup", t: "Clarify requirements", c: "s1",
+          actors: ["Customer", "Waiter", "Kitchen", "Admin/Owner"],
+          functional: ["Browse menu by category", "Add items to cart / place order", "Kitchen receives and processes order", "Track order status (PLACED→PREPARING→READY→SERVED)", "Generate bill with tax/discount", "Support dine-in, takeaway, delivery"],
+          nonfunctional: ["Concurrent orders from multiple tables", "Consistent order state transitions", "Single restaurant (not multi-branch)"],
+          scale: "Single restaurant, ~50 concurrent tables. Not distributed.",
+          tip: "Ask: Multiple kitchens? Do items have customization (no onions)? Split bills?"
+        },
+        {
+          n: "02", l: "Entities", t: "Define entities", c: "s2",
+          nouns: ["Restaurant", "Menu", "MenuCategory", "MenuItem", "Order", "OrderItem", "Table", "Bill", "Payment", "Customer", "Chef/Kitchen"],
+          enums: ["OrderStatus: PLACED, CONFIRMED, PREPARING, READY, SERVED, CANCELLED", "PaymentMethod: CASH, CARD, UPI", "ItemStatus: AVAILABLE, OUT_OF_STOCK", "OrderType: DINE_IN, TAKEAWAY, DELIVERY"],
+          tip: "OrderItem wraps MenuItem + quantity + customizations. Never mutate MenuItem directly."
+        },
+        {
+          n: "03", l: "APIs", t: "Define APIs / behaviors", c: "s3",
+          apis: ["Order placeOrder(int tableId, List<OrderItem> items)", "void updateOrderStatus(String orderId, OrderStatus status)", "Bill generateBill(String orderId)", "Payment processPayment(Bill bill, PaymentMethod method)", "List<MenuItem> getMenu(String category)", "void addToOrder(String orderId, OrderItem item)"],
+          tip: "placeOrder() returns an Order object with ID. Kitchen polls or is notified — ask which."
+        },
+        {
+          n: "04", l: "Architecture", t: "Establish relationships", c: "s4",
+          relations: [["Restaurant HAS-A List<Table>, Menu, List<Order>", "Composition"], ["Order HAS-A List<OrderItem> + Table + timestamps", "Composition"], ["OrderItem HAS-A MenuItem + quantity + customization", "Composition"], ["Bill HAS-A Order + tax + discount + total", "Composition"], ["Chef USES Order (observes status changes)", "Association"]],
+          card: "Restaurant 1→N Tables; Table 1→N Orders (history); Order 1→N OrderItems",
+          tip: "Bill is separate from Order — you might reprint a bill or apply discounts post-order."
+        },
+        {
+          n: "05", l: "Patterns", t: "Apply design patterns", c: "s5",
+          patterns: [["Observer", "Kitchen subscribes to OrderStatus PLACED/CONFIRMED events"], ["State", "Order state machine: PLACED→CONFIRMED→PREPARING→READY→SERVED"], ["Strategy", "PricingStrategy: RegularPricing, HappyHourPricing, MemberPricing"], ["Builder", "OrderBuilder for complex orders with customizations and combos"]],
+          tip: "State pattern is the star: Order drives all downstream behavior based on its current state."
+        },
+        {
+          n: "06", l: "Code", t: "Code & concurrency", c: "s6",
+          concurrency: ["Synchronized on Order.addItem() — concurrent waiters on same table", "AtomicReference<OrderStatus> for lock-free state reads", "Kitchen queue: BlockingQueue<Order> — producers (waiters) + consumers (chefs)"],
+          code: `// State pattern for Order lifecycle
+interface OrderState {
+  void confirm(Order o);
+  void startPreparing(Order o);
+  void markReady(Order o);
+}
+
+// Observer pattern: Kitchen listens
+class Kitchen implements OrderObserver {
+  private final BlockingQueue<Order> queue
+    = new LinkedBlockingQueue<>();
+
+  public void onOrderPlaced(Order order) {
+    queue.offer(order);  // non-blocking enqueue
+  }
+
+  public void processOrders() {  // chef thread
+    while (true) {
+      Order o = queue.take();      // blocks until order arrives
+      o.updateStatus(PREPARING);
+      cookOrder(o);
+      o.updateStatus(READY);
+    }
+  }
+}
+
+class Order {
+  private final List<OrderItem> items = new ArrayList<>();
+  private volatile OrderStatus status = PLACED;
+  private final List<OrderObserver> observers = new CopyOnWriteArrayList<>();
+
+  public synchronized void addItem(OrderItem item) {
+    if (status != PLACED && status != CONFIRMED)
+      throw new IllegalStateException("Cannot modify order in " + status);
+    items.add(item);
+  }
+  public void updateStatus(OrderStatus s) {
+    this.status = s;
+    observers.forEach(obs -> obs.onStatusChanged(this, s));
+  }
+}`
+          , tip: "BlockingQueue between waiters (producers) and kitchen (consumers) is the classic producer-consumer. Mention it."
+        }
+      ]
+    },
+
+    parking: {
+      steps: [
+        {
+          n: "01", l: "Setup", t: "Clarify requirements", c: "s1",
+          actors: ["Driver/Customer", "Admin", "Entry Gate", "Exit Gate", "Display Board"],
+          functional: ["Vehicle enters → assign spot → issue ticket", "Vehicle exits → calculate fee → release spot", "Multiple vehicle types (Bike, Car, Truck)", "Multiple floors", "Show available spot count per type"],
+          nonfunctional: ["Concurrent entries: two cars can't get the same spot", "High availability of spot lookup", "Single building, single machine"],
+          scale: "Single building. Concurrency at entry gates is the critical challenge.",
+          tip: "Ask: Flat fee or hourly? Reserved spots? Handicap/EV spots? Max floors?"
+        },
+        {
+          n: "02", l: "Entities", t: "Define entities", c: "s2",
+          nouns: ["ParkingLot", "ParkingFloor", "ParkingSpot", "Vehicle", "Car / Bike / Truck", "Ticket", "Payment", "EntryGate", "ExitGate", "DisplayBoard"],
+          enums: ["SpotType: SMALL, MEDIUM, LARGE", "SpotStatus: FREE, OCCUPIED, RESERVED, MAINTENANCE", "VehicleType: BIKE, CAR, TRUCK", "PaymentStatus: PENDING, COMPLETED"],
+          tip: "Map types: Bike→SMALL, Car→MEDIUM, Truck→LARGE. SpotType != VehicleType by design."
+        },
+        {
+          n: "03", l: "APIs", t: "Define APIs / behaviors", c: "s3",
+          apis: ["Ticket park(Vehicle vehicle)", "Receipt unpark(Ticket ticket)", "ParkingSpot findAvailableSpot(VehicleType type)", "Map<SpotType,Integer> getAvailableCount()", "boolean hasCapacity(VehicleType type)"],
+          tip: "findAvailableSpot() is internal. park() is the public entry point — it calls findAvailableSpot inside."
+        },
+        {
+          n: "04", l: "Architecture", t: "Establish relationships", c: "s4",
+          relations: [["ParkingLot HAS-A List<ParkingFloor>", "Composition"], ["ParkingFloor HAS-A List<ParkingSpot>", "Composition"], ["ParkingSpot HAS-A Vehicle (nullable)", "Association"], ["Ticket HAS-A ParkingSpot + Vehicle + entryTime", "Composition"], ["Car / Bike / Truck IS-A Vehicle", "Inheritance"]],
+          card: "ParkingLot 1→N ParkingFloor 1→N ParkingSpot; ParkingSpot 0..1→1 Vehicle",
+          tip: "ParkingLot is a Singleton — one instance per building. Floors own Spots (Composition = lifecycle tied)."
+        },
+        {
+          n: "05", l: "Patterns", t: "Apply design patterns", c: "s5",
+          patterns: [["Singleton", "ParkingLot.getInstance() — one lot per JVM"], ["Factory", "VehicleFactory.create(type, plate) → right Vehicle subclass"], ["Strategy", "PricingStrategy: HourlyPricing, DailyCapPricing, FlatPricing"], ["Observer", "DisplayBoard observes spot count changes per SpotType"]],
+          tip: "Strategy for pricing = swap weekend/weekday rates at config time without touching core logic."
+        },
+        {
+          n: "06", l: "Code", t: "Code & concurrency", c: "s6",
+          concurrency: ["synchronized on ParkingSpot.assign() — prevents double-assignment", "ReentrantLock per floor — concurrent entries on different floors don't block", "AtomicInteger availableCount per SpotType — O(1) display queries"],
+          code: `class ParkingSpot {
+  private final String id;
+  private final SpotType type;
+  private Vehicle vehicle;
+  private final ReentrantLock lock = new ReentrantLock();
+
+  public boolean assign(Vehicle v) {
+    lock.lock();
+    try {
+      if (vehicle != null) return false;
+      vehicle = v;
+      return true;
+    } finally { lock.unlock(); }
+  }
+  public void release() {
+    lock.lock();
+    try { vehicle = null; }
+    finally { lock.unlock(); }
+  }
+}
+
+// Strategy pattern for pricing
+interface PricingStrategy {
+  double calculate(Ticket ticket);
+}
+class HourlyPricing implements PricingStrategy {
+  private final Map<SpotType, Double> rates;
+  public double calculate(Ticket t) {
+    long hours = Math.max(1, ChronoUnit.HOURS.between(
+      t.getEntryTime(), LocalDateTime.now()));
+    return hours * rates.get(t.getSpot().getType());
+  }
+}`,
+          tip: "Lock per spot (not per floor) = finest granularity. Per-floor lock is acceptable trade-off if spot count is large."
+        }
+      ]
+    },
+
+    notification: {
+      steps: [
+        {
+          n: "01", l: "Setup", t: "Clarify requirements", c: "s1",
+          actors: ["Publisher/Service", "Notification Service", "Channel Handler (Email, SMS, Push)", "User/Subscriber"],
+          functional: ["Send notifications via Email, SMS, Push, In-App", "Subscribe/unsubscribe to event types", "User preferences (which channels per event)", "Retry on failure", "Notification history/log"],
+          nonfunctional: ["Async delivery (non-blocking callers)", "At-least-once delivery", "Channel failures must not block other channels", "Potentially distributed (high volume)"],
+          scale: "Ask: Expected volume? 1K/sec → async queue. 10/sec → synchronous is fine.",
+          tip: "Ask: Real-time or batch? Do users have per-channel preferences? Deduplication needed?"
+        },
+        {
+          n: "02", l: "Entities", t: "Define entities", c: "s2",
+          nouns: ["NotificationService", "Notification", "NotificationChannel (Email, SMS, Push, InApp)", "UserPreference", "NotificationTemplate", "DeliveryLog", "RetryPolicy", "EventType"],
+          enums: ["NotificationType: ORDER_PLACED, PAYMENT_SUCCESS, ALERT, PROMOTION", "ChannelType: EMAIL, SMS, PUSH, IN_APP", "DeliveryStatus: PENDING, SENT, FAILED, RETRYING", "Priority: LOW, MEDIUM, HIGH, CRITICAL"],
+          tip: "NotificationTemplate decouples message content from delivery logic. Templates stored by NotificationType."
+        },
+        {
+          n: "03", l: "APIs", t: "Define APIs / behaviors", c: "s3",
+          apis: ["void send(Notification n)", "void sendBulk(List<Notification> notifications)", "void subscribe(String userId, NotificationType type, ChannelType channel)", "void unsubscribe(String userId, NotificationType type)", "List<DeliveryLog> getHistory(String userId)", "UserPreference getPreferences(String userId)"],
+          tip: "send() is fire-and-forget (async). Callers should not block on notification delivery."
+        },
+        {
+          n: "04", l: "Architecture", t: "Establish relationships", c: "s4",
+          relations: [["NotificationService HAS-A Map<ChannelType, NotificationChannel>", "Composition"], ["NotificationService HAS-A UserPreferenceStore", "Composition"], ["EmailChannel / SMSChannel / PushChannel IS-A NotificationChannel", "Inheritance"], ["NotificationService USES-A MessageQueue (async dispatch)", "Association"], ["Notification HAS-A template + recipient + priority", "Composition"]],
+          card: "NotificationService 1→N Channels; User 1→1 UserPreference; Notification 1→N DeliveryLog entries",
+          tip: "NotificationChannel as interface = add WhatsApp channel later without touching the service."
+        },
+        {
+          n: "05", l: "Patterns", t: "Apply design patterns", c: "s5",
+          patterns: [["Strategy", "NotificationChannel interface — swap Email/SMS/Push without caller changes"], ["Observer", "NotificationService IS the Observer dispatcher: events → subscribers"], ["Chain of Responsibility", "Validation → Enrichment → Rate-limit check → Dispatch pipeline"], ["Template Method", "AbstractChannel.send(): validate() → format() → deliver() → log()"]],
+          tip: "Chain of Responsibility for the delivery pipeline is interview gold — shows you think in middleware layers."
+        },
+        {
+          n: "06", l: "Code", t: "Code & concurrency", c: "s6",
+          concurrency: ["BlockingQueue<Notification> between producers and dispatcher threads", "Thread pool of channel workers (email pool separate from SMS pool)", "Exponential backoff retry via ScheduledExecutorService"],
+          code: `// Strategy: channel is pluggable
+interface NotificationChannel {
+  void send(Notification n) throws DeliveryException;
+  ChannelType getType();
+}
+
+class NotificationService {
+  private final Map<ChannelType, NotificationChannel> channels;
+  private final UserPreferenceStore prefs;
+  private final BlockingQueue<Notification> queue
+    = new LinkedBlockingQueue<>(10_000);
+  private final ExecutorService workers
+    = Executors.newFixedThreadPool(10);
+
+  public void send(Notification n) {
+    queue.offer(n);  // non-blocking; caller returns immediately
+  }
+
+  private void dispatchLoop() {  // runs in background thread
+    while (true) {
+      Notification n = queue.take();
+      UserPreference p = prefs.get(n.getUserId());
+      p.getChannels(n.getType()).forEach(ch ->
+        workers.submit(() -> sendWithRetry(n, channels.get(ch))));
+    }
+  }
+
+  private void sendWithRetry(Notification n, NotificationChannel ch) {
+    int attempt = 0;
+    while (attempt < 3) {
+      try { ch.send(n); return; }
+      catch (DeliveryException e) {
+        long delay = (long)(Math.pow(2, attempt++) * 1000);
+        Thread.sleep(delay);  // exponential backoff
+      }
+    }
+    log.error("Delivery failed after retries: {}", n.getId());
+  }
+}`,
+          tip: "Exponential backoff: delay = 2^attempt * 1000ms → 1s, 2s, 4s. Name the formula in the interview."
+        }
+      ]
+    },
+
+    elevator: {
+      steps: [
+        {
+          n: "01", l: "Setup", t: "Clarify requirements", c: "s1",
+          actors: ["Passenger", "Elevator Controller", "Elevator Car", "Building System"],
+          functional: ["External request: press UP/DOWN on a floor", "Internal request: select destination inside car", "Controller dispatches nearest suitable elevator", "Open/close doors with safety check", "Emergency stop and overload detection"],
+          nonfunctional: ["Minimize average wait time (scheduling)", "Thread-safe state transitions per elevator", "Concurrent requests from multiple floors simultaneously"],
+          scale: "Single building, N elevators (e.g., 4). Not distributed.",
+          tip: "Ask: Any priority floors (emergency, executive)? Weight capacity? Basement floors?"
+        },
+        {
+          n: "02", l: "Entities", t: "Define entities", c: "s2",
+          nouns: ["ElevatorController", "Elevator", "Floor", "ExternalRequest", "InternalRequest", "Door", "Button", "Display"],
+          enums: ["Direction: UP, DOWN, IDLE", "ElevatorState: IDLE, MOVING_UP, MOVING_DOWN, DOOR_OPEN, MAINTENANCE", "DoorState: OPEN, CLOSED, OPENING, CLOSING", "RequestType: EXTERNAL (hall), INTERNAL (car panel)"],
+          tip: "Separate ExternalRequest (floor + direction) from InternalRequest (just destination). Different scheduling weight."
+        },
+        {
+          n: "03", l: "APIs", t: "Define APIs / behaviors", c: "s3",
+          apis: ["void requestElevator(int floor, Direction dir)", "void selectDestination(int elevatorId, int floor)", "int dispatchElevator(ExternalRequest req)", "ElevatorState getState(int elevatorId)", "int getCurrentFloor(int elevatorId)", "void triggerEmergencyStop(int elevatorId)"],
+          tip: "dispatchElevator() is the scheduling algorithm entry point. It returns the elected elevator's ID."
+        },
+        {
+          n: "04", l: "Architecture", t: "Establish relationships", c: "s4",
+          relations: [["ElevatorController HAS-A List<Elevator>", "Composition"], ["ElevatorController HAS-A SchedulingStrategy", "Composition"], ["Elevator HAS-A Door + Display + TreeSet<Integer> destinations", "Composition"], ["ExternalRequest / InternalRequest IS-A Request", "Inheritance"], ["Elevator IS-A state machine (managed by State pattern)", "—"]],
+          card: "Controller 1→N Elevators; Elevator 1→N pending destinations (sorted set)",
+          tip: "TreeSet for destinations = always process in sorted order. Moving up: poll lowest > currentFloor."
+        },
+        {
+          n: "05", l: "Patterns", t: "Apply design patterns", c: "s5",
+          patterns: [["Strategy", "SchedulingStrategy: FCFS, SCAN/LOOK, SSTF (nearest car)"], ["State", "ElevatorState machine: IDLE↔MOVING_UP↔MOVING_DOWN↔DOOR_OPEN"], ["Observer", "Floor display panels and arrival bells observe Elevator position"], ["Singleton", "ElevatorController — one dispatcher per building"]],
+          tip: "SCAN algorithm = service all requests in one direction before reversing. Same as disk I/O scheduling — say that."
+        },
+        {
+          n: "06", l: "Code", t: "Code & concurrency", c: "s6",
+          concurrency: ["Synchronized request queue per elevator (TreeSet + lock)", "Controller runs in dedicated dispatcher thread", "Each Elevator runs its own movement thread (state machine loop)"],
+          code: `// Strategy pattern for scheduling
+interface SchedulingStrategy {
+  Elevator dispatch(List<Elevator> elevators, ExternalRequest req);
+}
+
+class ScanScheduler implements SchedulingStrategy {
+  public Elevator dispatch(List<Elevator> cars, ExternalRequest req) {
+    return cars.stream()
+      .filter(e -> e.isMovingToward(req.getFloor(), req.getDir()))
+      .min(Comparator.comparingInt(
+        e -> Math.abs(e.getCurrentFloor() - req.getFloor())))
+      .orElseGet(() -> cars.stream()
+        .filter(e -> e.getState() == IDLE)
+        .min(Comparator.comparingInt(
+          e -> Math.abs(e.getCurrentFloor() - req.getFloor())))
+        .orElse(leastLoadedCar(cars)));
+  }
+}
+
+// State pattern for Elevator
+class Elevator {
+  private int currentFloor = 0;
+  private Direction direction = IDLE;
+  private final TreeSet<Integer> destinations = new TreeSet<>();
+  private final ReentrantLock lock = new ReentrantLock();
+
+  public synchronized void addDestination(int floor) {
+    destinations.add(floor);
+    if (direction == IDLE) direction =
+      floor > currentFloor ? UP : DOWN;
+  }
+  public boolean isMovingToward(int floor, Direction d) {
+    return direction == d &&
+      ((d == UP && floor > currentFloor) ||
+       (d == DOWN && floor < currentFloor));
+  }
+}`,
+          tip: "TreeSet<Integer> for destinations + SCAN = always the next floor in current direction. Clean and O(log n) insertion."
+        }
+      ]
+    },
+
+    carrental: {
+      steps: [
+        {
+          n: "01", l: "Setup", t: "Clarify requirements", c: "s1",
+          actors: ["Customer", "Admin", "Vehicle Fleet", "Payment Gateway"],
+          functional: ["Search available cars by date range, type, location", "Book a car (reservation)", "Pick up / return a car", "Calculate rental cost (daily rate × days)", "Manage fleet (add/remove vehicles)", "Handle cancellations and late returns"],
+          nonfunctional: ["Concurrent bookings: same car can't be double-booked", "Booking overlaps must be checked atomically", "Single location or multi-branch (clarify)"],
+          scale: "Single-location fleet of ~200 cars. Concurrency at booking is the key challenge.",
+          tip: "Ask: Can customers extend rental? Late fee policy? Do we need insurance / add-on options?"
+        },
+        {
+          n: "02", l: "Entities", t: "Define entities", c: "s2",
+          nouns: ["CarRentalSystem", "Vehicle", "Car/SUV/Truck/Van", "Reservation", "Rental (active)", "Customer", "Location", "Invoice", "Payment"],
+          enums: ["VehicleType: ECONOMY, COMPACT, SUV, LUXURY, VAN", "VehicleStatus: AVAILABLE, RESERVED, RENTED, MAINTENANCE", "ReservationStatus: CONFIRMED, ACTIVE, COMPLETED, CANCELLED", "FuelPolicy: FULL_TO_FULL, PREPAID"],
+          tip: "Reservation = future booking. Rental = active in-progress. They are different lifecycles."
+        },
+        {
+          n: "03", l: "APIs", t: "Define APIs / behaviors", c: "s3",
+          apis: ["List<Vehicle> searchAvailable(VehicleType type, DateRange range)", "Reservation book(String vehicleId, Customer c, DateRange range)", "Rental pickUp(String reservationId)", "Invoice returnVehicle(String rentalId, LocalDate actualReturn)", "boolean cancelReservation(String reservationId)", "double estimateCost(String vehicleId, DateRange range)"],
+          tip: "searchAvailable() must exclude vehicles with overlapping reservations — this is the core query."
+        },
+        {
+          n: "04", l: "Architecture", t: "Establish relationships", c: "s4",
+          relations: [["CarRentalSystem HAS-A List<Vehicle>, List<Reservation>", "Composition"], ["Reservation HAS-A Vehicle + Customer + DateRange", "Composition"], ["Rental HAS-A Reservation + actualPickup + actualReturn", "Composition"], ["Invoice HAS-A Rental + baseCost + extras + lateFee", "Composition"], ["Car / SUV / Truck IS-A Vehicle", "Inheritance"]],
+          card: "Vehicle 1→N Reservations (history); Customer 1→N Reservations; Reservation 1→1 Rental",
+          tip: "DateRange as a value object with overlaps() method — same trick as MeetingRoom TimeSlot."
+        },
+        {
+          n: "05", l: "Patterns", t: "Apply design patterns", c: "s5",
+          patterns: [["Strategy", "PricingStrategy: WeekdayPricing, WeekendPricing, LongTermDiscount"], ["Factory", "VehicleFactory.create(VehicleType) → correct subclass"], ["Observer", "NotificationService notified on CONFIRMED, CANCELLED, late return"], ["Builder", "ReservationBuilder for optional fields: insurance, GPS, child seat"]],
+          tip: "Builder pattern for Reservation is natural — many optional add-ons without telescoping constructors."
+        },
+        {
+          n: "06", l: "Code", t: "Code & concurrency", c: "s6",
+          concurrency: ["ReentrantLock per vehicle for booking — prevents double-booking", "Double-check overlap after acquiring lock (check-then-act)", "In prod: DB-level SELECT FOR UPDATE or optimistic locking"],
+          code: `class Vehicle {
+  private final String id;
+  private final List<Reservation> reservations = new ArrayList<>();
+  private final ReentrantLock lock = new ReentrantLock();
+
+  public Reservation book(Customer c, DateRange range) {
+    lock.lock();
+    try {
+      if (hasOverlap(range))
+        throw new VehicleUnavailableException(id, range);
+      Reservation r = new Reservation(UUID.randomUUID().toString(),
+                                      this, c, range);
+      reservations.add(r);
+      return r;
+    } finally { lock.unlock(); }
+  }
+
+  private boolean hasOverlap(DateRange newRange) {
+    return reservations.stream()
+      .filter(r -> r.getStatus() == CONFIRMED || r.getStatus() == ACTIVE)
+      .anyMatch(r -> r.getDateRange().overlaps(newRange));
+  }
+}
+
+// DateRange value object
+record DateRange(LocalDate start, LocalDate end) {
+  public boolean overlaps(DateRange other) {
+    return start.isBefore(other.end) && end.isAfter(other.start);
+  }
+  public long days() {
+    return ChronoUnit.DAYS.between(start, end);
+  }
+}
+
+// Strategy for pricing
+class LongTermDiscount implements PricingStrategy {
+  public double calculate(Vehicle v, DateRange range) {
+    long days = range.days();
+    double base = v.getDailyRate() * days;
+    return days >= 7 ? base * 0.85 : base;  // 15% off weekly
+  }
+}`,
+          tip: "Lock per vehicle (not system-wide). In a real DB, SELECT FOR UPDATE replaces the in-memory lock — mention both."
+        }
+      ]
+    }
+  };
+
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') }
+
+  function buildStep(s, i) {
+    const open = i === 0;
+    let h = `<div class="step ${s.c}${open ? ' open' : ''}">
+<div class="step-header" onclick="toggleStep(this)">
+  <div class="snum">${s.n}</div>
+  <div class="stitle">${s.t}</div>
+  <span class="slabel">${s.l}</span>
+  <i class="ti ti-chevron-down chev" aria-hidden="true"></i>
+</div>
+<div class="sbody">`;
+
+    if (s.actors) {
+      h += `<div class="sec"><div class="sectitle">Actors</div><div class="tags">`;
+      s.actors.forEach(a => h += `<span class="tag tp">${a}</span>`);
+      h += `</div><div class="sectitle" style="margin-top:8px">Functional</div><div class="tags">`;
+      s.functional.forEach(f => h += `<span class="tag tt">${f}</span>`);
+      h += `</div><div class="sectitle" style="margin-top:8px">Non-functional</div><div class="tags">`;
+      s.nonfunctional.forEach(f => h += `<span class="tag tg">${f}</span>`);
+      h += `</div><div class="sectitle" style="margin-top:8px">Scale</div><span style="font-size:13px;color:var(--color-text-primary)">${s.scale}</span></div>`;
+    }
+    if (s.nouns) {
+      h += `<div class="sec"><div class="sectitle">Core nouns</div><div class="tags">`;
+      s.nouns.forEach(n => h += `<span class="tag tb">${n}</span>`);
+      h += `</div><div class="sectitle" style="margin-top:8px">Enums</div><div class="tags">`;
+      s.enums.forEach(e => h += `<span class="tag ta">${e}</span>`);
+      h += `</div></div>`;
+    }
+    if (s.apis) {
+      h += `<div class="sec"><div class="sectitle">Entry points</div><div class="code">${s.apis.join('\n')}</div></div>`;
+    }
+    if (s.relations) {
+      h += `<div class="sec"><div class="sectitle">Relationships</div>`;
+      s.relations.forEach(r => {
+        const colMap = { Composition: 'tc', Inheritance: 'tp', Association: 'tt', '—': 'tg' };
+        h += `<div class="rel"><span style="flex:1;color:var(--color-text-primary)">${r[0]}</span><span class="tag ${colMap[r[1]] || 'tg'}" style="flex-shrink:0">${r[1]}</span></div>`;
+      });
+      if (s.card) h += `<div style="font-size:12px;color:var(--color-text-secondary);margin-top:8px">${s.card}</div>`;
+      h += `</div>`;
+    }
+    if (s.patterns) {
+      h += `<div class="sec"><div class="sectitle">Design patterns</div>`;
+      s.patterns.forEach(p => {
+        h += `<div class="pat"><span style="font-weight:500;color:var(--color-text-primary);min-width:120px">${p[0]}</span><span style="color:var(--color-text-secondary)">${p[1]}</span></div>`;
+      });
+      h += `</div>`;
+    }
+    if (s.concurrency) {
+      h += `<div class="sec"><div class="sectitle">Thread safety</div><div class="tags">`;
+      s.concurrency.forEach(c => h += `<span class="tag tk">${c}</span>`);
+      h += `</div></div>`;
+    }
+    if (s.code) {
+      h += `<div class="sec"><div class="sectitle">Sample implementation</div><div class="code">${esc(s.code)}</div></div>`;
+    }
+    h += `<div class="tip">💡 ${s.tip}</div>`;
+    h += `</div></div>`;
+    return h;
+  }
+
+  function buildPanel(key) {
+    return `<div class="steps">${D[key].steps.map((s, i) => buildStep(s, i)).join('')}</div>`;
+  }
+
+  function toggleStep(header) {
+    header.parentElement.classList.toggle('open');
+  }
+
+  function show(key, e) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    const panel = document.getElementById(key);
+    if (!panel.innerHTML) panel.innerHTML = buildPanel(key);
+    panel.classList.add('active');
+    e.target.classList.add('active');
+  }
+
+  document.getElementById('restaurant').innerHTML = buildPanel('restaurant');
+</script>
